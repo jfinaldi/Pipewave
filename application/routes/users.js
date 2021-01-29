@@ -37,11 +37,10 @@ router.post("/logout", async (req, res) => {
     } else {
       successPrint("Session was destroyed");
       res.clearCookie("qwerty");
+      res.redirect("/");
     }
   });
   successPrint("after");
-
-  res.redirect("/");
 });
 
 router.post("/upload", async (req, res, next) => {
