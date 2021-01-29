@@ -80,5 +80,9 @@ router.post("/search", async (req, res) => {
     });
   }
 });
-
+router.get("/*", (req, res) => {
+  res.render("error", {
+    unique: "error",
+  });
+});
 module.exports = router;
