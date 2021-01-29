@@ -1,9 +1,9 @@
 var express = require("express");
 var router = express.Router();
-var db = require("../config/database");
+// var db = require("../config/database");
 // const { body, validationResult } = require("express-validator");
 var mytools = require("../helpers/mytools");
-const Engine = require("../models/Engine");
+const Engine = require("../../models/Engine");
 
 router.get("/", async (req, res) => {
   res.render("index", {

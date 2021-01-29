@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const { successPrint, errorPrint } = require("../helpers/printers");
-const User = require("../models/Users");
+const User = require("../../models/Users");
 
 router.post("/login", async (req, res, next) => {
   var { username, password } = req.body;

@@ -3,8 +3,8 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var handlebars = require("express-handlebars");
-var indexRouter = require("./routes/index");
-var userRouter = require("./routes/users");
+var indexRouter = require("./controllers/routes/index");
+var userRouter = require("./controllers/routes/users");
 
 var sessions = require("express-session");
 const MySQLStore = require("express-mysql-session");
