@@ -10,7 +10,6 @@ var sessions = require("express-session");
 const MySQLStore = require("express-mysql-session");
 var mysqlSession = require("express-mysql-session")(sessions);
 const upload = require("express-fileupload");
-var flash = require("connect-flash");
 
 var app = express();
 app.engine(
@@ -20,27 +19,11 @@ app.engine(
     partialsDir: path.join(__dirname, "views/layouts/partials"),
     extname: ".hbs",
     defaultLayout: "home",
-    helpers: {
-      /**
-       *
-       *
-       renderLink: () => {
-
-
-        
-       },
-       *
-       */
-    },
+    helpers: {},
   })
 );
 
-var mysqlSessionsStore = new mysqlSession(
-  {
-    /*using default*/
-  },
-  require("./config/database")
-);
+var mysqlSessionsStore = new mysqlSession({}, require("./config/database"));
 
 app.use(
   sessions({
