@@ -7,7 +7,7 @@ const Engine = require("../../models/Engine");
 
 router.get("/", async (req, res) => {
   res.render("index", {
-    data: mytools.convert(await Engine.getPosts()),
+    data: mytools.convert(await Engine.getPosts(10)),
     js: true,
     home: "active",
     unique: "Home",
