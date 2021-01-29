@@ -1,0 +1,123 @@
+var express = require("express");
+var router = express.Router();
+const { successPrint, errorPrint } = require("../helpers/printers");
+const User = require("../models/Users");
+
+router.post("/login", async (req, res, next) => {
+  var { username, password } = req.body;
+  let [auth, userid] = await User.authenticate(username, password);
+  if (auth) {
+    res.locals.logged = true;
+    req.session.username = await username;
+    req.session.userid = await userid;
+    console.log(username, "has logged in");
+    res.redirect("/");
+  } else {
+    console.log("Incorrect Login");
+    res.redirect("../login");
+  }
+});
+
+router.post("/register", async (req, res, next) => {
+  let { username, name, email, password } = req.body,
+    active = 0,
+    usertype = 0;
+  console.log("test");
+  let a = await User.create(username, name, password, active, usertype, email);
+  console.log(`user${a ? "" : " not"} created`);
+  res.redirect(a ? "/login" : "/register");
+});
+
+router.post("/logout", async (req, res) => {
+  successPrint("before");
+
+  req.session.destroy(async err => {
+    if (err) {
+      errorPrint("Session could not be destroyed");
+    } else {
+      successPrint("Session was destroyed");
+      res.clearCookie("qwerty");
+    }
+  });
+  successPrint("after");
+
+  res.redirect("/");
+});
+
+router.post("/upload", async (req, res, next) => {
+  let { title, description } = req.body;
+  if (req.files) {
+    //
+  }
+});
+
+router.post("/changeUsername", async (req, res) => {
+  let status;
+  if (!res.locals.logged) {
+    status = "User not logged in";
+    res.render("user", {
+      unique: "user",
+      search: true,
+      user: { username: req.session.username, status: status },
+    });
+  } else {
+    let { new_username, confirm_password } = req.body;
+    await User.changeUser(new_username, confirm_password, req.session.userid);
+    req.session.username = new_username;
+    status = "Username Updated";
+    res.render("user", {
+      unique: "user",
+      search: true,
+      user: { username: req.session.username, status: status },
+    });
+  }
+});
+
+router.post("/changePassword", async (req, res) => {
+  let { old_password, new_password } = req.body;
+  let status;
+
+  let response = await User.changePassword(
+    req.session.username,
+    old_password,
+    new_password,
+    req.session.userid
+  );
+
+  if (response.changedRows) {
+    console.log("updated");
+    console.log(response);
+    status = "Password Updated";
+    res.render("user", {
+      unique: "user",
+      search: true,
+      user: { username: req.session.username, status: status },
+    });
+  } else {
+    status = "Server Error, please try again later";
+    res.render("user", {
+      unique: "user",
+      search: true,
+      user: { username: req.session.username, status: status },
+    });
+  }
+});
+
+router.post("/changeEmail", async (req, res) => {
+  let { old_password, new_email } = req.body;
+  let status;
+  let response = await User.changeEmail(
+    old_password,
+    new_email,
+    req.session.userid
+  );
+  console.log("updated");
+  console.log(response);
+  status = `Email Changed to ${new_email}`;
+  res.render("user", {
+    unique: "user",
+    user: { username: req.session.username, status: status },
+  });
+});
+
+module.exports = router;

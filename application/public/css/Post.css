@@ -1,0 +1,230 @@
+@import url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: rgba(29, 29, 29);
+  color: white;
+}
+a {
+  background-color: transparent !important ;
+  color: rgb(29, 29, 29);
+}
+.commenteach {
+  margin-top: 20px;
+  float: right;
+  color: rgb(29, 29, 29);
+  text-decoration: none;
+  text-decoration-color: none;
+  width: 300px;
+  height: 70px;
+  padding: 10px;
+  border-radius: 7px;
+  background-color: rgb(241, 241, 241);
+  font-family: "Open Sans", sans-serif;
+  font-size: 12px;
+  margin-left: 10px;
+  margin-right: 10px;
+  transition: all 0.4s ease;
+}
+
+.commenteach:hover {
+  background-color: rgb(168, 168, 168);
+}
+
+.card_info {
+  font-family: "Open Sans", sans-serif;
+  color: rgb(29, 29, 29);
+}
+
+#submitbutton {
+  height: 25px;
+  width: 100px;
+  background-color: #4dc8f8;
+  border-radius: 10px;
+  transition: all 0.4s ease;
+}
+
+#submitbutton:hover {
+  background-color: white;
+  color: rgba(29, 29, 29);
+}
+
+textarea {
+  border: none;
+  background-color: white;
+  color: black;
+  border-radius: 7px;
+  margin-left: 10px;
+}
+
+button {
+  border: none;
+}
+
+.container_desc {
+  width: 800px;
+  background-color: white;
+}
+
+.container_desc {
+  background-color: rgb(29, 29, 29);
+  height: 400px;
+  width: 500px;
+}
+
+.container_main {
+  overflow: hidden;
+
+  background-color: rgb(29, 29, 29);
+  height: 1000px;
+  width: 1000px;
+  float: left;
+}
+
+.img-container {
+  background-color: rgb(29, 29, 29);
+  width: 1920px;
+  border-radius: 10px;
+  float: left;
+}
+#img {
+  /* margin-right: auto; */
+  /* margin-left: auto; */
+  float: left;
+  border-radius: 10px;
+}
+.child1 {
+  margin: auto;
+  display: flex;
+  border-radius: 10px;
+}
+.main {
+  background-color: rgb(29, 29, 29);
+}
+.comments {
+  font-family: "Open Sans", sans-serif;
+  color: white;
+}
+#c_area {
+  font-family: "Open Sans", sans-serif;
+  padding-left: 5px;
+  width: 500px;
+  height: 100px;
+  border-radius: 10px;
+  margin: auto;
+}
+#cform {
+  margin: auto;
+  text-align: center;
+  height: 500px;
+  width: 600px;
+  background-color: blue;
+}
+#c_button {
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  background-color: #4dc8f8;
+  color: black;
+  margin-top: 10px;
+  font-family: "Open Sans", sans-serif;
+  transition: all 1.5s ease;
+}
+#c_button:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+.imagetitle {
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  font-size: 20px;
+  margin: auto;
+  color: white;
+  width: 500px;
+  height: 60px;
+  background-color: rgb(41, 41, 41);
+}
+#ddesc {
+  text-align: center;
+  background-color: rgb(236, 236, 236);
+  width: 500px;
+  height: 100px;
+  margin: auto;
+  border-radius: 10px;
+}
+#desc {
+  font-family: "Open Sans", sans-serif;
+
+  font-size: 20px;
+
+  text-align: center;
+}
+.topbar {
+  background-color: rgb(29, 29, 29);
+  overflow: hidden;
+}
+#title {
+  color: beige;
+  font-family: "Open Sans", sans-serif;
+}
+
+#title:hover {
+  background-color: rgb(41, 41, 41);
+}
+.topbar a {
+  float: left;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 14px;
+  color: beige;
+  font-family: "Open Sans", sans-serif;
+  transition: all 0.4s ease;
+}
+.topbar h3 {
+  float: left;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 16px;
+  color: beige;
+}
+.topbar a.active {
+  background-color: #4dc8f8;
+  color: white;
+}
+.topbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topbar-right {
+  float: right;
+  margin-right: 20px;
+}
+#cform {
+  margin-top: 120px;
+  background-color: rgb(29, 29, 29);
+}
+#commentstitle {
+  color: white;
+}
+#comments_section {
+  height: 400px;
+  background-color: white;
+}
+.wrapper {
+  background-color: rgb(29, 29, 29);
+  border-radius: 10px;
+}
+.img-container {
+  background-color: white;
+  width: 800px;
+  text-align: center;
+  margin: auto;
+  padding: 30px;
+}

@@ -1,0 +1,77 @@
+{{> nav}}
+
+<form class="container" method="post" action="/users/upload" encType="multipart/form-data">
+    <div class="left-half">
+        <div class="lmod">
+            <div id="uploadsquare" class="file-upload">
+                <br>
+                <div class="upload">
+                    <br>
+                    <label class="myFile">
+                        <p><img id="output" width="250" /></p>
+                        <input name="photofile" type="file" class="filebutton" onchange="loadFile(event)" required><a
+                            class="choose">Upload your resume
+                        </a><br>
+                        <script>
+                            var loadFile = function (event) {
+                                var image = document.getElementById('output');
+                                image.src = URL.createObjectURL(event.target.files[0]);
+                            };
+                        </script>
+                    </label>
+                    <br><br><br><br><a class="floattext"> OR </a><br><br><br><br><br><br><a class="drag" download>
+                        Drag / Drop </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="right-half">
+        <div class="rmod">
+            <table class="content-table">
+                <br><br><br>
+                <thead>
+                    <tr>
+                        <th colspan="4"><a class="black"> Info</a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <br>
+                    <tr>
+                        <a class="text">Upload </a><a id="tostext"> and</a> <a class="text">share your resume with one
+                            click.</a>
+                    </tr>
+
+                    <tr>
+                        <td colspan="4"><input name="title" placeholder=" Title" type=text id="post_title" /></td>
+                        <br>
+                    </tr>
+                    <tr class="active-row">
+                        <td colspan="4"><textarea name="description" rows="4" cols="50" id="description"
+                                placeholder=" Describe yourself here..."></textarea></td><br>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th colspan="4"><a class="black">TOS and Upload</a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <br>
+                    <tr>
+                        <td colspan="4" class="active-row"><input type="checkbox" required /><a class="text">Accept
+                            </a><a href="#" id="tostext"> Terms and Coditions</a></td><br>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="active-row"></td><br>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="active-row"><input type="submit" class="submit" value="Submit" required>
+                        </td><br>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>

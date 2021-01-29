@@ -1,0 +1,46 @@
+<body>
+    {{> nav}}
+    <div>
+
+
+
+        <div class="container">
+
+            <div class="child"><br>
+                <h1 id="ntitle">SIGN UP</h1>
+
+                <div id="error"></div>
+
+
+                <form action="/users/register" id="form" method="POST" enctype="application/x-www-form-urlencoded">
+                    <input placeholder=" Enter Username" pattern="[A-Za-z0-9]+" type=text id="username" name="username"
+                        required />
+                    <br><br><br>
+                    <input placeholder=" Enter Name" type="text" id="email" name="name" required /><br><br>
+                    <br>
+                    <input placeholder=" Enter Email" type="email" id="email"
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" name="email" required /><br><br>
+                    <br>
+                    <input placeholder=" Enter Password" type=password id="password" minlength="8" name="password"
+                        required></input><br><br>
+                    <br>
+                    <input placeholder=" Confirm Password" name="confirmpassword" type=password minlength="8"
+                        id="confirmpassword" required></input><br><br><br>
+                    <input type="checkbox" id="age" value="age" required name="agecheckbox" /><a class="text">Over 13
+                        years of
+                        age</a><br /><br>
+                    <input type="checkbox" id="TOS" value="tos" required /><a name="toscheckbox" class="text">Accept
+                    </a><a href="#" id="tostext"> Terms and Coditions</a><br /><br>
+                    <br>
+                    <input type="submit" class="submit" value="Submit">
+                </form>
+
+            </div>
+            <div id="box">
+                <div id="euser"></div>
+                <div id="epass"></div>
+            </div>
+        </div>
+</body>
+
+</html>

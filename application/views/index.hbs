@@ -1,0 +1,19 @@
+{{> nav}}
+<div class="container">
+
+
+    <div id="container">
+
+        <form id="form" method="post" action="/search" enctype="application/x-www-form-urlencoded">
+
+            <input placeholder=" search" type="text" name="search" id="search">
+            <button type="submit" id="button">GO</button>
+
+        </form>
+        <div id="output">
+            {{>cards}}
+        </div>
+
+    </div>
+
+</div>
