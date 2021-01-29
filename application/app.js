@@ -5,6 +5,7 @@ var logger = require("morgan");
 var handlebars = require("express-handlebars");
 var indexRouter = require("./controllers/routes/index");
 var userRouter = require("./controllers/routes/users");
+var aboutRouter = require("./controllers/routes/about");
 
 var sessions = require("express-session");
 const MySQLStore = require("express-mysql-session");
@@ -41,7 +42,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "/public")));
 
 app.use((req, res, next) => {
   if (req.session.username) {
@@ -51,6 +52,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/", indexRouter);
+app.use("/about", aboutRouter);
 app.use("/users", userRouter);
 
 // app.use((err, req, res, next) => {
