@@ -37,7 +37,6 @@ app.use(
 
 app.set("view engine", "hbs");
 app.use(upload());
-app.use(flash());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
