@@ -1,8 +1,16 @@
 body {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 2pc;
-  line-height: 150%;
+  font-size: 18pt;
+  /*line-height: 150%;*/
+  background: url(../assets/background.png);
   background-color: black;
+}
+#content {
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  background: rgba(27, 27, 26, 0.8);
 }
 label {
   color: black;
@@ -12,15 +20,43 @@ label {
 }
 p {
   color: black;
+  /*line-height: 150%;*/
 }
-fieldset {
+#name {
+  font-size: 70pt;
+  
+}
+#box {
   border: none;
-  border-radius: 16px;
-  max-width: 100%;
-  background-color: beige;
+  width: 90%;
+  margin: auto;
+  background-color: rgba(253, 253, 251, 0.8);
 }
 img {
-  float: right;
-  max-width:50%;
-  height:auto;
+  margin-right: 20px;
+  margin-top: 20px;
+  width: auto;
+  height: 400px;
+}
+
+/* Float four columns side by side */
+.column {
+  max-width: 50%;
+  float: left;
+  width: 45%;
+  height: 100%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {
+  margin: 0 -5px;
+  height: 100%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
