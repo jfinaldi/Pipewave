@@ -1,15 +1,15 @@
 <div id="nav">
     <h1 id="title1">coolbeans</h1>
     {{#if logged}}
-    <a href="./profile" class="right">Profile</a>
+    <a href="/profile" class="right">Profile</a>
     <form action="/users/logout" method="post">
         <button type="submit" id="logout_button" class="right">Logout</button>
     </form>
-    <a href="./upload" class="right">Create Post</a>
+    <a href="/upload" class="right">Create Post</a>
     {{else}}
-    <a href="./Register" class="right">Register</a>
-    <a href="./login" class="right">Login</a>
-    <a href="./login" class="right">Create Post</a>
+    <a href="/Register" class="right">Register</a>
+    <a href="/login" class="right">Login</a>
+    <a href="/login" class="right">Create Post</a>
     {{/if}}
     <a href="/" class="right">Home</a>
 </div>
