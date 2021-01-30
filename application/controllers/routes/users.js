@@ -19,13 +19,25 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.post("/register", async (req, res, next) => {
-  let { username, name, email, password } = req.body,
-    active = 0,
-    usertype = 0;
-  console.log("test");
-  let a = await User.create(username, name, password, active, usertype, email);
-  console.log(`user${a ? "" : " not"} created`);
-  res.redirect(a ? "/login" : "/register");
+  if (req.session.username) {
+    res.redirect("/");
+  }
+  {
+    let { username, name, email, password } = req.body,
+      active = 0,
+      usertype = 0;
+    console.log("test");
+    let a = await User.create(
+      username,
+      name,
+      password,
+      active,
+      usertype,
+      email
+    );
+    console.log(`user${a ? "" : " not"} created`);
+    res.redirect(a ? "/login" : "/register");
+  }
 });
 
 router.post("/logout", async (req, res) => {
