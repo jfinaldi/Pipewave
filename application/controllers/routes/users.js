@@ -4,25 +4,28 @@ const { successPrint, errorPrint } = require("../helpers/printers");
 const User = require("../../models/Users");
 
 router.post("/login", async (req, res, next) => {
-  var { username, password } = req.body;
-  let [auth, userid] = await User.authenticate(username, password);
-  if (auth) {
-    res.locals.logged = true;
-    req.session.username = await username;
-    req.session.userid = await userid;
-    console.log(username, "has logged in");
+  if (req.session.username) {
     res.redirect("/");
   } else {
-    console.log("Incorrect Login");
-    res.redirect("../login");
+    var { username, password } = req.body;
+    let [auth, userid] = await User.authenticate(username, password);
+    if (auth) {
+      res.locals.logged = true;
+      req.session.username = await username;
+      req.session.userid = await userid;
+      console.log(username, "has logged in");
+      res.redirect("/");
+    } else {
+      console.log("Incorrect Login");
+      res.redirect("../login");
+    }
   }
 });
 
 router.post("/register", async (req, res, next) => {
   if (req.session.username) {
     res.redirect("/");
-  }
-  {
+  } else {
     let { username, name, email, password } = req.body,
       active = 0,
       usertype = 0;
@@ -41,6 +44,9 @@ router.post("/register", async (req, res, next) => {
 });
 
 router.post("/logout", async (req, res) => {
+  if (!req.session.username) {
+    res.redirect("/");
+  } else {
   successPrint("before");
 
   req.session.destroy(async err => {
@@ -56,10 +62,14 @@ router.post("/logout", async (req, res) => {
 });
 
 router.post("/upload", async (req, res, next) => {
+  if (!req.session.username) {
+    res.redirect("/");
+  } else {
   let { title, description } = req.body;
   if (req.files) {
     //
   }
+}
 });
 
 router.post("/changeUsername", async (req, res) => {
