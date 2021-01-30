@@ -5,3 +5,19 @@
   padding: 0;
   box-sizing: border-box;
 }
+.post_container {
+  height: 400px;
+  width: 300px;
+  border-radius: 10px;
+  background-color: #eee;
+}
+.left {
+  height: 370px;
+  width: 270px;
+}
+.left_a {
+  margin-left: 7px;
+  font-size: 14px;
+  display: block;
+  font-family: "Open Sans", sans-serif;
+}
