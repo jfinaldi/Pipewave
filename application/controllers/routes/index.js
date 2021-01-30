@@ -4,6 +4,7 @@ var router = express.Router();
 // const { body, validationResult } = require("express-validator");
 var mytools = require("../helpers/mytools");
 const Engine = require("../../models/Engine");
+const session = require("express-session");
 
 router.get("/", async (req, res) => {
   res.render("index", {
@@ -17,10 +18,15 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/login", (req, res, next) => {
-  res.render("login", {
-    login: "active",
-    unique: "Login",
-  });
+  if (req.session.username) {
+    console.log("asd");
+    res.redirect("/");
+  } else {
+    res.render("login", {
+      login: "active",
+      unique: "Login",
+    });
+  }
 });
 router.get("/profile", async (req, res) => {
   res.render("user", {
@@ -30,10 +36,16 @@ router.get("/profile", async (req, res) => {
   });
 });
 router.get("/register", (req, res, next) => {
-  res.render("register", {
-    register: "active",
-    unique: "Registration",
-  });
+  if (req.session.username) {
+    console.log("asd");
+    res.redirect("/");
+  } else {
+    console.log("asasdd");
+    res.render("register", {
+      register: "active",
+      unique: "Registration",
+    });
+  }
 });
 
 router.get("/upload", (req, res, next) => {
@@ -46,11 +58,12 @@ router.get("/upload", (req, res, next) => {
 
 router.get("/post/:id(\\d+)", async (req, res, next) => {
   try {
-    let r = await Engine.getPost(req.params.id);
+    let r = mytools.convert(await Engine.getPost(req.params.id));
     if (r && r.length) {
-      res.send({ r });
+      res.render("post", { data: r[0], unique: "post" });
       req.session.viewing = req.params.id;
     } else {
+      console.log("here");
       res.redirect("/");
     }
   } catch (err) {
