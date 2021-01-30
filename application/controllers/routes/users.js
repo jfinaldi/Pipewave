@@ -47,29 +47,30 @@ router.post("/logout", async (req, res) => {
   if (!req.session.username) {
     res.redirect("/");
   } else {
-  successPrint("before");
+    successPrint("before");
 
-  req.session.destroy(async err => {
-    if (err) {
-      errorPrint("Session could not be destroyed");
-    } else {
-      successPrint("Session was destroyed");
-      res.clearCookie("qwerty");
-      res.redirect("/");
-    }
-  });
-  successPrint("after");
+    req.session.destroy(async err => {
+      if (err) {
+        errorPrint("Session could not be destroyed");
+      } else {
+        successPrint("Session was destroyed");
+        res.clearCookie("qwerty");
+        res.redirect("/");
+      }
+    });
+    successPrint("after");
+  }
 });
 
 router.post("/upload", async (req, res, next) => {
   if (!req.session.username) {
     res.redirect("/");
   } else {
-  let { title, description } = req.body;
-  if (req.files) {
-    //
+    let { title, description } = req.body;
+    if (req.files) {
+      //
+    }
   }
-}
 });
 
 router.post("/changeUsername", async (req, res) => {
