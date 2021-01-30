@@ -45,7 +45,9 @@
 }
 .post_title {
   text-align: left;
-  display: block;
+  /* display: block; */
+  /* float: left; */
+
   font-family: "Roboto", sans-serif;
   text-decoration: none;
   font-weight: bold;
@@ -93,7 +95,7 @@ p {
   /* border-radius: 12px; */
   background-color: rgb(185, 225, 252);
   height: 125px;
-  width: 90%;
+  width: 98%;
   text-align: left;
 
   transition: all 0.4s ease;
@@ -108,6 +110,7 @@ p {
   padding: 6px;
 }
 .comments {
+  position: relative;
   margin-left: 30px;
   /* border-radius: 10px; */
   /* box-shadow: 0 0 12px rgba(0, 0, 0, 0.16); */
@@ -124,6 +127,29 @@ p {
 }
 .moreinfo {
   float: right;
+}
+
+.head .left {
+}
+.right_post {
+  float: right;
+  right: 0;
+  /* width: 100%; */
+}
+.left_title {
+  /* float: left; */
+  width: 100%;
+}
+.right_post button {
+  /* position: absolute; */
+  /* top: 0;
+  right: 0; */
+  height: 20px;
+  border: none;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  width: 150px;
+  background-color: rgb(185, 225, 252);
 }
 .moreinfo button {
   margin-top: 5px;
