@@ -1,0 +1,14 @@
+{{#each comment}}
+<div class="list_container">
+    <a>{{this.title}}</a>
+    <a>{{this.description}}</a>
+    <a>{{this.username}}</a>
+    <a>{{this.created}}</a>
+    <div class="moreinfo">
+        <a href="/post/{{this.id}}">
+            <button>More info</button>
+        </a>
+    </div>
+</div>
+
+{{/each}}

@@ -1,22 +1,52 @@
 {{> nav}}
-<div class="post_container">
-    <div class="left">
-        <br>
+{{!--
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> --}}
+<style>
 
-        <a class="left_a">postid: {{data.id}}</a>
+</style>
+<div class="post_container">
+    <a class="post_title" href="/post/{{data.postid}}"> {{data.title}}</a>
+
+    <div class="left">
+
         <br>
-        <a class="left_a">created by: {{data.username}}</a>
-        <a class="left_a">name: {{data.name}}</a>
+        <a class="left_a">User: {{data.username}}</a>
+        <a class="left_a">Name: {{data.name}}</a>
         <br>
 
         <a class="left_a">{{data.created}}</a>
         <br>
-        <a class="left_a">title: {{data.title}}</a>
         <br>
-        <a class="left_a">description: {{data.description}}</a>
-        <br>
-        <a class="left_a">{{data.resumepath}}</a>
-        <br>
+        {{!-- <a class="left_a">Description: {{data.description}}</a> --}}
+        <div class="description">
+            <a>Learning to Code</a>
+            <a>Opening a door to the future</a>
+            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto obcaecati enim dicta
+                praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
+            <a id="readmore" href="#">seomthing about rating here</a>
 
+        </div>
+        <br>
+    </div>
+
+
+    <div class="resume_container">
+        <object id="obj" data="{{data.resumepath}}#toolbar=0">object can't be rendered</object>
+        {{!-- <embed src="{{data.resumepath}}#toolbar=0" width="500" height="375"> --}}
+    </div>
+</div>
+<div class="comments">
+    <a class="comment_head">Comments</a>
+    <br>
+    <div class="comment_container">
+        <a>asdcomment </a>
+        <a>very bad student dont recommend</a>
+        <a>asdtest</a>
+        <a>1/27/2021, 5:56:13 AM</a>
+        <div class="moreinfo">
+            <a href="/post/{{this.id}}">
+                <button>More info</button>
+            </a>
+        </div>
     </div>
 </div>
