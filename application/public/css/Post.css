@@ -46,11 +46,11 @@
   -webkit-overflow-scrolling: touch;
   margin-bottom: 10px;
 }
+
 .post_title {
   text-align: left;
   /* display: block; */
   /* float: left; */
-
   font-family: "Roboto", sans-serif;
   text-decoration: none;
   font-weight: bold;
