@@ -1,9 +1,11 @@
 {{> nav}}
 {{!--
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> --}}
-<style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+    crossorigin="anonymous" />
 
-</style>
+
 <div class="post_container">
     <a class="post_title" href="/post/{{data.postid}}"> {{data.title}}</a>
 
@@ -23,15 +25,26 @@
             <a>Opening a door to the future</a>
             <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto obcaecati enim dicta
                 praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
-            <a id="readmore" href="#">seomthing about rating here</a>
+            {{!-- <a id="readmore" href="#">seomthing about rating here</a> --}}
+            <div class="rating">
 
+                <a href="#5" title="Give 5 stars">★</a>
+
+                <a href="#4" title="Give 4 stars">★</a>
+
+                <a href="#3" title="Give 3 stars">★</a>
+
+                <a href="#2" title="Give 2 stars">★</a>
+
+                <a href="#1" title="Give 1 star">★</a>
+            </div>
         </div>
         <br>
     </div>
 
 
     <div class="resume_container">
-        <object id="obj" data="{{data.resumepath}}#toolbar=0">object can't be rendered</object>
+        <object id="obj" data="{{data.resumepath}}">object can't be rendered</object>
         {{!-- <embed src="{{data.resumepath}}#toolbar=0" width="500" height="375"> --}}
     </div>
 </div>
@@ -39,10 +52,10 @@
     <a class="comment_head">Comments</a>
     <br>
     <div class="comment_container">
-        <a>asdcomment </a>
-        <a>very bad student dont recommend</a>
-        <a>asdtest</a>
-        <a>1/27/2021, 5:56:13 AM</a>
+        <a>asdcomment
+            very bad student dont recommend
+            asdtest
+            1/27/2021, 5:56:13 AM</a>
         <div class="moreinfo">
             <a href="/post/{{this.id}}">
                 <button>More info</button>
