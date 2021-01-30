@@ -1,14 +1,17 @@
 @import url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap);
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 .post_container {
   height: 400px;
   width: auto;
 }
+
 .left {
   /* border-radius: 10px; */
   /* background-color: rgb(247, 247, 247); */
@@ -55,6 +58,7 @@
   font-size: 30px;
   margin-left: 7px;
 }
+
 .comment_title {
   text-align: left;
   display: block;
@@ -62,6 +66,7 @@
   font-family: "Roboto", sans-serif;
   font-size: 20px;
 }
+
 .review_content {
   display: block;
 }
@@ -103,6 +108,7 @@ p {
 
   margin-bottom: 10px;
 }
+
 .comment_container:hover {
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.16);
 }
@@ -140,6 +146,7 @@ p {
   /* float: left; */
   width: 100%;
 }
+
 #review_textarea {
   background-color: transparent;
   border: none;
@@ -150,6 +157,7 @@ p {
   resize: none;
   font-family: "Roboto", sans-serif;
 }
+
 .right_post button {
   /* position: absolute; */
   /* top: 0;
