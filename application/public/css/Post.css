@@ -144,12 +144,21 @@ p {
   /* position: absolute; */
   /* top: 0;
   right: 0; */
+  cursor: pointer;
   height: 20px;
   border: none;
   font-family: "Open Sans", sans-serif;
   font-weight: bold;
   width: 150px;
   background-color: rgb(185, 225, 252);
+}
+#leave_a_review {
+  background-color: rgb(29, 29, 29);
+  height: 200px;
+  width: 98%;
+  margin-left: 20px;
+  opacity: 0;
+  transition: all 0.5s ease;
 }
 .moreinfo button {
   margin-top: 5px;

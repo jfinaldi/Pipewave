@@ -60,7 +60,11 @@ router.get("/post/:id(\\d+)", async (req, res, next) => {
   try {
     let r = mytools.convert(await Engine.getPost(req.params.id));
     if (r && r.length) {
-      res.render("post", { data: r[0], unique: "post" });
+      res.render("post", {
+        data: r[0],
+        unique: "post",
+        render_js_files: ["comment"],
+      });
       req.session.viewing = req.params.id;
     } else {
       console.log("here");
