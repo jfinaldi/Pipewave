@@ -140,6 +140,16 @@ p {
   /* float: left; */
   width: 100%;
 }
+#review_textarea {
+  background-color: transparent;
+  border: none;
+  color: white;
+  width: 100%;
+  padding: 10px;
+  height: 100%;
+  resize: none;
+  font-family: "Roboto", sans-serif;
+}
 .right_post button {
   /* position: absolute; */
   /* top: 0;
