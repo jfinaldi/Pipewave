@@ -11,7 +11,7 @@
 }
 .left {
   /* border-radius: 10px; */
-  background-color: rgb(247, 247, 247);
+  /* background-color: rgb(247, 247, 247); */
   float: left;
   padding: 7px;
   margin-left: 30px;
@@ -20,11 +20,11 @@
   position: relative;
   width: 900px;
   transition: all 0.4s ease;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.14);
+  /* box-shadow: 0 0 12px rgba(0, 0, 0, 0.14); */
 }
-.left:hover {
+/* .left:hover {
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
-}
+} */
 .left_a {
   margin-left: 7px;
   font-size: 14px;
@@ -48,11 +48,21 @@
   display: block;
   font-family: "Roboto", sans-serif;
   text-decoration: none;
+  font-weight: bold;
   color: rgb(29, 29, 29);
   font-size: 30px;
   margin-left: 7px;
 }
-
+.comment_title {
+  text-align: left;
+  display: block;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+}
+.review_content {
+  display: block;
+}
 object {
   width: 700px;
   height: 100%;
@@ -80,11 +90,14 @@ p {
 }
 
 .comment_container {
-  border-radius: 12px;
-  background-color: rgb(255, 255, 255);
-  height: 50px;
-  width: 100%;
+  /* border-radius: 12px; */
+  background-color: rgb(185, 225, 252);
+  height: 125px;
+  width: 90%;
+  text-align: left;
+
   transition: all 0.4s ease;
+  margin-left: 20px;
 
   margin-bottom: 10px;
 }
@@ -96,12 +109,12 @@ p {
 }
 .comments {
   margin-left: 30px;
-  border-radius: 10px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.16);
+  /* border-radius: 10px; */
+  /* box-shadow: 0 0 12px rgba(0, 0, 0, 0.16); */
   height: 400px;
   width: 900px;
-  background-color: rgb(235, 235, 235);
-  margin-top: 60px;
+  /* background-color: rgb(235, 235, 235); */
+  /* margin-top: 60px; */
   font-family: "Open Sans", sans-serif;
   /* font-family: "Barlow Condensed", sans-serif; */
   text-align: left;
