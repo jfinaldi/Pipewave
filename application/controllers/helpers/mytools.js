@@ -1,9 +1,25 @@
+var months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 module.exports = {
   convert: x => {
     for (var i = 0; i < x.length; i++) {
-      x[i].created = new Date(
-        x[i].created.toString().split("-")[0]
-      ).toLocaleString();
+      let response = new Date(x[i].created.toString().split("-")[0]);
+      console.log();
+      x[i].created = `${months[response.getMonth()]}
+      ${response.getDate()}, 
+      ${response.getFullYear()}`;
     }
     return x;
   },

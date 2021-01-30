@@ -24,7 +24,7 @@ Engine.search = async search => {
 Engine.getPost = async id => {
   try {
     var baseSQL =
-      "SELECT p.id as postid, u.id, u.name, u.username, p.title, p.description, p.resumepath, p.created FROM users u JOIN posts p ON u.id=fk_userid WHERE p.id=?;";
+      "SELECT p.id as postid, p.company, u.id, u.name, u.username, p.title, p.description, p.resumepath, p.created FROM users u JOIN posts p ON u.id=fk_userid WHERE p.id=?;";
     let [r, fields] = await db.query(baseSQL, [id]);
     return r;
   } catch (err) {
