@@ -1,230 +1,266 @@
 @import url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap);
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: rgba(29, 29, 29);
-  color: white;
-}
-a {
-  background-color: transparent !important ;
-  color: rgb(29, 29, 29);
-}
-.commenteach {
-  margin-top: 20px;
-  float: right;
-  color: rgb(29, 29, 29);
-  text-decoration: none;
-  text-decoration-color: none;
-  width: 300px;
-  height: 70px;
-  padding: 10px;
-  border-radius: 7px;
-  background-color: rgb(241, 241, 241);
-  font-family: "Open Sans", sans-serif;
-  font-size: 12px;
-  margin-left: 10px;
-  margin-right: 10px;
-  transition: all 0.4s ease;
 }
 
-.commenteach:hover {
-  background-color: rgb(168, 168, 168);
-}
-
-.card_info {
-  font-family: "Open Sans", sans-serif;
-  color: rgb(29, 29, 29);
-}
-
-#submitbutton {
-  height: 25px;
-  width: 100px;
-  background-color: #4dc8f8;
-  border-radius: 10px;
-  transition: all 0.4s ease;
-}
-
-#submitbutton:hover {
-  background-color: white;
-  color: rgba(29, 29, 29);
-}
-
-textarea {
-  border: none;
-  background-color: white;
-  color: black;
-  border-radius: 7px;
-  margin-left: 10px;
-}
-
-button {
-  border: none;
-}
-
-.container_desc {
-  width: 800px;
-  background-color: white;
-}
-
-.container_desc {
-  background-color: rgb(29, 29, 29);
+.post_container {
   height: 400px;
-  width: 500px;
+  width: auto;
 }
 
-.container_main {
-  overflow: hidden;
+.left {
+  /* border-radius: 10px; */
+  /* background-color: rgb(247, 247, 247); */
+  float: left;
+  padding: 7px;
+  margin-left: 30px;
+  height: 370px;
+  /* display: inline-block; */
+  position: relative;
+  width: 900px;
+  transition: all 0.4s ease;
+  /* box-shadow: 0 0 12px rgba(0, 0, 0, 0.14); */
+}
+/* .left:hover {
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+} */
+.left_a {
+  margin-left: 7px;
+  font-size: 14px;
+  display: block;
+  font-family: "Open Sans", sans-serif;
+}
+.resume_container {
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.16);
 
-  background-color: rgb(29, 29, 29);
-  height: 1000px;
-  width: 1000px;
-  float: left;
+  height: 900px;
+
+  float: right;
+  margin-right: 50px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 10px;
 }
 
-.img-container {
-  background-color: rgb(29, 29, 29);
-  width: 1920px;
-  border-radius: 10px;
-  float: left;
+.post_title {
+  text-align: left;
+  /* display: block; */
+  /* float: left; */
+  font-family: "Roboto", sans-serif;
+  text-decoration: none;
+  font-weight: bold;
+  color: rgb(29, 29, 29);
+  font-size: 30px;
+  margin-left: 7px;
 }
-#img {
-  /* margin-right: auto; */
-  /* margin-left: auto; */
-  float: left;
-  border-radius: 10px;
+.review_button_container {
+  float: right;
 }
-.child1 {
-  margin: auto;
-  display: flex;
-  border-radius: 10px;
+.review_button_container button {
+  margin-top: 5px;
+  cursor: pointer;
+  height: 20px;
+  border: none;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  width: 150px;
+  background-color: rgb(185, 225, 252);
 }
-.main {
-  background-color: rgb(29, 29, 29);
+.comment_title {
+  text-align: left;
+  display: block;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+}
+
+.review_content {
+  display: block;
+}
+object {
+  width: 700px;
+  height: 100%;
+}
+.description a {
+  font-family: "Roboto", sans-serif;
+  color: rgb(29, 29, 29);
+  font-size: 20px;
+}
+.description a,
+p {
+  display: block;
+  margin-bottom: 5px;
+}
+.description p {
+  font-family: "Roboto", sans-serif;
+}
+#readmore {
+  position: absolute;
+
+  bottom: 0;
+  right: 0;
+  margin-bottom: 15px;
+  margin-right: 15px;
+}
+
+.comment_container {
+  /* border-radius: 12px; */
+  background-color: rgb(185, 225, 252);
+  height: 125px;
+  width: 98%;
+  text-align: left;
+
+  transition: all 0.4s ease;
+  margin-left: 20px;
+
+  margin-bottom: 10px;
+}
+
+.comment_container:hover {
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.16);
+}
+.comment_container a {
+  padding: 6px;
 }
 .comments {
+  position: relative;
+  margin-left: 30px;
+  /* border-radius: 10px; */
+  /* box-shadow: 0 0 12px rgba(0, 0, 0, 0.16); */
+  height: 400px;
+  width: 900px;
+  /* background-color: rgb(235, 235, 235); */
+  /* margin-top: 60px; */
   font-family: "Open Sans", sans-serif;
-  color: white;
-}
-#c_area {
-  font-family: "Open Sans", sans-serif;
-  padding-left: 5px;
-  width: 500px;
-  height: 100px;
-  border-radius: 10px;
-  margin: auto;
-}
-#cform {
-  margin: auto;
-  text-align: center;
-  height: 500px;
-  width: 600px;
-  background-color: blue;
-}
-#c_button {
-  height: 40px;
-  border-radius: 10px;
-  border: none;
+  /* font-family: "Barlow Condensed", sans-serif; */
+  text-align: left;
   padding: 10px;
-  background-color: #4dc8f8;
-  color: black;
-  margin-top: 10px;
-  font-family: "Open Sans", sans-serif;
-  transition: all 1.5s ease;
-}
-#c_button:hover {
-  background-color: white;
-  color: black;
-  cursor: pointer;
-}
-.imagetitle {
-  text-align: center;
-  font-family: "Open Sans", sans-serif;
-  font-size: 20px;
-  margin: auto;
-  color: white;
-  width: 500px;
-  height: 60px;
-  background-color: rgb(41, 41, 41);
-}
-#ddesc {
-  text-align: center;
-  background-color: rgb(236, 236, 236);
-  width: 500px;
-  height: 100px;
-  margin: auto;
-  border-radius: 10px;
-}
-#desc {
-  font-family: "Open Sans", sans-serif;
-
-  font-size: 20px;
-
-  text-align: center;
-}
-.topbar {
-  background-color: rgb(29, 29, 29);
-  overflow: hidden;
-}
-#title {
-  color: beige;
-  font-family: "Open Sans", sans-serif;
-}
-
-#title:hover {
-  background-color: rgb(41, 41, 41);
-}
-.topbar a {
-  float: left;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 14px;
-  color: beige;
-  font-family: "Open Sans", sans-serif;
+  font-size: 17px;
   transition: all 0.4s ease;
 }
-.topbar h3 {
-  float: left;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 16px;
-  color: beige;
-}
-.topbar a.active {
-  background-color: #4dc8f8;
-  color: white;
-}
-.topbar a:hover {
-  background-color: #ddd;
-  color: black;
+.moreinfo {
+  float: right;
 }
 
-.topbar-right {
+.head .left {
+}
+.right_post {
   float: right;
-  margin-right: 20px;
+  right: 0;
+  /* width: 100%; */
 }
-#cform {
-  margin-top: 120px;
-  background-color: rgb(29, 29, 29);
+.left_title {
+  /* float: left; */
+  width: 100%;
 }
-#commentstitle {
+
+#review_textarea {
+  background-color: transparent;
+  border: none;
   color: white;
+  width: 100%;
+  padding: 10px;
+  height: 100%;
+  resize: none;
+  font-family: "Roboto", sans-serif;
 }
-#comments_section {
-  height: 400px;
-  background-color: white;
+
+.right_post button {
+  /* position: absolute; */
+  /* top: 0;
+  right: 0; */
+  cursor: pointer;
+  height: 20px;
+  border: none;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  width: 150px;
+  background-color: rgb(185, 225, 252);
 }
-.wrapper {
+#leave_a_review {
   background-color: rgb(29, 29, 29);
-  border-radius: 10px;
+  height: 200px;
+  width: 98%;
+  margin-left: 20px;
+  margin-bottom: 100px;
+
+  opacity: 0;
+  transition: all 0.5s ease;
 }
-.img-container {
-  background-color: white;
-  width: 800px;
+#leave_a_review form {
+  height: 100%;
+}
+.moreinfo button {
+  margin-top: 5px;
+  margin-right: 5px;
+
+  height: 30px;
+  font-family: "Open Sans", sans-serif;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: rgb(180, 244, 255);
+  border: none;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+.moreinfo button:hover {
+  background-color: rgb(54, 54, 54);
+  color: rgb(218, 216, 216);
+}
+.comment_head {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: block;
   text-align: center;
   margin: auto;
-  padding: 30px;
+}
+/*  */
+a[href*="intent"] {
+  display: inline-block;
+  margin-top: 0.4em;
+}
+
+/*  
+ * Rating styles
+ */
+.rating {
+  width: 226px;
+  position: absolute;
+
+  top: 0;
+  right: 0;
+  margin-bottom: 15px;
+  margin-right: 15px;
+  font-size: 45px;
+  overflow: hidden;
+}
+.rating input {
+  float: right;
+  opacity: 0;
+  position: absolute;
+}
+.rating a,
+.rating label {
+  float: right;
+  color: #aaa;
+  text-decoration: none;
+  -webkit-transition: color 0.4s;
+  -moz-transition: color 0.4s;
+  -o-transition: color 0.4s;
+  transition: color 0.4s;
+}
+.rating label:hover ~ label,
+.rating input:focus ~ label,
+.rating label:hover,
+.rating a:hover,
+.rating a:hover ~ a,
+.rating a:focus,
+.rating a:focus ~ a {
+  color: rgb(120, 209, 224);
+  cursor: pointer;
 }

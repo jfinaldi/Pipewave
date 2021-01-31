@@ -1,0 +1,87 @@
+{{> nav}}
+{{!--
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> --}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+    crossorigin="anonymous" />
+
+
+<div class="post_container">
+
+    <div class="left">
+        <a class="post_title" href="/post/{{data.postid}}"> {{data.name}}</a>
+
+        <a class="left_a">{{data.username}}</a>
+        <br>
+        <a class="left_a">Job Title: {{data.title}} </a>
+        <a class="left_a">Company: {{data.company}} </a>
+
+        <a class="left_a">Date Posted: {{data.created}}</a>
+        <br>
+        <br>
+        {{!-- <a class="left_a">Description: {{data.description}}</a> --}}
+        <div class="description">
+            <p> Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto
+                obcaecati enim dicta
+                praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
+            {{!-- <a id="readmore" href="#">seomthing about rating here</a> --}}
+            <div class="rating">
+
+                <a href="#5" title="Give 5 stars">★</a>
+
+                <a href="#4" title="Give 4 stars">★</a>
+
+                <a href="#3" title="Give 3 stars">★</a>
+
+                <a href="#2" title="Give 2 stars">★</a>
+
+                <a href="#1" title="Give 1 star">★</a>
+            </div>
+        </div>
+        <br>
+    </div>
+
+
+    <div class="resume_container">
+        <object id="obj" data="{{data.resumepath}}">object can't be rendered</object>
+        {{!-- <embed src="{{data.resumepath}}#toolbar=0" width="500" height="375"> --}}
+    </div>
+</div>
+<div class="comments">
+
+    <div class="left_title">
+        <a class="post_title">Reviews</a>
+        <div class="right_post"><button id="post_review">Post A Review</button></div>
+    </div>
+    <br>
+    {{!-- comments section partial --}}
+    <div class="comment_container">
+        <a class="comment_title">Dr.Erlich Bachman</a>
+        <a class="review_user_title">Professor of Computer Science, SFSU</a>
+        <br>
+
+        <a class="review_content">Very bad student, dont recommend. Writes shit code and doesnt know how to spell, next.
+            bla
+            bla bla bla bla bla bla bla bla, words idk what to say</a>
+
+        {{!-- <div class="moreinfo">
+            <a href="/post/{{this.id}}">
+                <button>More info</button>
+            </a>
+        </div> --}}
+    </div>
+    {{>comments}}
+
+    <div id="leave_a_review">
+        <form action="/comment" method="post" enctype="application/x-www-form-urlencoded">
+            <textarea type="text" name="comment" id="review_textarea" cols="30" rows="10">
+        </textarea>
+            <div class="review_button_container">
+                <button>Submit Review</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+<br>
+<br>

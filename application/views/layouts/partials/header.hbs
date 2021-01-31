@@ -10,8 +10,7 @@
     {{#if search}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     {{/if}}
-    {{#if js}}
-    <script defer type="text/javascript" src="../js/{{unique}}.js"></script>
-    {{/if}}
-
+    {{#each render_js_files}}
+    <script defer type="text/javascript" src="/js/{{this}}.js""></script>
+    {{/each}}
 </head>

@@ -2,6 +2,9 @@
   padding: 15px;
   text-decoration: none;
   color: rgb(29, 29, 29);
+  float: right;
+  font-family: "Open Sans", sans-serif;
+  font-size: 15px;
 }
 #nav {
   background-color: white;
@@ -21,14 +24,5 @@
   font-size: 20px;
 }
 .nav {
-  /* float: right; */
   position: relative;
-}
-#title {
-  float: left;
-}
-.right {
-  float: right;
-  font-family: "Open Sans", sans-serif;
-  font-size: 15px;
 }

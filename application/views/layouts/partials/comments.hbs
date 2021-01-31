@@ -1,0 +1,16 @@
+{{#each comment}}
+<div class="comment_container">
+    <a class="comment_title">{{this.name}}</a>
+    <a class="review_user_title">{{this.title}}</a>
+    <br>
+
+    <a class="review_content">{{this.comment}}</a>
+
+    {{!-- <div class="moreinfo">
+        <a href="/post/{{this.id}}">
+            <button>More info</button>
+        </a>
+    </div> --}}
+</div>
+
+{{/each}}
