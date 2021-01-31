@@ -1,21 +1,29 @@
 body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    /*font-family: Open Sans, sans-serif;*/
     font-size: 18pt;
-    /*line-height: 150%;*/
     background: url(../assets/background.png);
     background-color: black;
 }
 
-h1, h4, .quote {
+.name, .quote {
     margin-left: 40px;
+}
+
+.name {
+    margin-top: 20px;
+    font-size: 56pt;
 }
 
 .quote {
-    max-width: 550px;
+    max-width: 100%;
+    font-size: 14pt;
 }
 
-table {
-    margin-left: 40px;
+.table {
+    margin-left: 20px;
+    max-width: 50%;
+    display: table;
 }
 
  #innerContent {
@@ -47,6 +55,26 @@ img {
     height:auto;
 }
 
-.value {
+.tr {
+    display: table-row;
+}
+
+.td {
+    display: table-cell;
+    margin-left: 20px;
+    font-size: 14pt;
+}
+
+#label {
+    float: left;
+    padding-left: none;
+    margin-left: none;
+    width: 200px;
+}
+
+.title {
+    display: table-cell;
     padding-left: 20px;
+    padding-bottom: 10px;
+    font-size: 24pt;   
 }
