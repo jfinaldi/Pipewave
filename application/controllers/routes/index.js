@@ -1,12 +1,9 @@
 var express = require("express");
 var router = express.Router();
-// var db = require("../config/database");
 // const { body, validationResult } = require("express-validator");
 var mytools = require("../helpers/mytools");
 const Engine = require("../../models/Engine");
 const Review = require("../../models/Review");
-
-const session = require("express-session");
 
 router.get("/", async (req, res) => {
   res.render("index", {
@@ -77,11 +74,15 @@ router.get("/post/:id(\\d+)", async (req, res, next) => {
   }
 });
 router.post("/comment", (req, res, next) => {
-  let comment = req.body.comment;
-  console.log(comment);
-
-  // res.render("/post/" + res.locals.viewing)
-  res.redirect("/");
+  if (!req.session.username) {
+    res.redirect("/post/" + req.session.viewing);
+  } else {
+    let comment = req.body.comment;
+    console.log(comment);
+    Review.addReview(comment, req.session.viewing, req.session.userid);
+    // res.render("/post/" + res.locals.viewing)
+    res.redirect("/");
+  }
 });
 router.post("/search", async (req, res) => {
   // console.log(validationResult(req));
