@@ -54,6 +54,7 @@
         <div class="right_post"><button id="post_review">Post A Review</button></div>
     </div>
     <br>
+    {{!-- comments section partial --}}
     <div class="comment_container">
         <a class="comment_title">Dr.Erlich Bachman</a>
         <a class="review_user_title">Professor of Computer Science, SFSU</a>
@@ -69,9 +70,18 @@
             </a>
         </div> --}}
     </div>
+    {{>comments}}
 
     <div id="leave_a_review">
-        <textarea type="text" name="review" id="review_textarea" cols="30" rows="10"></textarea>
+        <form action="/comment" method="post" enctype="application/x-www-form-urlencoded">
+            <textarea type="text" name="comment" id="review_textarea" cols="30" rows="10">
+        </textarea>
+            <div class="review_button_container">
+                <button>Submit Review</button>
+            </div>
+        </form>
     </div>
 
 </div>
+<br>
+<br>

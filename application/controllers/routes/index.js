@@ -4,6 +4,7 @@ var router = express.Router();
 var mytools = require("../helpers/mytools");
 const Engine = require("../../models/Engine");
 const Review = require("../../models/Review");
+const { successPrint, errorPrint } = require("../helpers/printers");
 
 router.get("/", async (req, res) => {
   res.render("index", {
@@ -61,6 +62,7 @@ router.get("/post/:id(\\d+)", async (req, res, next) => {
     if (r && r.length) {
       res.render("post", {
         data: r[0],
+        comment: await Review.getReviews(req.params.id),
         unique: "post",
         render_js_files: ["comment"],
       });
@@ -81,7 +83,10 @@ router.post("/comment", (req, res, next) => {
     console.log(comment);
     Review.addReview(comment, req.session.viewing, req.session.userid);
     // res.render("/post/" + res.locals.viewing)
-    res.redirect("/");
+    successPrint(
+      `User: ${req.session.userid}\nReview Left: ${comment}\nPost ID: ${req.session.viewing}`
+    );
+    res.redirect("/post/" + req.session.viewing);
   }
 });
 router.post("/search", async (req, res) => {

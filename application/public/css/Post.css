@@ -58,7 +58,19 @@
   font-size: 30px;
   margin-left: 7px;
 }
-
+.review_button_container {
+  float: right;
+}
+.review_button_container button {
+  margin-top: 5px;
+  cursor: pointer;
+  height: 20px;
+  border: none;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  width: 150px;
+  background-color: rgb(185, 225, 252);
+}
 .comment_title {
   text-align: left;
   display: block;
@@ -175,8 +187,13 @@ p {
   height: 200px;
   width: 98%;
   margin-left: 20px;
+  margin-bottom: 100px;
+
   opacity: 0;
   transition: all 0.5s ease;
+}
+#leave_a_review form {
+  height: 100%;
 }
 .moreinfo button {
   margin-top: 5px;
