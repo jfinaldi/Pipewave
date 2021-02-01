@@ -20,12 +20,20 @@ app.engine(
     partialsDir: path.join(__dirname, "views/layouts/partials"),
     extname: ".hbs",
     defaultLayout: "home",
-    helpers: {},
+    helpers: {
+      equal: function (lvalue, rvalue, options) {
+        if (arguments.length < 3)
+          throw new Error("Handlebars Helper equal needs 2 parameters");
+        if (lvalue != rvalue) {
+          return options.fn(this);
+        } else {
+          return options.inverse(this);
+        }
+      },
+    },
   })
 );
-
 var mysqlSessionsStore = new mysqlSession({}, require("./config/database"));
-
 app.use(
   sessions({
     key: "qwerty",
@@ -45,9 +53,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "/public")));
 
 app.use((req, res, next) => {
+  let a = req.url.split("/");
   if (req.session.username) {
     res.locals.logged = true;
     res.locals.username = req.session.username;
+    res.locals.recent = a[a.length - 1];
   }
   next();
 });

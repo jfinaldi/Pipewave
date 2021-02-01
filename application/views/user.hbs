@@ -45,8 +45,10 @@
                 <ul class="list_boxes">
                     <li><a href="/users/ds">Resumes</a></li>
                     <li><a href="/users/sd">Reviews</a></li>
+                    {{#equal username recent}}
                     <li><a href="/users/">Profile Settings</a></li>
                     <li><a href="/">Messages</a></li>
+                    {{/equal}}
 
                 </ul>
             </div>
