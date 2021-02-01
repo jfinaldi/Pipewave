@@ -46,6 +46,9 @@ body {
 .moreinfo {
   float: right;
 }
+#list_title {
+  color: black;
+}
 .moreinfo button {
   margin-top: 5px;
   margin-right: 5px;
@@ -54,7 +57,9 @@ body {
   font-family: "Open Sans", sans-serif;
   padding: 5px;
   border-radius: 10px;
-  background-color: rgba(170, 250, 188, 0.74);
+  /* background-color: rgba(170, 250, 188, 0.74);
+   */
+  background-color: rgb(117, 180, 231);
   border: none;
   transition: all 0.4s ease;
   cursor: pointer;
@@ -85,7 +90,18 @@ body {
 #button:hover {
   background-color: rgb(180, 244, 255);
 }
-
+#user_link {
+  color: rgb(25, 117, 192);
+}
+.right_created {
+  /* float: right;
+  position: relative;
+  width: 50px;
+  height: 10px; */
+}
+.right_created a {
+  font-size: 10px;
+}
 #output {
   border-radius: 15px;
   width: 1200px;
@@ -103,7 +119,7 @@ body {
 .list_container {
   border-radius: 12px;
   background-color: rgb(255, 255, 255);
-  height: 50px;
+  height: 80px;
   width: 100%;
   margin-bottom: 10px;
   transition: all 0.4s ease;

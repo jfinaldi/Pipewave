@@ -1,13 +1,19 @@
 {{#each data}}
 <div class="list_container">
-    <a>{{this.title}}</a>
-    <a>{{this.description}}</a>
-    <a>{{this.username}}</a>
-    <a>{{this.created}}</a>
+    <a id="list_title" href="/post/{{this.id}}">{{this.title}}</a>
+    <br>
+    <a id="user_link" href="/users/{{this.username}}">{{this.name}}</a>
+
+
+    {{!-- <a>{{this.description}}</a> --}}
+
     <div class="moreinfo">
         <a href="/post/{{this.id}}">
             <button>More info</button>
         </a>
+    </div>
+    <div class="right_created">
+        <a>{{this.created}}</a>
     </div>
 </div>
 

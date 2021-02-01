@@ -5,7 +5,7 @@ const Engine = {};
 //grabs n amount of posts from db and returns the data
 Engine.getPosts = async limit => {
   let baseSQL =
-    "SELECT u.username, p.id, p.title, p.description, p.resumepath, p.created FROM users u JOIN posts p ON u.id=fk_userid ORDER BY created DESC LIMIT ?";
+    "SELECT u.username,u.name,  p.id, p.title, p.description, p.resumepath, p.created FROM users u JOIN posts p ON u.id=fk_userid ORDER BY created DESC LIMIT ?";
   let [r, fields] = await db.query(baseSQL, [limit]);
   return r;
 };
