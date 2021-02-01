@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 const { successPrint, errorPrint } = require("../helpers/printers");
 const User = require("../../models/Users");
+const Engine = require("../../models/Engine");
 
 router.post("/login", async (req, res, next) => {
   if (req.session.username) {
@@ -141,5 +142,8 @@ router.post("/changeEmail", async (req, res) => {
     user: { username: req.session.username, status: status },
   });
 });
-
+router.get("/:user", async (req, res) => {
+  let r = await Engine.getUserPosts(req.params.user);
+  res.send(r);
+});
 module.exports = router;

@@ -47,6 +47,7 @@ app.use(express.static(path.join(__dirname, "/public")));
 app.use((req, res, next) => {
   if (req.session.username) {
     res.locals.logged = true;
+    res.locals.username = req.session.username;
   }
   next();
 });

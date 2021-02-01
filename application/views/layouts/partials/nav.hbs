@@ -1,7 +1,7 @@
 <div id="nav">
     <h1 id="title1">coolbeans</h1>
     {{#if logged}}
-    <a href="/profile" class="right">Profile</a>
+    <a href="/users/{{username}}" class="right">Profile</a>
     <form action="/users/logout" method="post">
         <button type="submit" id="logout_button" class="right">Logout</button>
     </form>
