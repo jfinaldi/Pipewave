@@ -121,6 +121,7 @@ body {
 #username,
 #password,
 #confirmpassword,
+#major,
 #email {
   border-radius: 7px;
   height: 33px;
@@ -130,6 +131,7 @@ body {
   transition: all 0.2s ease;
 }
 #username:hover,
+#major:hover,
 #password:hover,
 #confirmpassword:hover,
 #email:hover {

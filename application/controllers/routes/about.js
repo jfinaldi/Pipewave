@@ -3,7 +3,7 @@ var router = express.Router();
 
 router.get("/", (req, res) => {
   res.render("about/about", {
-    unique: "about",
+    unique: "About",
   });
 });
 router.get("/:user", async (req, res, next) => {

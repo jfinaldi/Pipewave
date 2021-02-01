@@ -14,17 +14,26 @@ User.emailExists = async email => {
   }
 };
 
-User.create = async (username, name, password, active, usertype, email) => {
+User.create = async (
+  username,
+  name,
+  password,
+  active,
+  usertype,
+  email,
+  major
+) => {
   password = await bcrypt.hash(password, 15);
   if (
     !((await User.emailExists(email)) && (await User.usernameExists(username)))
   ) {
     let baseSQL =
-      "INSERT INTO users (`username`,`name`, `email`, `active`,`usertype`, `password`, `created`) VALUES (?,?,?,?,?,?, now());";
+      "INSERT INTO users (`username`,`name`, `email`,`title`, `active`,`usertype`, `password`, `created`) VALUES (?,?,?,?,?,?,?, now());";
     let a = await db.execute(baseSQL, [
       username,
       name,
       email,
+      major,
       active,
       usertype,
       password,
@@ -32,7 +41,16 @@ User.create = async (username, name, password, active, usertype, email) => {
     return a;
   }
 };
-
+User.getId = async username => {
+  let baseSQL = "SELECT id FROM users WHERE username=?;";
+  let [r, fields] = await db.execute(baseSQL, [username]);
+  if (r && r.length) {
+    return r[0].id;
+  } else {
+    console.log("error retrieving id");
+    return null;
+  }
+};
 User.authenticate = async (username, password) => {
   let baseSQL = "SELECT id,username, password FROM users WHERE username=?;";
   let [r, fields] = await db.execute(baseSQL, [username]);
