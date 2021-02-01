@@ -36,8 +36,9 @@ Engine.getPost = async id => {
 Engine.getUserPosts = async username => {
   try {
     var baseSQL =
-      "SELECT p.id as postid, p.company, u.id, u.name, u.username, p.title, p.description, p.resumepath, p.created FROM users u JOIN posts p ON u.id=fk_userid WHERE u.username=?";
+      "SELECT p.id as postid, p.company, u.bio, u.id, u.name, u.username, p.title, p.description, p.resumepath, p.created FROM users u JOIN posts p ON u.id=fk_userid WHERE u.username=?";
     let [r, fields] = await db.query(baseSQL, [username]);
+    console.log("here", r);
     return r;
   } catch (err) {
     console.log("post doesnt exist");

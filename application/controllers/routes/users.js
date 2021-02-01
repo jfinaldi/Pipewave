@@ -3,6 +3,7 @@ var router = express.Router();
 const { successPrint, errorPrint } = require("../helpers/printers");
 const User = require("../../models/Users");
 const Engine = require("../../models/Engine");
+var mytools = require("../helpers/mytools");
 
 router.post("/login", async (req, res, next) => {
   if (req.session.username) {
@@ -144,6 +145,7 @@ router.post("/changeEmail", async (req, res) => {
 });
 router.get("/:user", async (req, res) => {
   let r = await Engine.getUserPosts(req.params.user);
-  res.send(r);
+  successPrint(r[0]);
+  res.render("user", { user: r[0], unique: "User" });
 });
 module.exports = router;
