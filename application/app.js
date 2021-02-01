@@ -56,14 +56,12 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 app.use((req, res, next) => {
   let a = req.url.split("/");
-  console.log("req URL:", a[a.length - 1]);
   res.locals.authpage = false;
   if (req.session.username) {
     console.log("username: ", req.session.username);
     res.locals.logged = true;
     res.locals.username = req.session.username;
-    res.locals.recent = a[a.length - 1];
-    if (res.locals.username == res.locals.recent) res.locals.authpage = true;
+    if (res.locals.username == a[a.length - 1]) res.locals.authpage = true;
   }
   next();
 });
