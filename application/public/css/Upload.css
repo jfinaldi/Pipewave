@@ -23,7 +23,7 @@
   font-family: "Open Sans", sans-serif;
 }
 #title {
-  color: beige;
+  /* color: beige; */
   font-family: "Open Sans", sans-serif;
 }
 #title1 {
@@ -86,7 +86,7 @@
   background-color: #f6f7f9 !important;
 }
 body {
-  color: #f6f7f9;
+  /* color: #f6f7f9; */
   font-family: sans-serif;
   overflow: hidden;
 }
