@@ -1,6 +1,56 @@
 {{> nav}}
+
+
 <div class="user_info_container">
 
-    <a class="username">{{user.username}}</a>
-    asd
+    <div class="left">
+        <a class="post_title" href="/post/{{data.postid}}"> {{data.name}}</a>
+
+        <a class="username">{{user.name}}</a>
+        <br>
+        <a class="left_a"> {{user.title}} </a>
+        <a class="left_a">{{user.company}} </a>
+
+        <a class="left_a"> Date Created: {{user.created}}</a>
+        <br>
+        <br>
+        {{!-- <a class="left_a">Description: {{data.description}}</a> --}}
+        <div class="description">
+            <p> Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto
+                obcaecati enim dicta
+                praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
+            {{!-- <a id="readmore" href="#">seomthing about rating here</a> --}}
+
+            <div class="rating">
+                <a href="#5" title="Give 5 stars">★</a>
+                <a href="#4" title="Give 4 stars">★</a>
+                <a href="#3" title="Give 3 stars">★</a>
+                <a href="#2" title="Give 2 stars">★</a>
+                <a href="#1" title="Give 1 star">★</a>
+            </div>
+        </div>
+        <br>
+    </div>
+
+
+    <div class="resume_container">
+        <div class="right_userinfo">
+            <div class="user_image">
+                <img id="pfp" src="/assets/user_image.jpg" width="250px"></img>
+            </div>
+            <div class="username_info">
+                <a id="username_info">{{user.username}}</a>
+            </div>
+            <div class="boxes">
+                <ul class="list_boxes">
+                    <li><a href="/users/ds">Resumes</a></li>
+                    <li><a href="/users/sd">Reviews</a></li>
+                    <li><a href="/users/">Profile Settings</a></li>
+                    <li><a href="/">Messages</a></li>
+
+                </ul>
+            </div>
+        </div>
+        {{!-- <embed src="{{data.resumepath}}#toolbar=0" width="500" height="375"> --}}
+    </div>
 </div>

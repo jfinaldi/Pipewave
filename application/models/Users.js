@@ -98,4 +98,10 @@ User.changeUser = async (username, confirm_password, userid) => {
   } else return null;
 };
 
+User.getInfo = async username => {
+  var baseSQL =
+    "SELECT bio, id, name,email,usertype,title,created, username FROM users WHERE username=?;";
+  let [r, fields] = await db.query(baseSQL, [username]);
+  return r;
+};
 module.exports = User;

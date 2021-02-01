@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap);
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 * {
   scrollbar-width: thin;
   scroll-behavior: smooth;
@@ -12,5 +13,328 @@ body {
 }
 .username {
   font-family: "Roboto", sans-serif;
-  font-size: 25px;
+  font-size: 40px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.post_container {
+  height: 400px;
+  width: auto;
+}
+
+.left {
+  /* border-radius: 10px; */
+  /* background-color: rgb(247, 247, 247); */
+  float: left;
+  padding: 7px;
+  margin-left: 30px;
+  height: 370px;
+  /* display: inline-block; */
+  position: relative;
+  width: 900px;
+  transition: all 0.4s ease;
+  /* box-shadow: 0 0 12px rgba(0, 0, 0, 0.14); */
+}
+/* .left:hover {
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+} */
+.left_a {
+  margin-left: 7px;
+  font-size: 14px;
+  display: block;
+  font-family: "Open Sans", sans-serif;
+}
+.resume_container {
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.16);
+  background-color: rgb(185, 225, 252);
+
+  float: right;
+  margin-right: 50px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 10px;
+}
+
+.post_title {
+  text-align: left;
+  /* display: block; */
+  /* float: left; */
+  font-family: "Roboto", sans-serif;
+  text-decoration: none;
+  font-weight: bold;
+  color: rgb(29, 29, 29);
+  font-size: 30px;
+  margin-left: 7px;
+}
+.review_button_container {
+  float: right;
+}
+.review_button_container button {
+  margin-top: 5px;
+  cursor: pointer;
+  height: 20px;
+  border: none;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  width: 150px;
+  background-color: rgb(185, 225, 252);
+}
+.comment_title {
+  text-align: left;
+  display: block;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+}
+
+.review_content {
+  display: block;
+}
+object {
+  width: 700px;
+  height: 100%;
+}
+.description {
+  height: 240px;
+  background-color: rgb(185, 225, 252);
+}
+.description a {
+  font-family: "Roboto", sans-serif;
+  color: rgb(29, 29, 29);
+  font-size: 20px;
+}
+.description a,
+p {
+  display: block;
+  margin-bottom: 5px;
+}
+.description p {
+  padding: 10px;
+  font-family: "Roboto", sans-serif;
+}
+#readmore {
+  position: absolute;
+
+  bottom: 0;
+  right: 0;
+  margin-bottom: 15px;
+  margin-right: 15px;
+}
+
+.comment_container {
+  /* border-radius: 12px; */
+  background-color: rgb(185, 225, 252);
+  height: 125px;
+  width: 98%;
+  text-align: left;
+
+  transition: all 0.4s ease;
+  margin-left: 20px;
+
+  margin-bottom: 10px;
+}
+
+.comment_container:hover {
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.16);
+}
+.comment_container a {
+  padding: 6px;
+}
+.comments {
+  position: relative;
+  margin-left: 30px;
+  /* border-radius: 10px; */
+  /* box-shadow: 0 0 12px rgba(0, 0, 0, 0.16); */
+  height: 400px;
+  width: 900px;
+  /* background-color: rgb(235, 235, 235); */
+  /* margin-top: 60px; */
+  font-family: "Open Sans", sans-serif;
+  /* font-family: "Barlow Condensed", sans-serif; */
+  text-align: left;
+  padding: 10px;
+  font-size: 17px;
+  transition: all 0.4s ease;
+}
+.moreinfo {
+  float: right;
+}
+
+.head .left {
+}
+.right_post {
+  float: right;
+  right: 0;
+  /* width: 100%; */
+}
+.left_title {
+  /* float: left; */
+  width: 100%;
+}
+
+#review_textarea {
+  background-color: transparent;
+  border: none;
+  color: white;
+  width: 100%;
+  padding: 10px;
+  height: 100%;
+  resize: none;
+  font-family: "Roboto", sans-serif;
+}
+
+.right_post button {
+  /* position: absolute; */
+  /* top: 0;
+  right: 0; */
+  cursor: pointer;
+  height: 20px;
+  border: none;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  width: 150px;
+  background-color: rgb(185, 225, 252);
+}
+#leave_a_review {
+  background-color: rgb(29, 29, 29);
+  height: 200px;
+  width: 98%;
+  margin-left: 20px;
+  margin-bottom: 100px;
+
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+#leave_a_review form {
+  height: 100%;
+}
+.moreinfo button {
+  margin-top: 5px;
+  margin-right: 5px;
+
+  height: 30px;
+  font-family: "Open Sans", sans-serif;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: rgb(180, 244, 255);
+  border: none;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+.moreinfo button:hover {
+  background-color: rgb(54, 54, 54);
+  color: rgb(218, 216, 216);
+}
+.comment_head {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: block;
+  text-align: center;
+  margin: auto;
+}
+/*  */
+a[href*="intent"] {
+  display: inline-block;
+  margin-top: 0.4em;
+}
+
+/*  
+ * Rating styles
+ */
+.rating {
+  width: 226px;
+  position: absolute;
+
+  top: 0;
+  right: 0;
+  margin-bottom: 15px;
+  margin-right: 15px;
+  font-size: 45px;
+  overflow: hidden;
+}
+.rating input {
+  float: right;
+  opacity: 0;
+  position: absolute;
+}
+.rating a,
+.rating label {
+  float: right;
+  color: #aaa;
+  text-decoration: none;
+  -webkit-transition: color 0.4s;
+  -moz-transition: color 0.4s;
+  -o-transition: color 0.4s;
+  transition: color 0.4s;
+}
+.rating label:hover ~ label,
+.rating input:focus ~ label,
+.rating label:hover,
+.rating a:hover,
+.rating a:hover ~ a,
+.rating a:focus,
+.rating a:focus ~ a {
+  color: #65bdf8;
+  cursor: pointer;
+}
+.right_userinfo {
+  background-color: rgb(185, 225, 252);
+  height: 600px;
+  width: 400px;
+}
+#pfp {
+  border-radius: 50%;
+}
+.user_image {
+  text-align: center;
+  margin-top: 15px;
+}
+.username_info {
+  text-align: center;
+}
+#username_info {
+  display: block;
+  margin-top: 10px;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+}
+.list_boxes {
+  display: block;
+  text-emphasis: none;
+  text-decoration: none;
+}
+.boxes {
+}
+.list_boxes li {
+  display: block;
+  /* padding: 8px; */
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+
+  background-color: #65bdf8;
+  height: 40px;
+  width: 80%;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.list_boxes li a {
+  padding: 8px;
+  text-decoration: none;
+  text-emphasis: none;
+  border: none;
+  color: rgb(0, 0, 0);
+  display: block;
+  width: 100%;
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+  /* border: none; */
 }

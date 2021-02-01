@@ -144,8 +144,12 @@ router.post("/changeEmail", async (req, res) => {
   });
 });
 router.get("/:user", async (req, res) => {
-  let r = await Engine.getUserPosts(req.params.user);
+  let r = await mytools.convert(await Engine.getUserPosts(req.params.user));
   successPrint(r[0]);
-  res.render("user", { user: r[0], unique: "User" });
+  res.render("user", {
+    user: await mytools.convert(await User.getInfo(req.params.user))[0],
+    post: r[0],
+    unique: "User",
+  });
 });
 module.exports = router;
