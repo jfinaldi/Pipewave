@@ -1,7 +1,7 @@
 var db = require("../config/database");
 
 const Review = {};
-
+//
 Review.addReview = async (comment, postid, userid) => {
   var baseSQL =
     "INSERT INTO `reviews` (`comment`,`fk_postid_c`,`fk_userid_c`,`created`) VALUES (?,?,?,now());";
