@@ -5,6 +5,7 @@ let comments_displayed = false;
 const display_comments = x => {
   leave_a_review.style.opacity = x;
   comments_displayed = !comments_displayed;
+  comments_displayed && leave_a_review.scrollIntoView({ behavior: "smooth" });
 };
 post_review.addEventListener("click", () => {
   display_comments(!comments_displayed ? 1 : 0);

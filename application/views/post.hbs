@@ -11,7 +11,7 @@
     <div class="left">
         <a class="post_title" href="/post/{{data.postid}}"> {{data.name}}</a>
 
-        <a class="left_a">{{data.username}}</a>
+        <a class="left_a" id="user" href="/users/{{data.username}}">{{data.username}}</a>
         <br>
         <a class="left_a">Job Title: {{data.title}} </a>
         <a class="left_a">Company: {{data.company}} </a>
@@ -56,7 +56,7 @@
     <br>
     {{!-- comments section partial --}}
     <div class="comment_container">
-        <a class="comment_title">Dr.Erlich Bachman</a>
+        <a class="note_title">Dr.Erlich Bachman</a>
         <a class="review_user_title">Professor of Computer Science, SFSU</a>
         <br>
 
