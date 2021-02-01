@@ -148,7 +148,7 @@ router.get("/:user", async (req, res) => {
   successPrint(r[0]);
   res.render("user", {
     user: await mytools.convert(await User.getInfo(req.params.user))[0],
-    post: r[0],
+    post: r,
     unique: "User",
   });
 });

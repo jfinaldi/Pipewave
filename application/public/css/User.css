@@ -326,6 +326,24 @@ a[href*="intent"] {
   margin-bottom: 20px;
   margin-top: 20px;
 }
+.user_info_container {
+  height: 400px;
+}
+.eachpost {
+  padding: 7px;
+  font-family: "Roboto", sans-serif;
+
+  background-color: rgb(185, 225, 252);
+  width: 886px;
+  height: 50px;
+  margin-bottom: 15px;
+}
+.posts_container {
+  margin-left: 30px;
+  padding: 7px;
+}
+#userpost_label {
+}
 .list_boxes li a {
   padding: 8px;
   text-decoration: none;

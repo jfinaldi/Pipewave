@@ -24,7 +24,7 @@ Engine.search = async search => {
 Engine.getPost = async id => {
   try {
     var baseSQL =
-      "SELECT p.id as postid, p.company, u.id, u.name, u.username, p.title, p.description, p.resumepath, p.created FROM users u JOIN posts p ON u.id=fk_userid WHERE p.id=?;";
+      "SELECT p.id as postid, p.role, u.id, u.name, u.username, p.title, p.description, p.resumepath, p.created FROM users u JOIN posts p ON u.id=fk_userid WHERE p.id=?;";
     let [r, fields] = await db.query(baseSQL, [id]);
     return r;
   } catch (err) {
@@ -36,7 +36,7 @@ Engine.getPost = async id => {
 Engine.getUserPosts = async username => {
   try {
     var baseSQL =
-      "SELECT p.id as postid, p.company, u.bio, u.id, u.name, u.username, p.title, p.description, p.resumepath, p.created FROM users u JOIN posts p ON u.id=fk_userid WHERE u.username=?";
+      "SELECT p.id as postid, p.role, p.title, p.description, p.resumepath, p.created FROM users u JOIN posts p ON u.id=fk_userid WHERE u.username=?";
     let [r, fields] = await db.query(baseSQL, [username]);
     console.log("here", r);
     return r;
