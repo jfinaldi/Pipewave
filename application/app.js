@@ -22,12 +22,14 @@ app.engine(
     defaultLayout: "home",
     helpers: {
       equal: function (lvalue, rvalue, options) {
-        if (arguments.length < 3)
+        if (arguments.length < 3) {
+          console.log("ERROR");
           throw new Error("Handlebars Helper equal needs 2 parameters");
+        }
         if (lvalue != rvalue) {
-          return options.fn(this);
-        } else {
           return options.inverse(this);
+        } else {
+          return options.fn(this);
         }
       },
     },
@@ -54,10 +56,14 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 app.use((req, res, next) => {
   let a = req.url.split("/");
+  console.log("req URL:", a[a.length - 1]);
+  res.locals.authpage = false;
   if (req.session.username) {
+    console.log("username: ", req.session.username);
     res.locals.logged = true;
     res.locals.username = req.session.username;
     res.locals.recent = a[a.length - 1];
+    if (res.locals.username == res.locals.recent) res.locals.authpage = true;
   }
   next();
 });
