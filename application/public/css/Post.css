@@ -80,6 +80,7 @@
   font-size: 20px;
   transition: all 0.4s ease;
 }
+
 .note_title {
   text-align: left;
   color: black;
@@ -264,6 +265,14 @@ a[href*="intent"] {
 #user:hover {
   color: #848dd6;
 }
+.avg {
+  float: right;
+  font-size: 16px;
+  color: #aaa;
+  font-family: "Roboto", sans-serif;
+  padding: 6px;
+  cursor: default;
+}
 .rating a,
 .rating label {
   float: right;
@@ -283,4 +292,85 @@ a[href*="intent"] {
 .rating a:focus ~ a {
   color: rgb(120, 209, 224);
   cursor: pointer;
+}
+/* // */
+
+/* .formrating a,
+.formrating label,
+.formrating input {
+  float: right;
+  color: #aaa;
+  height: 10px;
+  text-decoration: none;
+  -webkit-transition: color 0.4s;
+  -moz-transition: color 0.4s;
+  -o-transition: color 0.4s;
+  transition: color 0.4s;
+}
+#formavg {
+  transition: all 1s ease;
+}
+.formrating label:hover ~ label,
+.formrating input:focus ~ label,
+.formrating label:hover,
+.formrating input:hover,
+.formrating a:hover,
+.formrating a:hover ~ a,
+.formrating a:focus,
+.formrating a:focus ~ a {
+  color: rgb(120, 209, 224);
+  cursor: pointer;
+} */
+/* // */
+
+.formrating {
+  float: right;
+}
+
+/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t 
+ follow these rules. Every browser that supports :checked also supports :not(), so
+ it doesn’t make the test unnecessarily selective */
+.formrating:not(:checked) > input {
+  position: absolute;
+  top: -9999px;
+  clip: rect(0, 0, 0, 0);
+}
+
+.formrating:not(:checked) > label {
+  float: right;
+  width: 1em;
+  padding: 0 0.1em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1.2;
+  color: #ddd;
+}
+
+.formrating:not(:checked) > label:before {
+  content: "★ ";
+}
+
+.formrating > input:checked ~ label {
+  color: rgb(0, 210, 247);
+}
+
+.formrating:not(:checked) > label:hover,
+.formrating:not(:checked) > label:hover ~ label {
+  color: rgb(120, 209, 224);
+}
+
+.formrating > input:checked + label:hover,
+.formrating > input:checked + label:hover ~ label,
+.formrating > input:checked ~ label:hover,
+.formrating > input:checked ~ label:hover ~ label,
+.formrating > label:hover ~ input:checked ~ label {
+  color: rgb(120, 209, 224);
+}
+
+.formrating > label:active {
+  position: relative;
+  top: 2px;
+  left: 2px;
 }
