@@ -12,4 +12,5 @@ router.get("/:user", async (req, res, next) => {
     unique: user,
   });
 });
+
 module.exports = router;
