@@ -10,13 +10,13 @@
 1. Server URL or IP : 35.235.77.107
 2. SSH username : teamprojectgc
 3. SSH password : teamprojectgc04!
-    <br> If a ssh key is used please upload the key to the credentials folder.
+    <br> SSH key: in credentials folder
 4. Database URL or IP and port used
     <br><strong>Host:</strong>35.235.77.107
     <br><strong>Port:</strong>3306
     <br><strong> NOTE THIS DOES NOT MEAN YOUR DATABASE NEEDS A PUBLIC FACING PORT.</strong> But knowing the IP and port number will help with SSH tunneling into the database. The default port is more than sufficient for this class.
 5. Database username : teamproject
-6. Database password teamprojectgc04!
+6. Database password : teamprojectgc04!
 7. Database name: Website
 8. Instructions on how to use the above information.
     <br>1. Use SSH client to connect to cloud server, using ppk username/password.
