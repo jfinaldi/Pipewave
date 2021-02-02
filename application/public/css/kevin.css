@@ -1,62 +1,80 @@
 body {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  /*font-family: Open Sans, sans-serif;*/
   font-size: 18pt;
-  /*line-height: 150%;*/
   background: url(../assets/background.png);
   background-color: black;
 }
-#content {
-  margin: auto;
-  width: 100%;
-  height: 100%;
-  padding: 10px;
-  background: rgba(27, 27, 26, 0.8);
+
+.name, .quote {
+  margin-left: 40px;
 }
-label {
-  color: black;
-  font-weight: bold;
-  float: left;
-  margin-right: 5px;
+
+.name {
+  margin-top: 20px;
+  font-size: 56pt;
 }
+
+.quote {
+  max-width: 100%;
+  font-size: 14pt;
+}
+
+.table {
+  margin-left: 20px;
+  max-width: 50%;
+  display: table;
+}
+
+#innerContent {
+   padding-left: 20px;
+   padding-right: 20px;
+   padding-top: 20px;
+   padding-bottom: 50px;
+   margin-left: 20px;
+   margin-right: 20px;
+   background: rgba(255,255,255, 0.75);
+   border-radius: 5px;
+   -moz-border-radius: 5px;
+   -webkit-border-radius: 5px;
+}
+
 p {
   color: black;
-  /*line-height: 150%;*/
-}
-#name {
-  font-size: 70pt;
-  
-}
-#box {
-  border: none;
-  width: 90%;
-  margin: auto;
-  background-color: rgba(253, 253, 251, 0.8);
-}
-img {
+  margin-left: 20px;
   margin-right: 20px;
   margin-top: 20px;
-  width: auto;
-  height: 400px;
 }
 
-/* Float four columns side by side */
-.column {
-  max-width: 50%;
+img {
+  box-shadow:rgba(0,0,0, 0.75);
+  float: right;
+  max-width:50%;
+  margin-right: 20px;
+  margin-top: 20px;
+  height:auto;
+}
+
+.tr {
+  display: table-row;
+}
+
+.td {
+  display: table-cell;
+  margin-left: 20px;
+  font-size: 14pt;
+}
+
+#label {
   float: left;
-  width: 45%;
-  height: 100%;
-  padding: 0 10px;
+  padding-left: none;
+  margin-left: none;
+  width: 200px;
 }
 
-/* Remove extra left and right margins, due to padding */
-.row {
-  margin: 0 -5px;
-  height: 100%;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
+.title {
+  display: table-cell;
+  padding-left: 20px;
+  padding-bottom: 10px;
+  font-size: 24pt;   
 }
