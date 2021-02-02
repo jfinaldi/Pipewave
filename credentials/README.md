@@ -19,8 +19,9 @@
 6. Database password : teamprojectgc04!
 7. Database name: Website
 8. Instructions on how to use the above information.
-    <br>1. Use SSH client to connect to cloud server, using ppk username/password.
-    <br>2. Open up a terminal window and change into the code directory
+    <br>1. Default Schema: 
+    <br>2. Use SSH client to connect to cloud server, using ppk username/password.
+    <br>3. Open up a terminal window and change into the code directory
 
 # Most important things to Remember
 ## These values need to kept update to date throughout the semester. <br>
