@@ -17,7 +17,7 @@
 |    :---:     |     :---:     |     :---:       |
 | member1      |               |                 |
 | member2      |               |                 |
-| member3      |jhernandez12@mail.sfsu.edu               |   JahirHdz              |
+| member3      |jhernandez12@mail.sfsu.edu               |   Jahirhdz              |
 | member4      |               |                 |
 | member5      |               |                 |
 | member6      |               |                 |
