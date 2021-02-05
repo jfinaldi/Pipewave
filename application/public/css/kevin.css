@@ -1,5 +1,6 @@
 body {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  /*font-family: Open Sans, sans-serif;*/
   font-size: 18pt;
   background: url(../assets/background.png);
   background-color: black;
@@ -39,11 +40,11 @@ body {
    -webkit-border-radius: 5px;
 }
 
-tr {
+.tr {
   display: table-row;
 }
 
-td {
+.td {
   display: table-cell;
   margin-left: 20px;
   font-size: 14pt;

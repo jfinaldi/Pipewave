@@ -1,31 +1,32 @@
 body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    /*font-family: Open Sans, sans-serif;*/
     font-size: 18pt;
     background: url(../assets/background.png);
     background-color: black;
-  }
-  
-  .name, .quote {
+}
+
+.name, .quote {
     margin-left: 40px;
-  }
-  
-  .name {
+}
+
+.name {
     margin-top: 20px;
     font-size: 56pt;
-  }
-  
-  .quote {
+}
+
+.quote {
     max-width: 100%;
     font-size: 14pt;
-  }
-  
-  .table {
+}
+
+.table {
     margin-left: 20px;
     max-width: 50%;
     display: table;
-  }
-  
-  #innerContent {
+}
+
+ #innerContent {
      padding-left: 20px;
      padding-right: 20px;
      padding-top: 20px;
@@ -37,28 +38,28 @@ body {
      border-radius: 5px;
      -moz-border-radius: 5px;
      -webkit-border-radius: 5px;
-  }
-  
-  tr {
+}
+
+.tr {
     display: table-row;
-  }
-  
-  td {
+}
+
+.td {
     display: table-cell;
     margin-left: 20px;
     font-size: 14pt;
-  }
-  
-  #label {
+}
+
+#label {
     float: left;
     padding-left: none;
     margin-left: none;
     width: 200px;
-  }
-  
-  .title {
+}
+
+.title {
     display: table-cell;
     padding-left: 20px;
     padding-bottom: 10px;
     font-size: 24pt;   
-  }
+}
