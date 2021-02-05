@@ -10,6 +10,7 @@ router.get("/:user", async (req, res, next) => {
   let user = req.params.user;
   res.render(`about/users/${user}`, {
     unique: user,
+    render_css_files: ["aboutus"],
   });
 });
 module.exports = router;

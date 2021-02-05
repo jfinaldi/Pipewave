@@ -1,12 +1,13 @@
 body {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   /*font-family: Open Sans, sans-serif;*/
   font-size: 18pt;
   background: url(../assets/background.png);
   background-color: black;
 }
 
-.name, .quote {
+.name,
+.quote {
   margin-left: 40px;
 }
 
@@ -27,17 +28,17 @@ body {
 }
 
 #innerContent {
-   padding-left: 20px;
-   padding-right: 20px;
-   padding-top: 20px;
-   padding-bottom: 50px;
-   margin-left: 20px;
-   margin-right: 20px;
-   margin-top: 20px;
-   background: rgba(255,255,255, 0.75);
-   border-radius: 5px;
-   -moz-border-radius: 5px;
-   -webkit-border-radius: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 50px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
 }
 
 .tr {
@@ -61,5 +62,5 @@ body {
   display: table-cell;
   padding-left: 20px;
   padding-bottom: 10px;
-  font-size: 24pt;   
+  font-size: 24pt;
 }
