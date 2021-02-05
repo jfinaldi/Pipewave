@@ -22,6 +22,10 @@
     <br>1. Default Schema: 
     <br>2. Use SSH client to connect to cloud server, using ppk username/password.
     <br>3. Open up a terminal window and change into the code directory
+    <br>4. Download Node.js from the web
+    <br>5. In the terminal window, inside the application folder, run the command: npm install
+    <br>6. After npm is installed, run nodemon by simply typing the command: nodemon
+    <br>7. Alternatively, if you are not wanting to connect locally, use the IP Host
 
 # Most important things to Remember
 ## These values need to kept update to date throughout the semester. <br>
