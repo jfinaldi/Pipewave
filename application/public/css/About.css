@@ -5,6 +5,39 @@ body {
     background: url(../assets/background.png);
     background-color: black;
 }
+.wrap {
+  text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 50px;
+  margin-left: 20px;
+  margin-right: 20px;
+  background: rgba(255,255,255, 0.75);
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+.statement {
+  font-size: 16pt;
+  font-style: italic;
+  max-width: auto;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+img.align-center {
+  display: block;
+  margin: 0px auto;
+}
+table {
+  margin:  0px auto;
+}
+td {
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
 .button {
     background-color: #4CAF50;
     border-radius: 5px;
@@ -17,7 +50,7 @@ body {
     margin: 4px 2px;
     cursor: pointer;
   }
-  .button:hover {
+.button:hover {
     background-color: blue;
     box-shadow: 5px 10px #888888;
-  }
+}
