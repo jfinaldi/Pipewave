@@ -4,8 +4,7 @@ const review = document.getElementById("avg");
 // const star1 = document.getElementById("formstar4");
 function color(x, extra = "") {
   for (let i = 0; i < parseInt(x); i++) {
-    document.getElementById(`${extra}star${i + 1}`).style.color =
-      "rgb(120, 209, 224)";
+    document.getElementById(`${extra}star${i + 1}`).style.color = "rgb(120, 209, 224)";
   }
 }
 color(review.textContent);
@@ -36,9 +35,9 @@ let comments_displayed = false;
 // clean code to toggle review section :)
 const display_comments = x => {
   leave_a_review.style.opacity = x;
-  comments_displayed = !comments_displayed;
-  comments_displayed && leave_a_review.scrollIntoView({ behavior: "smooth" });
+  ~(comments_displayed = !comments_displayed) && leave_a_review.scrollIntoView({ behavior: "smooth" });
 };
+
 post_review.addEventListener("click", () => {
   display_comments(!comments_displayed ? 1 : 0);
 });
