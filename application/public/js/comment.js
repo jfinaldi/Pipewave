@@ -33,10 +33,12 @@ document.getElementById("formstar5").addEventListener("click", () => {
 console.log(review.textContent);
 let comments_displayed = false;
 // clean code to toggle review section :)
+
 const display_comments = x => {
   leave_a_review.style.opacity = x;
   ~(comments_displayed = !comments_displayed) && leave_a_review.scrollIntoView({ behavior: "smooth" });
 };
+
 post_review.addEventListener("click", () => {
   display_comments(!comments_displayed ? 1 : 0);
 });
