@@ -1,18 +1,21 @@
 <div id="nav">
-    {{!-- <a href="/" id="title1">coolbeans</a> --}}
-    <a href="/"><img id="logo" height="60" src="../assets/pipewavelogo.jpg"></a>
+    <a href="/" id="title1">Talent Pipeline</a>
+    {{!-- <a href="/" class="fas fa-user"></a> --}}
     {{#if logged}}
     <a href="/users/{{username}}" class="right">Profile</a>
     <form action="/users/logout" method="post">
         <button type="submit" id="logout_button" class="right">Logout</button>
     </form>
-    <a href="/upload" class="right">Create Post</a>
+    <a href="/upload" class="right">Post Resume</a>
     {{else}}
     <a href="/Register" class="right">Register</a>
+    {{!-- <a class="fas fa-user"></a> --}}
+
     <a href="/login" class="right">Login</a>
-    <a href="/login" class="right">Create Post</a>
+
+    {{!-- <a href="/login" class="right">Create Post</a> --}}
     {{/if}}
-    <a href="/about" class="right">About </a>
+    <a href="/about" class="right">About</a>
     <a href="/" class="right">Home</a>
 
 </div>

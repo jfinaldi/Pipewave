@@ -5,11 +5,40 @@
   box-sizing: border-box;
   scrollbar-width: thin;
   scroll-behavior: smooth;
+  background-repeat: no-repeat;
   /* scrollbar-color: rgba(29, 29, 29, 0.473) white; */
 }
 
-body {
+/* body {
   background-color: rgb(29, 29, 29);
+  background: url(../assets/background.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+} */
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  background: url(../assets/background.png);
+  padding: 0;
+  /* background-size: 100%; */
+  /* background-size: 1920px 1080px; */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+footer {
+  margin-top: 500px;
+  display: block;
+  text-align: center;
+  background-color: #a6d5df;
+  height: 47px;
+  padding: 2px;
 }
 .graphcontainer {
   width: 350px;
@@ -36,10 +65,36 @@ body {
   overflow: auto;
 }
 
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.aboutus {
+  margin-top: 150px;
+  display: flex;
+  justify-content: center;
+}
+.about__child {
+  animation: fadein 1.2s;
+  line-height: 1.8;
+  font-family: "Rubik", sans-serif;
+  font-size: 15px;
+  color: rgb(97, 97, 97);
+  font-weight: 400;
+  padding: 10px;
+  width: 400px;
+}
+
 #container {
+  animation: fadein 2s;
+
   height: 500px;
   width: 100%;
-  background-color: white;
   text-align: center;
   display: inline-block;
 }
@@ -73,7 +128,7 @@ body {
   border-radius: 7px;
   border: none;
   font-family: "Open Sans", sans-serif;
-  background-color: rgb(180, 244, 255);
+  /* background-color: rgb(180, 244, 255); */
   height: 40px;
   width: 300px;
   padding: 10px;
@@ -105,7 +160,7 @@ body {
 #output {
   border-radius: 15px;
   width: 1200px;
-  height: 300px;
+  height: 500px;
   background-color: rgb(235, 235, 235);
   margin: auto;
   margin-top: 20px;

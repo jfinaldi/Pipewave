@@ -4,12 +4,28 @@
   scrollbar-width: thin;
   scroll-behavior: smooth;
 }
-
 body {
   box-sizing: border-box;
   margin: 0;
+
   padding: 0;
-  z-index: 0;
+  text-decoration: none;
+  /* background-size: 100%; */
+  /* background-size: 1920px 1080px; */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+footer {
+  margin-top: auto;
+  text-align: center;
+  background-color: #a6d5df;
+  height: 47px;
+  padding: 2px;
 }
 .username {
   font-family: "Roboto", sans-serif;

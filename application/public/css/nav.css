@@ -15,11 +15,17 @@
   float: right;
   font-family: "Open Sans", sans-serif;
   font-size: 15px;
+  /* border: 1px solid white;
+  border-radius: 5px; */
+  margin-top: 10px;
+  margin-right: 15px;
 }
+
 #nav {
-  background-color: white;
+  /* background-color: white; */
   width: 100%;
-  height: 80px;
+  height: 53px;
+  border-radius: 0px 0px 5px 5px;
 }
 #logout_button {
   background-color: transparent;
@@ -27,6 +33,7 @@
   cursor: pointer;
 }
 #title1 {
+  margin-left: 20px;
   padding: 10px;
   font-family: "Open Sans", sans-serif;
   float: left;
@@ -34,7 +41,19 @@
   text-decoration: none;
   text-align: left;
   font-size: 20px;
+  /* border: 1px solid white;
+  border-radius: 5px; */
+  margin-top: 10px;
 }
 .nav {
   position: relative;
 }
+
+/* .fa,
+.far,
+.fas {
+  margin-top: 16px;
+}
+.fa-user:before {
+  color: black;
+} */

@@ -2,11 +2,12 @@ var db = require("../config/database");
 
 const Review = {};
 //
+//
 Review.addReview = async (comment, postid, userid) => {
-  var baseSQL =
-    "INSERT INTO `reviews` (`comment`,`fk_postid_c`,`fk_userid_c`,`created`) VALUES (?,?,?,now());";
+  var baseSQL = "INSERT INTO `reviews` (`comment`,`fk_postid_c`,`fk_userid_c`,`created`) VALUES (?,?,?,now());";
   await db.execute(baseSQL, [comment, postid, userid]);
 };
+
 Review.getReviews = async (postid, limit) => {
   //TODO: Maybe add limit to amount of Reviews to get on each individual post
   //TO ADD just LIMIT ? at end of SQL line

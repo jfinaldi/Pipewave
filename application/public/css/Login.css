@@ -4,9 +4,25 @@ body {
   margin: 0;
   background: url(../assets/background.png);
   padding: 0;
-  background-size: auto;
-  background-size: 1920px 1080px;
+  background-size: cover;
+  /* background-size: 1920px 1080px; */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  ackground-size: cover;
 }
+
+footer {
+  margin-top: auto;
+  text-align: center;
+  background-color: #a6d5df;
+  height: 47px;
+  padding: 2px;
+}
+
 #nav {
   background-color: transparent !important;
   width: 100%;
@@ -34,7 +50,7 @@ body {
 
   overflow: hidden;
 
-  transition: all 0.4s ease;
+  animation: fadein 2s;
 }
 #title1 {
   /* color: white; */
@@ -48,21 +64,26 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 .child {
-  background-image: linear-gradient(
-    to bottom right,
-    rgb(29, 29, 29),
-    rgb(43, 40, 40)
-  );
+  background-image: linear-gradient(to bottom right, rgb(29, 29, 29), rgb(43, 40, 40));
   border-radius: 10px;
-  opacity: 98%;
   text-align: center;
   margin: auto;
   margin-top: 10px;
   width: 330px;
-  height: 90%;
-  opacity: 0.97;
+  height: 76%;
+  opacity: 4;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.4), 0 10px 10px rgba(0, 0, 0, 0.22);
-  transition: all 0.2s ease;
+  opacity: 98%;
+  transition: all 1s ease;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .child:hover {
@@ -83,6 +104,8 @@ body {
   font-size: 15px;
   color: white;
   font-family: "Open Sans", sans-serif;
+  display: block;
+  margin: 20px 0px 10px 0px;
 }
 
 .submit {
@@ -95,6 +118,7 @@ body {
   outline: none;
   border: none;
   transition: all 0.4s ease;
+  margin: 26px 0px 0px 0px;
 }
 
 .submit:hover {
@@ -102,3 +126,13 @@ body {
   background-color: white;
   color: rgb(41, 41, 41);
 }
+
+/* 
+.fa,
+.far,
+.fas {
+  margin-top: 16px;
+}
+.fa-user:before {
+  color: black;
+} */

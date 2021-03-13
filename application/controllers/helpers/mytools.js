@@ -1,27 +1,16 @@
-var months = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
+var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+// Convert res.data.created data to a Date object
 module.exports = {
-  convert: x => {
-    for (var i = 0; i < x.length; i++) {
-      let response = new Date(x[i].created.toString().split("-")[0]);
-      console.log();
-      x[i].created = `${months[response.getMonth()]}
-      ${response.getDate()}, 
-      ${response.getFullYear()}`;
+  resFormatDateCreated: res_data => {
+    for (var i = 0; i < res_data.length; i++) {
+      // Convert res_data's date created to a Date object
+      let date_object = new Date(res_data[i].created.toString().split("-")[0]);
+
+      // console.log(res_data);
+      res_data[i].created = `${MONTHS[date_object.getMonth()]} ${date_object.getDate()}, ${date_object.getFullYear()}`;
     }
-    return x;
+    return res_data;
   },
 };
 

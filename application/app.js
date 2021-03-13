@@ -4,13 +4,16 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var handlebars = require("express-handlebars");
 var indexRouter = require("./controllers/routes/index");
+var authRouter = require("./controllers/routes/auth");
+
 var userRouter = require("./controllers/routes/users");
 var aboutRouter = require("./controllers/routes/about");
-
 var sessions = require("express-session");
 const MySQLStore = require("express-mysql-session");
+const passport = require("passport");
 var mysqlSession = require("express-mysql-session")(sessions);
-const upload = require("express-fileupload");
+require("./controllers/middleware/google_oauth");
+// const upload = require("express-fileupload");
 
 var app = express();
 app.engine(
@@ -35,6 +38,11 @@ app.engine(
     },
   })
 );
+
+app.get("/success", (req, res) => {
+  res.send(`Successfully logged in ${req.user.email}`);
+});
+
 var mysqlSessionsStore = new mysqlSession({}, require("./config/database"));
 app.use(
   sessions({
@@ -46,13 +54,22 @@ app.use(
   })
 );
 
+/*
+Passport initialization
+  http://www.passportjs.org/docs/configure/
+    "Note that enabling session support is entirely optional, though it is recommended for most applications. 
+    If enabled, be sure to use session() before passport.session() to ensure that the login session is restored in the correct order."
+*/
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.set("view engine", "hbs");
-app.use(upload());
+// app.use(upload());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "/public/")));
+app.use(express.static(path.join(__dirname, "/public")));
 
 app.use((req, res, next) => {
   let a = req.url.split("/");
@@ -66,6 +83,8 @@ app.use((req, res, next) => {
   next();
 });
 
+// Password and OAuth
+app.use("/auth", authRouter);
 app.use("/", indexRouter);
 app.use("/about", aboutRouter);
 app.use("/users", userRouter);

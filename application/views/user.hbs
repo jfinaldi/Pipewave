@@ -7,8 +7,11 @@
         <a class="post_title" href="/post/{{data.postid}}"> {{data.name}}</a>
 
         <a class="username">{{user.name}}</a>
+
         <br>
         <a class="left_a"> {{user.title}} </a>
+        <a class="left_a"> {{user.email}} </a>
+
         <a class="left_a">{{user.company}} </a>
 
         <a class="left_a"> Date Created: {{user.created}}</a>
@@ -19,10 +22,9 @@
             <p> Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto
                 obcaecati enim dicta
                 praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
-            {{!-- <a id="readmore" href="#">seomthing about rating here</a> --}}
 
             <div class="rating">
-                <a href="#5" title="Give 5 stars">★</a>
+                <a href="#5" titsle="Give 5 stars">★</a>
                 <a href="#4" title="Give 4 stars">★</a>
                 <a href="#3" title="Give 3 stars">★</a>
                 <a href="#2" title="Give 2 stars">★</a>
@@ -43,17 +45,16 @@
             </div>
             <div class="boxes">
                 <ul class="list_boxes">
-                    <li><a href="/users/ds">Resumes</a></li>
-                    <li><a href="/users/`">Reviews</a></li>
+                    <li><a href="/users/{{user.username}}">Posts</a></li>
+                    <li><a href="/users/{{user.username}}">Reviews</a></li>
                     {{#if authpage}}
-                    <li><a href="/users/">Edit Settings</a></li>
+                    <li><a href="/users/{{user.username}}">Edit Settings</a></li>
                     <li><a href="/">Messages</a></li>
                     {{/if}}
 
                 </ul>
             </div>
         </div>
-        {{!-- <embed src="{{data.resumepath}}#toolbar=0" width="500" height="375"> --}}
     </div>
 
 </div>

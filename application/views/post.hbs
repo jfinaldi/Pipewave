@@ -1,6 +1,7 @@
 {{> nav}}
 {{!--
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> --}}
+<link rel="stylesheet" type="text/css" href="/css/nav.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
     integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
     crossorigin="anonymous" />
@@ -13,10 +14,12 @@
 
         <a class="left_a" id="user" href="/users/{{data.username}}">{{data.username}}</a>
         <br>
-        <a class="left_a">Job Title: {{data.title}} </a>
+        <a class="left_a top_left_a">Job Title: {{data.title}} </a>
+        <a class="left_a top_left_a">Email: {{data.email}} </a>
+
         <a class="left_a">Company: {{data.company}} </a>
 
-        <a class="left_a">Date Posted: {{data.created}}</a>
+        <a class="left_a bottom_left_a">Date Posted: {{data.created}}</a>
         <br>
         <br>
         {{!-- <a class="left_a">Description: {{data.description}}</a> --}}
@@ -42,8 +45,8 @@
 
 
     <div class="resume_container">
-        <object id="obj" data="{{data.resumepath}}">object can't be rendered</object>
-        {{!-- <embed src="{{data.resumepath}}#toolbar=0" width="500" height="375"> --}}
+        {{!-- <embed id="obj" src="{{data.resumePath}}" /> --}}
+        <object id="obj" data="{{data.resumePath}}">object can't be rendered</object>
     </div>
 </div>
 <div class="comments">

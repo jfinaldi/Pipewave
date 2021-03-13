@@ -3,12 +3,22 @@
     <div class="child"><br>
         <h1 id="ctitle">LOGIN</h1>
         <form action="/users/login" method="POST" enctype="application/x-www-form-urlencoded">
-            <br><label for="Username" class="inputtags">Username</label><br>
-            <input placeholder=" Enter username" type=text id="username" name="username" required /><br><br><br><br>
-            <label for="Password" class="inputtags">Password</label><br>
-            <input placeholder=" Enter password" type=password id="password" name="password"
-                required></input><br><br><br><br><br>
+            {{!-- <br> --}}
+            <label for="Username" class="inputtags">Username</label>
+            {{!-- <br> --}}
+            <input placeholder=" Enter username" type=text id="username" name="username" required />
+            {{!-- <br><br><br><br> --}}
+
+            <label for="Password" class="inputtags">Password</label>
+            {{!-- <br> --}}
+            <input placeholder=" Enter password" type=password id="password" name="password" required></input>
+            {{!-- <br><br><br><br><br> --}}
+            <a href="/auth/google">
+                <img src="https://developers.google.com/identity/images/btn_google_signin_light_normal_web.png" alt="">
+            </a>
+            <br>
             <input type="submit" class="submit" value="Login">
+
 
         </form>
     </div>
