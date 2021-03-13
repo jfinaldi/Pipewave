@@ -15,7 +15,10 @@
   background-repeat: no-repeat;
   background-size: 100%;
 } */
-
+#result_image{
+  border-radius: 50%;
+  width: 40px;
+}
 body {
   box-sizing: border-box;
   margin: 0;
@@ -174,7 +177,7 @@ footer {
 .list_container {
   border-radius: 12px;
   background-color: rgb(255, 255, 255);
-  height: 80px;
+  height: 100px;
   width: 100%;
   margin-bottom: 10px;
   transition: all 0.4s ease;

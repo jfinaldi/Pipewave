@@ -7,7 +7,10 @@
         <a class="post_title" href="/post/{{data.postid}}"> {{data.name}}</a>
 
         <a class="username">{{user.name}}</a>
-
+        <form action="/users/edit_profile_picture" method="post" enctype="multipart/form-data">
+            <input type="file" name="photo" />
+            <button type="submit">Save</button>
+        </form>
         <br>
         <a class="left_a"> {{user.title}} </a>
         <a class="left_a"> {{user.email}} </a>

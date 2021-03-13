@@ -11,6 +11,7 @@ router.get("/", (req, res) => {
   });
 });
 //
+
 router.get("/:user", async (req, res, next) => {
   debugPrinter.printRouter(`/${req.params.user}`);
 

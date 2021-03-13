@@ -8,7 +8,7 @@ const Engine = {};
 Engine.getPosts = async limit => {
   debugPrinter.printFunction("Engine.getPosts");
   let baseSQL =
-    "SELECT u.username,u.name,  p.id, p.title, p.description, p.resumePath, p.created FROM users u JOIN posts p ON u.id=fk_userid ORDER BY created DESC LIMIT ?";
+    "SELECT u.username,u.name,u.profilepic,  p.id, p.title, p.description, p.resumePath, p.created FROM users u JOIN posts p ON u.id=fk_userid ORDER BY created DESC LIMIT ?";
   let [r, fields] = await db.query(baseSQL, [limit]);
   return r;
 };
@@ -28,7 +28,7 @@ Engine.search = async search => {
   debugPrinter.printFunction("Engine.search");
   try {
     let baseSQL =
-      "SELECT p.id, p.title, p.description, p.created, u.username, u.name, concat_ws(' ', p.title, p.description, p.tags) AS haystack FROM users u JOIN posts p ON u.id=fk_userid HAVING haystack like ?;";
+      "SELECT p.id, p.title, p.description, p.created,u.profilepic, u.username, u.name, concat_ws(' ', p.title, p.description, p.tags) AS haystack FROM users u JOIN posts p ON u.id=fk_userid HAVING haystack like ?;";
     let sqlready = "%" + search + "%";
     let [r, fields] = await db.execute(baseSQL, [sqlready]);
     return r && r.length ? r : await Engine.getPosts(10);
@@ -41,7 +41,7 @@ Engine.getPost = async id => {
   debugPrinter.printFunction("Engine.getPost");
   try {
     var baseSQL =
-      "SELECT p.id as postid, p.role, u.id,u.email, u.name, u.username, p.title, p.description, p.resumePath, p.created FROM users u JOIN posts p ON u.id=fk_userid WHERE p.id=?;";
+      "SELECT p.id as postid, p.role, u.id,u.email, u.profilepic,u.name, u.username, p.title, p.description, p.resumePath, p.created FROM users u JOIN posts p ON u.id=fk_userid WHERE p.id=?;";
     let [r, fields] = await db.query(baseSQL, [id]);
     return r;
   } catch (err) {
@@ -55,7 +55,7 @@ Engine.getUserPosts = async username => {
   debugPrinter.printFunction("Engine.getUserPosts");
   try {
     var baseSQL =
-      "SELECT p.id as postid, p.role, p.title, p.description, p.resumePath, p.created FROM users u JOIN posts p ON u.id=fk_userid WHERE u.username=?";
+      "SELECT p.id as postid, p.role, p.title, p.description, p.resumePath,u.profilepic, p.created FROM users u JOIN posts p ON u.id=fk_userid WHERE u.username=?";
     let [r, fields] = await db.query(baseSQL, [username]);
     return r;
   } catch (err) {
@@ -79,6 +79,36 @@ Engine.setPost = async (title, description, file, fk_userid) => {
   } catch (err) {
     console.log("Couldnt Create Post");
     return null;
+  }
+};
+
+Engine.updatePFP = async (file, fk_userid) => {
+  debugPrinter.printFunction("Engine.setPost");
+  try {
+    console.log(fk_userid);
+    let path = "/assets/" + file.filename;
+    // let tags = await pdfReader("./public" + path);
+    debugPrinter.printDebug(fk_userid);
+    // let path = "/assets/" + req.file.filename;
+    var baseSQL = "UPDATE `website`.`users` SET `profilepic` = ? WHERE `id` = ?;";
+    let [r, fields] = await db.query(baseSQL, [path, fk_userid]);
+    debugPrinter.printDebug("Response", r);
+    return r;
+  } catch (err) {
+    console.log("Couldnt Create Post");
+    return null;
+  }
+};
+
+Engine.advancedSearch = async (type, search) => {
+  debugPrinter.printFunction("Engine.advancedSearch");
+  try {
+    let baseSQL =
+      "SELECT p.id, p.title, p.description, p.created,u.profilepic, u.username, u.name FROM users u JOIN posts p ON u.id=fk_userid WHERE ?=?";
+    let [r, fields] = await db.execute(baseSQL, [type, search]);
+    return r && r.length ? r : await Engine.getPosts(10);
+  } catch (err) {
+    return false;
   }
 };
 

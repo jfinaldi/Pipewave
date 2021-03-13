@@ -162,6 +162,16 @@ router.post("/upload", uploader.single("photofile"), async (req, res, next) => {
   }
 });
 
+router.post("/edit_profile_picture", uploader.single("photo"), async (req, res) => {
+  if (!req.session.username) {
+    res.redirect("/");
+  } else {
+    debugPrinter.printRouter(req.file);
+
+    await Engine.updatePFP(req.file, req.session.userid);
+    res.redirect("/");
+  }
+});
 // Post changeUsername
 router.post("/changeUsername", async (req, res) => {
   debugPrinter.printRouter("Post: /changeUsername");
