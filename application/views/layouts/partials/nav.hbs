@@ -2,7 +2,7 @@
     <a href="/"><img id="logo" height="60" src="../assets/pipewavelogo.jpg"></a>
     {{!-- <a href="/" id="title1">coolbeans</a> --}}
     {{#if logged}}
-    <a href="/user/logout" method="post">
+    <a href="/users/logout">
         <button type="submit" id="logout_button" class="right">Logout</button>
     </a>
     <a href="/users/{{username}}" class="right">{{username}}</a>
@@ -17,5 +17,4 @@
     {{/if}}
     <a href="/about" class="right">About </a>
     <a href="/" class="right">Home</a>
-
 </div>
