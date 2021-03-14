@@ -18,39 +18,38 @@
             
             <div id="filterContainer">
                 <div class="innerContent">
-                    <div class="tc">
-                        <div class="tr" id="list">
-                            <div class="title"><b>Ethnicity</b></div>
-                            <div class="selection">
-                                <button type="button">African-American</button>
-                                <button type="button">Hispanic</button>
-                                <button type="button">Asian</button>
-                                <button type="button">Latin</button>
-                                <button type="button">Pacific Islander</button>
-                                <button type="button">Indigineous</button>
-                            </div>
-                        </div>
+                    <div class="table_column">
+                        <table>
+                            <tr scope="col">
+                                <th class="title"><b>Ethnicity</b></th>
+                            </tr>
+                            <tr scope="col"><td><button type="button" id="t_button">African-American</button></td></tr>
+                            <tr scope="col"><td><button type="button" id="t_button">Hispanic</button></td></tr>
+                            <tr scope="col"><td><button type="button" id="t_button">Asian</button></td></tr>
+                            <tr scope="col"><td><button type="button" id="t_button">Latin</button></td></tr>
+                            <tr scope="col"><td><button type="button" id="t_button">Pacific Islander</button></td></tr>
+                            <tr scope="col"><td><button type="button" id="t_button">Indigeneous</button></td></tr>
+                        </table>
                     </div>
-                    <div class="tc">
-                        <div class="tr" id="list">
-                            <div class="title"><b>Gender</b></div>
-                            <div class="selection">
-                                <input name="gender" type="radio">Male</input>
-                                <input name="gender" type="radio">Female</input>
-                                <input name="gender" type="radio">Non-Binary</input>
-                            </div>
-                        </div>
-                        <div class="tr">
-                            <div class="title"><b>Job Title</b></div>
-                            <div class="selection">
-                                <button type="button">Front-End</button>
-                                <button type="button">Back-End</button>
-                            </div>
-                        </div>
+                    <div class="table_column">
+                        <table>
+                            <tr scope="col">
+                                <th class="title"><b>Gender</b></th>
+                            </tr>
+                            <tr scope="col"><td><input name="gender" type="radio">Male</input></td></tr>
+                            <tr scope="col"><td><input name="gender" type="radio">Female</input></td></tr>
+                            <tr scope="col"><td><input name="gender" type="radio">Non-Binary</input></td></tr>
+                            
+                            <tr scope="col">
+                                <th class="title" id="job"><b>Job Title</b></th>
+                            </tr>
+                            <tr scope="col"><td><button type="button" id="t_button">Front-End</button></td></tr>
+                            <tr scope="col"><td><button type="button" id="t_button">Back-End</button></td></tr>
+                    </table>
                     </div>
-                    <div class="tc">
+                    <div class="table_column">
                         <div class="tr" id="list">
-                            <button type="submit">Add to Search</button>
+                            <button type="submit">Search</button>
                         </div>
                     </div>
                 </div>

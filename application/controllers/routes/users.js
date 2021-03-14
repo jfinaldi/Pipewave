@@ -118,6 +118,7 @@ router.post("/logout", async (req, res) => {
   }
 });
 
+// Get Logout
 router.get("/logout", async (req, res) => {
   debugPrinter.printRouter("Get: /logout");
 
