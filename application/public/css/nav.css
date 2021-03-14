@@ -8,8 +8,9 @@
   scroll-behavior: smooth;
   text-decoration: none;
 }
+/*Nav button links*/
 .right {
-  padding: 15px;
+  padding: 8px;
   text-decoration: none;
   color: rgb(29, 29, 29);
   float: right;
@@ -19,13 +20,15 @@
   border-radius: 5px; */
   margin-top: 10px;
   margin-right: 15px;
+  /* background-color: white; */
 }
 
 #nav {
   /* background-color: white; */
   width: 100%;
-  height: 53px;
+  height: 60px;
   border-radius: 0px 0px 5px 5px;
+  background-color: white;
 }
 #logout_button {
   background-color: transparent;
