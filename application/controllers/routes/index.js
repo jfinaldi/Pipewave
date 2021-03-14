@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
     unique: "Home",
     search: true,
     user: req.session.username,
-    render_js_files: ["home"],
+    render_js_files: ["home", "advancedFilter"],
   });
 });
 router.get("/api/getposts/:id", async (req, res) => {

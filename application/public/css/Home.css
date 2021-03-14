@@ -185,3 +185,62 @@ footer {
 .list_container a {
   padding: 6px;
 }
+
+
+/*Filter Button*/
+#filterButton {
+  display: inline-block;
+  padding: 0.3em 1.2em;
+  margin: 0 0.3em 0.3em 0;
+  border-radius:px;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color:#FFFFFF;
+  background-color:#4eb5f1;
+  text-align:center;
+  transition: all 0.2s;
+}
+#filterButton:hover{
+  background-color:#4095c6;
+}
+
+/*Advanced Filter Table*/
+#filterContainer{
+  display: none;
+  color: black;
+  margin: auto;
+  width: 50%;
+  border: 1px solid Black;
+  background: white;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+/*Advanced Filter Sections*/
+.innerContent{
+  border: 1px solid blue;
+  display: flex;
+  margin: auto;
+}
+.tc {
+  display: flex;
+  border: 1px solid Black;
+  margin:  0px auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.tr {
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+.selection {
+  margin: auto;
+}
+#list {
+  width:auto;
+  padding: none;
+}
