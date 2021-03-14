@@ -1,20 +1,16 @@
 const filter = document.getElementById("filterButton");
 var goButton = document.getElementById("button");
-
+check = false;
+styles = ["none", "inline", "flex"];
 filter.addEventListener("click", e => {
-    console.log("clicked");
-    goButton.remove(); // remove the other GO button
-    console.log("go button removed.");
-    displayAdvancedFilter();
-})
+  check = !check;
+  goButton.style.display = styles[check ? 0 : 1];
+  displayAdvancedFilter();
+});
 
 function displayAdvancedFilter() {
-    var x = document.getElementById("filterContainer");
-    if (x.style.display === "flex") {
-        x.style.display = "none";
-    } else {
-        x.style.display = "flex";
-    }
+  var x = document.getElementById("filterContainer");
+  x.style.display = styles[x.style.display === "flex" ? 0 : 2];
 }
 
 console.log("advancedFilter js connected");
