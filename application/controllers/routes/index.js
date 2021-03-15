@@ -10,6 +10,7 @@ const debugPrinter = require("../helpers/debug/debug_printer");
 
 // Get Home
 router.get("/", async (req, res) => {
+  if (req.query.search) await search(req, res, req.query.search);
   debugPrinter.printRouter("Get: /");
   res.render("index", {
     data: mytools.resFormatDateCreated(await Engine.getPosts(10)),
@@ -132,17 +133,11 @@ router.post("/comment", async (req, res, next) => {
 });
 
 // Post search
-router.post("/search", async (req, res) => {
+const search = async (req, res, search) => {
+  console.log(search);
   debugPrinter.printRouter("Get: /search");
-  // console.log(validationResult(req));
-  // const errors = validationResult(req);
-  // if (!errors.isEmpty()) {
-  // res.redirect("/");
-  // }
-  // debugPrinter.printRouter(req.body.search);
 
-  // No search given
-  if (!req.body.search) {
+  if (!search) {
     debugPrinter.printDebug(`Search is empty!`);
     res.render("index", {
       data: await mytools.resFormatDateCreated(await Engine.getPosts(10)),
@@ -154,17 +149,17 @@ router.post("/search", async (req, res) => {
   }
   // Search given
   else {
-    debugPrinter.printDebug(`Search: ${req.body.search}`);
+    debugPrinter.printDebug(`Search: ${search}`);
 
     res.render("index", {
-      data: await mytools.resFormatDateCreated(await Engine.search(req.body.search)),
+      data: await mytools.resFormatDateCreated(await Engine.search(search)),
       js: true,
       home: "active",
       unique: "Home",
       search: true,
     });
   }
-});
+};
 
 // router.get("/*", (req, res) => {
 //   res.render("error", {

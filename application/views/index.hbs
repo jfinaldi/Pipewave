@@ -4,7 +4,7 @@
     <div id="counter"></div>
     <div id="container">
 
-        <form id="form" method="post" action="/search" enctype="application/x-www-form-urlencoded">
+        <form id="form" method="get" action="/" enctype="application/x-www-form-urlencoded">
 
             <input placeholder=" search" type="text" name="search" id="search">
             <button type="submit" id="button">GO</button>
@@ -14,8 +14,8 @@
                 <option value="Top">Top</option>
                 <option value="test">Test</option>
             </select> --}}
-            <button type="button" id="filterButton">Advanced</button> 
-            
+            <button type="button" id="filterButton">Advanced</button>
+
             <div id="filterContainer">
                 <div class="innerContent">
                     <div class="table_column">
@@ -23,12 +23,24 @@
                             <tr scope="col">
                                 <th class="title"><b>Ethnicity</b></th>
                             </tr>
-                            <tr scope="col"><td><button type="button" id="t_button">African-American</button></td></tr>
-                            <tr scope="col"><td><button type="button" id="t_button">Hispanic</button></td></tr>
-                            <tr scope="col"><td><button type="button" id="t_button">Asian</button></td></tr>
-                            <tr scope="col"><td><button type="button" id="t_button">Latin</button></td></tr>
-                            <tr scope="col"><td><button type="button" id="t_button">Pacific Islander</button></td></tr>
-                            <tr scope="col"><td><button type="button" id="t_button">Indigeneous</button></td></tr>
+                            <tr scope="col">
+                                <td><button type="button" id="t_button">African-American</button></td>
+                            </tr>
+                            <tr scope="col">
+                                <td><button type="button" id="t_button">Hispanic</button></td>
+                            </tr>
+                            <tr scope="col">
+                                <td><button type="button" id="t_button">Asian</button></td>
+                            </tr>
+                            <tr scope="col">
+                                <td><button type="button" id="t_button">Latin</button></td>
+                            </tr>
+                            <tr scope="col">
+                                <td><button type="button" id="t_button">Pacific Islander</button></td>
+                            </tr>
+                            <tr scope="col">
+                                <td><button type="button" id="t_button">Indigeneous</button></td>
+                            </tr>
                         </table>
                     </div>
                     <div class="table_column">
@@ -36,16 +48,26 @@
                             <tr scope="col">
                                 <th class="title"><b>Gender</b></th>
                             </tr>
-                            <tr scope="col"><td><input name="gender" type="radio">Male</input></td></tr>
-                            <tr scope="col"><td><input name="gender" type="radio">Female</input></td></tr>
-                            <tr scope="col"><td><input name="gender" type="radio">Non-Binary</input></td></tr>
-                            
+                            <tr scope="col">
+                                <td><input name="gender" type="radio">Male</input></td>
+                            </tr>
+                            <tr scope="col">
+                                <td><input name="gender" type="radio">Female</input></td>
+                            </tr>
+                            <tr scope="col">
+                                <td><input name="gender" type="radio">Non-Binary</input></td>
+                            </tr>
+
                             <tr scope="col">
                                 <th class="title" id="job"><b>Job Title</b></th>
                             </tr>
-                            <tr scope="col"><td><button type="button" id="t_button">Front-End</button></td></tr>
-                            <tr scope="col"><td><button type="button" id="t_button">Back-End</button></td></tr>
-                    </table>
+                            <tr scope="col">
+                                <td><button type="button" id="t_button">Front-End</button></td>
+                            </tr>
+                            <tr scope="col">
+                                <td><button type="button" id="t_button">Back-End</button></td>
+                            </tr>
+                        </table>
                     </div>
                     <div class="table_column">
                         <div class="tr" id="list">
