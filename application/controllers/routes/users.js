@@ -90,33 +90,33 @@ router.post("/register", async (req, res, next) => {
 });
 
 // Post Logout
-router.post("/logout", async (req, res) => {
-  debugPrinter.printRouter("Post: /logout");
+// router.post("/logout", async (req, res) => {
+//   debugPrinter.printRouter("Post: /logout");
 
-  // If not logged in
-  if (!req.session.username) {
-    debugPrinter.printWarning("User not logged in trying to log out");
-    res.redirect("/");
-  }
-  // If user is logged in
-  else {
-    debugPrinter.printSuccess(`User ${req.session.username} has logged out!`);
+//   // If not logged in
+//   if (!req.session.username) {
+//     debugPrinter.printWarning("User not logged in trying to log out");
+//     res.redirect("/");
+//   }
+//   // If user is logged in
+//   else {
+//     debugPrinter.printSuccess(`User ${req.session.username} has logged out!`);
 
-    req.session.destroy(async err => {
-      // If an error has occurred during the User's session being destroyed
-      if (err) {
-        debugPrinter.printError("Session could not be destroyed!");
-      }
-      // If the User's session was destroyed
-      else {
-        debugPrinter.printSuccess("Session was destroyed!");
-        res.clearCookie("qwerty");
-        res.redirect("/");
-      }
-    });
-    debugPrinter.printSuccess("Post: /logout route was successful!");
-  }
-});
+//     req.session.destroy(async err => {
+//       // If an error has occurred during the User's session being destroyed
+//       if (err) {
+//         debugPrinter.printError("Session could not be destroyed!");
+//       }
+//       // If the User's session was destroyed
+//       else {
+//         debugPrinter.printSuccess("Session was destroyed!");
+//         res.clearCookie("qwerty");
+//         res.redirect("/");
+//       }
+//     });
+//     debugPrinter.printSuccess("Post: /logout route was successful!");
+//   }
+// });
 
 // Get Logout
 router.get("/logout", async (req, res) => {
