@@ -5,10 +5,16 @@ const debugPrinter = require("../controllers/helpers/debug/debug_printer");
 const Engine = {};
 
 //grabs n amount of posts from db and returns the data
+// Engine.getPosts = async limit => {
+//   debugPrinter.printFunction("Engine.getPosts");
+//   let baseSQL =
+//     "SELECT u.username,u.name,u.profilepic,  p.id, p.title, p.description, p.resumePath, p.created FROM users u JOIN posts p ON u.id=fk_userid ORDER BY created DESC LIMIT ?";
+//   let [r, fields] = await db.query(baseSQL, [limit]);
+//   return r;
+// };
 Engine.getPosts = async limit => {
   debugPrinter.printFunction("Engine.getPosts");
-  let baseSQL =
-    "SELECT u.username,u.name,u.profilepic,  p.id, p.title, p.description, p.resumePath, p.created FROM users u JOIN posts p ON u.id=fk_userid ORDER BY created DESC LIMIT ?";
+  let baseSQL = "SELECT * FROM website.users ORDER BY created DESC LIMIT ?;";
   let [r, fields] = await db.query(baseSQL, [limit]);
   return r;
 };
@@ -28,7 +34,7 @@ Engine.search = async search => {
   debugPrinter.printFunction("Engine.search");
   try {
     let baseSQL =
-      "SELECT u.id,u.name, u.title,u.created, u.username, concat_ws(' ', u.name, u.username) AS haystack FROM users u HAVING haystack like ?;";
+      "SELECT u.id,u.name,u.profilepic, u.title,u.created, u.username, concat_ws(' ', u.name, u.username) AS haystack FROM users u HAVING haystack like ?;";
     let sqlready = "%" + search + "%";
     let [r, fields] = await db.execute(baseSQL, [sqlready]);
     return r && r.length ? r : await Engine.getPosts(10);

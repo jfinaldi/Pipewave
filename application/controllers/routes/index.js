@@ -144,21 +144,20 @@ router.post("/search", async (req, res) => {
   // No search given
   if (!req.body.search) {
     debugPrinter.printDebug(`Search is empty!`);
-
-    res.send({
-      resultStatus: "info",
-      message: "No search term given",
-      results: [],
+    res.render("index", {
+      data: await mytools.resFormatDateCreated(await Engine.getPosts(10)),
+      js: true,
+      home: "active",
+      unique: "Home",
+      search: true,
     });
   }
   // Search given
   else {
     debugPrinter.printDebug(`Search: ${req.body.search}`);
-    results = mytools.resFormatDateCreated(await Engine.search(req.body.search));
-    debugPrinter.printDebug(`Results: ${JSON.stringify(results)}`);
-    console.log(results[0].username);
+
     res.render("index", {
-      data: results,
+      data: await mytools.resFormatDateCreated(await Engine.search(req.body.search)),
       js: true,
       home: "active",
       unique: "Home",
