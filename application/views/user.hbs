@@ -7,16 +7,13 @@
         <a class="post_title" href="/post/{{data.postid}}"> {{data.name}}</a>
 
         <a class="username">{{user.name}}</a>
-        {{#if authpage}}
-
         <form action="/users/edit_profile_picture" method="post" enctype="multipart/form-data">
             <input type="file" name="photo" />
             <button type="submit">Save</button>
         </form>
-        {{/if}}
         <br>
-        <a class="left_a"> {{user.title}} </a>
-        <a class="left_a"> {{user.email}} </a>
+        <a class="left_a"> Major: {{user.title}} </a>
+        <a class="left_a"> Email: {{user.email}} </a>
 
         <a class="left_a">{{user.company}} </a>
 
@@ -30,7 +27,7 @@
                 praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
 
             <div class="rating">
-                <a href="#5" titsle="Give 5 stars">★</a>
+                <a href="#5" titele="Give 5 stars">★</a>
                 <a href="#4" title="Give 4 stars">★</a>
                 <a href="#3" title="Give 3 stars">★</a>
                 <a href="#2" title="Give 2 stars">★</a>
@@ -64,8 +61,8 @@
     </div>
 
 </div>
-<div class="posts_container">
+{{!-- <div class="posts_container">
     <a class="username" id="userpost_label">User Posts</a>
     {{> posts}}
 
-</div>
+</div> --}}
