@@ -145,6 +145,7 @@ const search = async (req, res, search) => {
       home: "active",
       unique: "Home",
       search: true,
+      render_js_files: ["home", "advancedFilter"],
     });
   }
   // Search given
@@ -157,6 +158,7 @@ const search = async (req, res, search) => {
       home: "active",
       unique: "Home",
       search: true,
+      render_js_files: ["home", "advancedFilter"],
     });
   }
 };
