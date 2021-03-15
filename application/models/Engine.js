@@ -28,7 +28,7 @@ Engine.search = async search => {
   debugPrinter.printFunction("Engine.search");
   try {
     let baseSQL =
-      "SELECT p.id, p.title, p.description, p.created,u.profilepic, u.username, u.name, concat_ws(' ', p.title, p.description, p.tags) AS haystack FROM users u JOIN posts p ON u.id=fk_userid HAVING haystack like ?;";
+      "SELECT u.id,u.name, u.title,u.created, u.username, concat_ws(' ', u.name, u.username) AS haystack FROM users u HAVING haystack like ?;";
     let sqlready = "%" + search + "%";
     let [r, fields] = await db.execute(baseSQL, [sqlready]);
     return r && r.length ? r : await Engine.getPosts(10);
@@ -36,6 +36,19 @@ Engine.search = async search => {
     return false;
   }
 };
+
+// Engine.search = async search => {
+//   debugPrinter.printFunction("Engine.search");
+//   try {
+//     let baseSQL =
+//       "SELECT p.id, p.title, p.description, p.created,u.profilepic, u.username, u.name, concat_ws(' ', p.title,u.name, p.description, p.tags) AS haystack FROM users u JOIN posts p ON u.id=fk_userid HAVING haystack like ?;";
+//     let sqlready = "%" + search + "%";
+//     let [r, fields] = await db.execute(baseSQL, [sqlready]);
+//     return r && r.length ? r : await Engine.getPosts(10);
+//   } catch (err) {
+//     return false;
+//   }
+// };
 
 Engine.getPost = async id => {
   debugPrinter.printFunction("Engine.getPost");

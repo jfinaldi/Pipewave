@@ -139,6 +139,7 @@ router.post("/search", async (req, res) => {
   // if (!errors.isEmpty()) {
   // res.redirect("/");
   // }
+  // debugPrinter.printRouter(req.body.search);
 
   // No search given
   if (!req.body.search) {
@@ -153,8 +154,11 @@ router.post("/search", async (req, res) => {
   // Search given
   else {
     debugPrinter.printDebug(`Search: ${req.body.search}`);
+    results = mytools.resFormatDateCreated(await Engine.search(req.body.search));
+    debugPrinter.printDebug(`Results: ${JSON.stringify(results)}`);
+    console.log(results[0].username);
     res.render("index", {
-      data: mytools.resFormatDateCreated(await Engine.search(req.body.search)),
+      data: results,
       js: true,
       home: "active",
       unique: "Home",
