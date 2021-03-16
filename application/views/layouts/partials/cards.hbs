@@ -1,25 +1,26 @@
-{{#each data}}
-<a href="/users/{{this.username}}">
-<div class="list_container">
-        <table>
-            <tr><td>
-            {{#if this.profilepic}}
-                <img id="result_image" src="{{this.profilepic}}" />
-            {{else}}
-                <img id="result_image" src="https://randomuser.me/api/portraits/men/66.jpg" />
-            {{/if}}
-            </td></tr>
-        </table>
+{{#each data}}<a href="/users/{{this.username}}">
+    <div class="list_container">
         <table>
             <tr>
-                <td>{{this.name}}</td>
-            </tr>
-            <tr>
-                <td>Major: {{this.title}}</td>
+                <td>
+                {{#if this.profilepic}}
+                    <img id="result_image" src="{{this.profilepic}}" />
+                {{else}}
+                    <img id="result_image" src="../assets/icons/defaultProfile.png" />
+                {{/if}}
+                </td>
+                <td id="name_title">
+                    {{this.name}}</br>Major: {{this.title}}
+                </td>
+                {{!-- <td colspan="3" rowspan="3" id="date_created">
+                    Date Created: {{this.created}}
+                </td> --}}
             </tr>
         </table>
+    </div>
+</a>
 
-
+{{/each}}
 
     {{!-- <a>{{this.description}}</a> --}}
 
@@ -28,10 +29,3 @@
             <button>More info</button>
         </a>
     </div> --}}
-    <div class="right_created">
-        <a>{{this.created}}</a>
-    </div>
-</div>
-</a>
-
-{{/each}}

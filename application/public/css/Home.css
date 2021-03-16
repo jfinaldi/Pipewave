@@ -181,7 +181,8 @@ footer {
 .list_container {
   border-radius: 12px;
   background-color: rgb(255, 255, 255);
-  height: 100px;
+  /* height: 100px; */
+  height: auto;
   width: 100%;
   margin-bottom: 10px;
   transition: all 0.4s ease;
@@ -296,4 +297,12 @@ tr {
   height: 40px;
 } */
 
+#name_title {
+  padding-left: 15px;
+}
+
+#date_created {
+  text-align: right;
+  margin-right: 0;
+}
 
