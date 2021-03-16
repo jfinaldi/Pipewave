@@ -288,4 +288,14 @@ router.get("/:user", async (req, res) => {
   });
 });
 
+// get settings page
+router.get("/:user/settings", async (req, res) => {
+  debugPrinter.printRouter("Get: /:settings");
+  res.render("settings", {
+    unique: "User",
+    search: true,
+    user: { username: req.session.username },
+  });
+});
+
 module.exports = router;
