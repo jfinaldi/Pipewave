@@ -1,21 +1,36 @@
 {{#each data}}
+<a href="/users/{{this.username}}">
 <div class="list_container">
-    <img id="result_image" src="https://randomuser.me/api/portraits/men/66.jpg" />
-    <a id="list_title" href="/post/{{this.id}}">{{this.title}}</a>
-    <br>
-    <a id="user_link" href="/users/{{this.username}}">{{this.name}}</a>
+        <table>
+            <tr><td>
+            {{#if this.profilepic}}
+                <img id="result_image" src="{{this.profilepic}}" />
+            {{else}}
+                <img id="result_image" src="https://randomuser.me/api/portraits/men/66.jpg" />
+            {{/if}}
+            </td></tr>
+            <tr>
+                <td><a id="user_link" href="/users/{{this.username}}">{{this.name}}</a></td>
+            </tr>
+            <tr>
+                </br>
+                <td><a id="list_title" href="/post/{{this.id}}">Major: {{this.title}}</a></td>
+            </tr>
+        </table>
+
 
 
     {{!-- <a>{{this.description}}</a> --}}
 
-    <div class="moreinfo">
+    {{!-- <div class="moreinfo">
         <a href="/users/{{this.username}}">
             <button>More info</button>
         </a>
-    </div>
+    </div> --}}
     <div class="right_created">
         <a>{{this.created}}</a>
     </div>
 </div>
+</a>
 
 {{/each}}

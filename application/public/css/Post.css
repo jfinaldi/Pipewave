@@ -10,11 +10,8 @@
 body {
   box-sizing: border-box;
   margin: 0;
-  /* background: url(../assets/background.png); */
   padding: 0;
   text-decoration: none;
-  /* background-size: 100%; */
-  /* background-size: 1920px 1080px; */
   display: flex;
   flex-direction: column;
   min-height: 100vh;
