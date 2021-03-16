@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
   if (req.query.search) await search(req, res, req.query.search);
   debugPrinter.printRouter("Get: /");
   res.render("index", {
-    data: mytools.resFormatDateCreated(await Engine.getPosts(10)),
+    data: mytools.resFormatDateCreated(await Engine.getAllPosts()),
     js: true,
     home: "active",
     unique: "Home",

@@ -12,13 +12,19 @@ const Engine = {};
 //   let [r, fields] = await db.query(baseSQL, [limit]);
 //   return r;
 // };
+
 Engine.getPosts = async limit => {
   debugPrinter.printFunction("Engine.getPosts");
   let baseSQL = "SELECT * FROM website.users ORDER BY created DESC LIMIT ?;";
   let [r, fields] = await db.query(baseSQL, [limit]);
   return r;
 };
-
+Engine.getAllPosts = async _ => {
+  debugPrinter.printFunction("Engine.getPosts");
+  let baseSQL = "SELECT * FROM website.users ORDER BY created DESC;";
+  let [r, fields] = await db.query(baseSQL);
+  return r;
+};
 Engine.getPostsApiEndpoint = async (limit, filter, order = "DESC") => {
   //filter = created, reviews
   //ASC - DESC
