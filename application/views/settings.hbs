@@ -9,59 +9,56 @@
 
 
 </div>
-<div class="userInfo"></div>
-<div class="userBox">
+<div class="userInfo">
+    <div class="userBox">
+        <form action="/users/changeUsername" method="post">
+            <label for="new_username">Enter New Username</label>
 
-    <form action="/users/changeUsername" method="post">
-        <label for="new_username">Enter New Username</label>
+            <input class="textbox" type="text" name="new_username">
+            <br>
+            <label for="old_password">Enter Current Password</label>
 
-        <input class="textbox" type="text" name="new_username">
-        <br>
-        <label for="old_password">Enter Current Password</label>
+            <br>
+            <input class="textbox" type="text" name="old_password">
+            <br>
+            <button class="button_change" type="submit">Change Username</button>
 
-        <br>
-        <input class="textbox" type="text" name="old_password">
-        <br>
-        <button class="button_change" type="submit">Change Username</button>
+            <br>
+        </form>
+    </div>
 
-        <br>
-    </form>
+    <div class="passwordBox">
 
-</div>
+        <form action="/users/changePassword" method="post">
+            <label for="new_password">New Password</label>
+            <br>
 
-<div class="passwordBox">
+            <input class="textbox" type="text" name="new_password">
+            <br>
+            <label for="old_password">Enter Current Password</label>
+            <br>
 
-    <form action="/users/changePassword" method="post">
-        <label for="new_password">New Password</label>
-        <br>
+            <input class="textbox" type="text" name="old_password">
+            <br>
 
-        <input class="textbox" type="text" name="new_password">
-        <br>
-        <label for="old_password">Enter Current Password</label>
-        <br>
+            <button class="button_change" type="submit">Change Password</button>
+        </form>
+    </div>
 
-        <input class="textbox" type="text" name="old_password">
-        <br>
+    <div class="emailBox">
 
-        <button class="button_change" type="submit">Change Password</button>
-    </form>
+        <form action="/users/changeEmail" method="post">
+            <label for="new_email">Enter New Email</label>
+            <br>
 
-</div>
-<div class="emailBox">
+            <input class="textbox" type="text" name="new_email">
+            <br>
+            <label for="old_password">Enter Current Password</label>
+            <br>
 
-    <form action="/users/changeEmail" method="post">
-        <label for="new_email">Enter New Email</label>
-        <br>
-
-        <input class="textbox" type="text" name="new_email">
-        <br>
-        <label for="old_password">Enter Current Password</label>
-
-        <br>
-
-        <input class="textbox" type="text" name="old_password">
-        <br>
-        <button class="button_change" type="submit">Change Email</button>
-    </form>
-
+            <input class="textbox" type="text" name="old_password">
+            <br>
+            <button class="button_change" type="submit">Change Email</button>
+        </form>
+    </div>
 </div>

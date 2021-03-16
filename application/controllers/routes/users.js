@@ -292,9 +292,10 @@ router.get("/:user", async (req, res) => {
 router.get("/:user/settings", async (req, res) => {
   debugPrinter.printRouter("Get: /:settings");
   res.render("settings", {
-    unique: "User",
+    unique: "Settings", //css link
     search: true,
     user: { username: req.session.username },
+    render_css_files: ["Settings"],
   });
 });
 

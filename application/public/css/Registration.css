@@ -1,4 +1,7 @@
 @import url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap);
+* {
+  text-align: center;
+}
 body {
   box-sizing: border-box;
   margin: 0;
@@ -177,7 +180,9 @@ footer {
 }
 
 #nav {
-  background-color: transparent !important;
+  /* background-color: transparent !important; */
+  text-align: left;
+  background-color: white;
   width: 100%;
   height: 80px;
 }
