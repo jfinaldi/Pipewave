@@ -148,7 +148,6 @@ Engine.advancedSearch = async advancedSearch => {
 
   debugPrinter.printFunction("BASE: ");
   debugPrinter.printFunction(base);
-  let filters = [advancedSearch.gender, advancedSearch.ethnicity, advancedSearch.major];
   try {
     let baseSQL = "SELECT u.id,u.title, u.ethnicity, u.major, u.profilepic, u.username, u.name FROM users u " + base;
     console.log(baseSQL);
