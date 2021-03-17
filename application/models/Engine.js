@@ -40,7 +40,7 @@ Engine.search = async search => {
   debugPrinter.printFunction("Engine.search");
   try {
     let baseSQL =
-      "SELECT u.id,u.name,u.profilepic, u.title,u.created, u.username, concat_ws(' ', u.name, u.username) AS haystack FROM users u HAVING haystack like ?;";
+      "SELECT u.id,u.name,u.profilepic, u.title,u.created, u.username, concat_ws(' ', u.name, u.username, u.title) AS haystack FROM users u HAVING haystack like ?;";
     let sqlready = "%" + search + "%";
     let [r, fields] = await db.execute(baseSQL, [sqlready]);
     return r && r.length ? r : await Engine.getPosts(10);
