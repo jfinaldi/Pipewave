@@ -124,14 +124,36 @@ Engine.updatePFP = async (file, fk_userid) => {
     return null;
   }
 };
+// SELECT u.id, u.ethnicity, u.major, u.profilepic, u.username, u.name FROM users u WHERE `gender`="male" and `major`="Computer Science" and `ethnicity`="hispanic";
 
-Engine.advancedSearch = async (type, search) => {
+const helper_cluster = (x, filter_name, count, base) => {
+  if (x) {
+    console.log("Gender passed in");
+    base += count ? ` and ${filter_name}="${x}"` : `WHERE ${filter_name}="${x}"`;
+    return [++count, base];
+  }
+  return [count, base];
+};
+
+Engine.advancedSearch = async advancedSearch => {
   debugPrinter.printFunction("Engine.advancedSearch");
+  // WHERE ?=?, and ?
+  let options = ["ethnicity", "gender", "major"];
+  let base = "",
+    count = 0;
+  [count, base] = helper_cluster(advancedSearch?.ethnicity, options[0], count, base);
+  [count, base] = helper_cluster(advancedSearch?.gender, options[1], count, base);
+  [count, base] = helper_cluster(advancedSearch?.major, options[2], count, base);
+  base += ";";
+
+  debugPrinter.printFunction("BASE: ");
+  debugPrinter.printFunction(base);
+  let filters = [advancedSearch.gender, advancedSearch.ethnicity, advancedSearch.major];
   try {
-    let baseSQL =
-      "SELECT p.id, p.title, p.description, p.created,u.profilepic, u.username, u.name FROM users u JOIN posts p ON u.id=fk_userid WHERE ?=?";
-    let [r, fields] = await db.execute(baseSQL, [type, search]);
-    return r && r.length ? r : await Engine.getPosts(10);
+    let baseSQL = "SELECT u.id,u.title, u.ethnicity, u.major, u.profilepic, u.username, u.name FROM users u " + base;
+    console.log(baseSQL);
+    let [r, fields] = await db.execute(baseSQL);
+    return r && r.length ? r : await Engine.getallPosts();
   } catch (err) {
     return false;
   }

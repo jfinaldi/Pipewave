@@ -17,7 +17,7 @@
             <button type="button" id="filterButton">Advanced</button>
         </form>
 
-        <form id="form">
+        <form id="form" method="get" action="/" enctype="application/x-www-form-urlencoded">
             <div id="filterContainer">
                 <div class="innerContent">
                     <div class="table_column">
@@ -26,28 +26,30 @@
                                 <th class="title"><b>Ethnicity</b></th>
                             </tr>
                             <tr scope="col">
-                                <td><input name="ethnicity" type="radio">African-American</input></td>
+                                <td><input name="ethnicity" value="african american"
+                                        type="radio">African-American</input></td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="ethnicity" type="radio">Hispanic</input></td>
+                                <td><input name="ethnicity" value="hispanic" type="radio">Hispanic</input></td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="ethnicity" type="radio">Asian</input></td>
+                                <td><input name="ethnicity" value="asian" type="radio">Asian</input></td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="ethnicity" type="radio">Latin</input></td>
+                                <td><input name="ethnicity" value="latin" type="radio">Latin</input></td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="ethnicity" type="radio">Pacific Islander</input></td>
+                                <td><input name="ethnicity" value="pacific islander" type="radio">Pacific
+                                    Islander</input></td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="ethnicity" type="radio">Indigeneous</input></td>
+                                <td><input name="ethnicity" value="indigeneous" type="radio">Indigeneous</input></td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="ethnicity" type="radio">White</input></td>
+                                <td><input name="ethnicity" value="white" type="radio">White</input></td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="ethnicity" type="radio">Other</input></td>
+                                <td><input name="ethnicity" value="other" type="radio">Other</input></td>
                             </tr>
                         </table>
                     </div>
@@ -57,32 +59,34 @@
                                 <th class="title"><b>Gender</b></th>
                             </tr>
                             <tr scope="col">
-                                <td><input name="gender" type="radio">Male</input></td>
+                                <td><input name="gender" value="male" type="radio">Male</input></td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="gender" type="radio">Female</input></td>
+                                <td><input name="gender" value="female" type="radio">Female</input></td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="gender" type="radio">Non-Binary</input></td>
+                                <td><input name="gender" value="nonbinary" type="radio">Non-Binary</input></td>
                             </tr>
 
                             <tr scope="col">
                                 <th class="title" id="major"><b>Major</b></th>
                             </tr>
                             <tr scope="col">
-                                <td><input name="major" type="radio">Computer Science</input></td>
+                                <td><input name="major" value="Computer Science" type="radio">Computer Science</input>
+                                </td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="major" type="radio">Engineering</input></td>
+                                <td><input name="major" value="Engineering" type="radio">Engineering</input></td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="major" type="radio">Mathematics</input></td>
+                                <td><input name="major" value="Mathematics" type="radio">Mathematics</input></td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="major" type="radio">Communications</input></td>
+                                <td><input name="major" value="Communications" type="radio">Communications</input>
+                                </td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="major" type="radio">Business</input></td>
+                                <td><input name="major" value="Business" type="radio">Business</input></td>
                             </tr>
                         </table>
                     </div>

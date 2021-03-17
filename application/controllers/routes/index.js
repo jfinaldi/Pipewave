@@ -10,7 +10,13 @@ const debugPrinter = require("../helpers/debug/debug_printer");
 
 // Get Home
 router.get("/", async (req, res) => {
+  console.log(req.query);
   if (req.query.search) await search(req, res, req.query.search);
+  if (req.query.gender || req.query.ethnicity || req.query.major) {
+    console.log(req.query);
+    data = { gender: req.query.gender, ethnicity: req.query.ethnicity, major: req.query.major };
+    await advancedSearch(req, res, data);
+  }
   debugPrinter.printRouter("Get: /");
   res.render("index", {
     data: mytools.resFormatDateCreated(await Engine.getAllPosts()),
@@ -22,6 +28,7 @@ router.get("/", async (req, res) => {
     render_js_files: ["home", "advancedFilter"],
   });
 });
+
 router.get("/api/getposts/:id", async (req, res) => {
   let { id } = req.params;
   let args = id.split(",");
@@ -154,6 +161,42 @@ const search = async (req, res, search) => {
 
     res.render("index", {
       data: await mytools.resFormatDateCreated(await Engine.search(search)),
+      js: true,
+      home: "active",
+      unique: "Home",
+      search: true,
+      render_js_files: ["home", "advancedFilter"],
+    });
+  }
+};
+
+const advancedSearch = async (req, res, search) => {
+  debugPrinter.printRouter("Get: Advanced Search");
+  debugPrinter.printRouter(search);
+
+  if (!search) {
+    debugPrinter.printDebug(`Search is empty!`);
+    res.render("index", {
+      data: await mytools.resFormatDateCreated(await Engine.getallPosts()),
+      js: true,
+      home: "active",
+      unique: "Home",
+      search: true,
+      render_js_files: ["home", "advancedFilter"],
+    });
+  }
+
+  // Search given
+  else {
+    debugPrinter.printDebug(`Search: ${JSON.stringify(search)}`);
+    // search = search.filter(x => x != null);
+    let testing = await Engine.advancedSearch(search);
+    debugPrinter.printDebug("Output");
+
+    debugPrinter.printDebug(testing);
+
+    res.render("index", {
+      data: testing,
       js: true,
       home: "active",
       unique: "Home",
