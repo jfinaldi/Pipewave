@@ -190,6 +190,7 @@ const advancedSearch = async (req, res, search) => {
   else {
     debugPrinter.printDebug(`Search: ${JSON.stringify(search)}`);
     // search = search.filter(x => x != null);
+    //
     let testing = await Engine.advancedSearch(search);
     debugPrinter.printDebug("Output");
 

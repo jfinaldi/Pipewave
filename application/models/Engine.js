@@ -141,9 +141,9 @@ Engine.advancedSearch = async advancedSearch => {
   let options = ["ethnicity", "gender", "major"];
   let base = "",
     count = 0;
-  [count, base] = helper_cluster(advancedSearch?.ethnicity, options[0], count, base);
-  [count, base] = helper_cluster(advancedSearch?.gender, options[1], count, base);
-  [count, base] = helper_cluster(advancedSearch?.major, options[2], count, base);
+  [count, base] = helper_cluster(advancedSearch.ethnicity, options[0], count, base);
+  [count, base] = helper_cluster(advancedSearch.gender, options[1], count, base);
+  [count, base] = helper_cluster(advancedSearch.major, options[2], count, base);
   base += ";";
 
   debugPrinter.printFunction("BASE: ");
