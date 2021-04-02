@@ -1,0 +1,126 @@
+{{> nav}}
+<div class="container">
+
+    <div id="counter"></div>
+    <div id="container">
+
+        {{!-- <form id="form" method="get" action="/" enctype="application/x-www-form-urlencoded">
+
+            <input placeholder=" search" type="text" name="search" id="search">
+            <button type="submit" id="button">GO</button>
+            <button type="button" id="filterButton">Advanced</button>
+        </form> --}}
+        <h1>Alerts</h1>
+        <h3>Get alerts for talent that meets your needs</h3>
+
+        <form id="form" method="get" action="/" enctype="application/x-www-form-urlencoded">
+            <div id="filterContainer">
+                <div class="innerContent">
+                    <div class="table_column">
+                        <table>
+                            <tr scope="col">
+                                <th class="title"><b>Ethnicity</b></th>
+                            </tr>
+                            <tr scope="col">
+                                <td><input name="ethnicity" value="african american"
+                                        type="radio">African-American</input></td>
+                            </tr>
+                            <tr scope="col">
+                                <td><input name="ethnicity" value="hispanic" type="radio">Hispanic</input></td>
+                            </tr>
+                            <tr scope="col">
+                                <td><input name="ethnicity" value="asian" type="radio">Asian</input></td>
+                            </tr>
+                            <tr scope="col">
+                                <td><input name="ethnicity" value="latin" type="radio">Latin</input></td>
+                            </tr>
+                            <tr scope="col">
+                                <td><input name="ethnicity" value="pacific islander" type="radio">Pacific
+                                    Islander</input></td>
+                            </tr>
+                            <tr scope="col">
+                                <td><input name="ethnicity" value="indigeneous" type="radio">Indigeneous</input></td>
+                            </tr>
+                            <tr scope="col">
+                                <td><input name="ethnicity" value="white" type="radio">White</input></td>
+                            </tr>
+                            <tr scope="col">
+                                <td><input name="ethnicity" value="other" type="radio">Other</input></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="table_column">
+                        <table>
+                            <tr scope="col">
+                                <th class="title"><b>Gender</b></th>
+                            </tr>
+                            <tr scope="col">
+                                <td><input name="gender" value="male" type="radio">Male</input></td>
+                            </tr>
+                            <tr scope="col">
+                                <td><input name="gender" value="female" type="radio">Female</input></td>
+                            </tr>
+                            <tr scope="col">
+                                <td><input name="gender" value="nonbinary" type="radio">Non-Binary</input></td>
+                            </tr>
+
+                            <tr scope="col">
+                                <th class="title" id="major"><b>Major</b></th>
+                            </tr>
+                            <tr scope="col">
+                                <td><input name="major" value="Computer Science" type="radio">Computer Science</input>
+                                </td>
+                            </tr>
+                            <tr scope="col">
+                                <td><input name="major" value="Engineering" type="radio">Engineering</input></td>
+                            </tr>
+                            <tr scope="col">
+                                <td><input name="major" value="Mathematics" type="radio">Mathematics</input></td>
+                            </tr>
+                            <tr scope="col">
+                                <td><input name="major" value="Communications" type="radio">Communications</input>
+                                </td>
+                            </tr>
+                            <tr scope="col">
+                                <td><input name="major" value="Business" type="radio">Business</input></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="table_column">
+                        <div class="tr" id="list">
+                            </br></br></br></br>
+                            <button type="submit" id="advanced_search">Save Alert</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div id="alert_cards_title">Recent Alerts
+        <div id="output">
+            {{>cards}}
+        </div>
+        </div>
+
+    </div>
+    <div class="aboutus">
+        <br>
+        <div class="about__child">
+            The Talent Pipeline website has existed for n days and has constructed a simple website where users can look
+            at each other's resumes. Our objective is to connect employers with potential employees who have posted
+            their resumes on our site. You can easily view a user’s resumes simply by clicking on their profile. If you
+            like a user's resume, you can email them for potential employment.
+        </div>
+        <br>
+
+        <div class="about__child">
+            The Talent Pipeline website uses <br>
+            <ul>
+                <li>Google’s Natural Language Processing’s Entity extraction AI using the Google Cloud Platform</li>
+                <li>OAuth 2.0 protocol with Google accounts</li>
+                <li>Notivize’s Simple Mail Transfer Protocol to notify users that they have created an account with us
+                </li>
+                <li>Pdf-parse, a simple JavaScript library to extract text from pdfs for Google’s NLP </li>
+            </ul>
+        </div>
+    </div>
+</div>

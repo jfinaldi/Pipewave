@@ -80,6 +80,27 @@ router.get("/register", (req, res, next) => {
   }
 });
 
+// Get Alerts
+router.get("/alerts", async (req, res) => {
+  console.log(req.query);
+  if (req.query.search) await search(req, res, req.query.search);
+  if (req.query.gender || req.query.ethnicity || req.query.major) {
+    console.log(req.query);
+    data = { gender: req.query.gender, ethnicity: req.query.ethnicity, major: req.query.major };
+    await advancedSearch(req, res, data);
+  }
+  debugPrinter.printRouter("Get: /alerts");
+  res.render("alerts", {
+    data: mytools.resFormatDateCreated(await Engine.getAllPosts()),
+    js: true,
+    home: "active",
+    unique: "Home",
+    search: true,
+    user: req.session.username,
+    render_js_files: ["home", "advancedFilter"],
+  });
+});
+
 // Get Upload
 router.get("/upload", (req, res, next) => {
   debugPrinter.printRouter("Get: /upload");

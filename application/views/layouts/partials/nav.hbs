@@ -5,6 +5,11 @@
     <a href="/users/logout">
         <button type="submit" id="logout_button" class="right">Logout</button>
     </a>
+    {{!-- {{#if industryAccount}} --}}
+        <a href="/alerts" class="right">Alerts
+            <div class="right" id="nav_dot"></div>
+        </a>
+    {{!-- {{/if}} --}}
     <a href="/users/{{username}}" class="right">{{username}}</a>
     {{!-- <form action="/users/logout" method="post">
         <button type="submit" id="logout_button" class="right">Logout</button>
