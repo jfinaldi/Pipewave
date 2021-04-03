@@ -35,16 +35,16 @@ function displayFormElements() {
         occupation.placeholder = "Department";
       break;
     case "ERG":
-        occupationLabel.innerHTML = "ERG";
-        occupation.placeholder = "ERG Company";
+        occupationLabel.innerHTML = "Company";
+        occupation.placeholder = "Company";
       break;
     case "NPO":
-        occupationLabel.innerHTML = "NPO";
-        occupation.placeholder = "NPO Company";
+        occupationLabel.innerHTML = "Company";
+        occupation.placeholder = "Company";
       break;
     case "Recruiter":
-        occupationLabel.innerHTML = "Recruiter";
-        occupation.placeholder = "Recruiter Company";
+        occupationLabel.innerHTML = "Company";
+        occupation.placeholder = "Company";
       break;
     default:
         occupationLabel.innerHTML = "Occupation";
