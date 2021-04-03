@@ -1,17 +1,17 @@
 {{!-- This file displays a list of all of the demographics 
 currently selected to create alerts for --}}
-{{!-- {{#each data}} --}}
-    {{!-- <ul>
-        {{#each this.ethnicity}}
-            <li>{{this.ethnicity}}</li>
+{{#if data.alerts}}
+    <ul>
+        {{#each data.alerts.ethnicity}}
+            <li>{{this}}</li>
         {{/each}}
-        {{#each}}
-            <li>{{this.gender}}</li>
+        {{#each data.alerts.gender}}
+            <li>{{this}}</li>
         {{/each}}
-        {{#each}}
-            <li>{{this.major}}</li>
+        {{#each data.alerts.major}}
+            <li>{{this}}</li>
         {{/each}}
-    </ul> --}}
-{{!-- {{else}} --}}
+    </ul>
+{{else}}
     <div>No Alert Created</div>
-{{!-- {{/each}} --}}
+{{/if}}
