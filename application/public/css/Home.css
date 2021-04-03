@@ -248,7 +248,7 @@ footer {
   padding-left: 2px;
   padding-right: 2px;
   background-color: white;
-  text-align: center;
+  text-align: left;
 }
 
 #major {
@@ -306,16 +306,19 @@ tr {
   margin-right: 0;
 }
 
-#nav_dot {
+.dot {
   margin-left: 10px;
-  /* position: relative; */
-  top: -15px;
-  right: 12px;
-  height: 5px;
-  width: 5px;
+  position: relative;
+  height: 15px;
+  width: 15px;
   background-color: rgb(0, 255, 0);
   border-radius: 50%;
   display: inline-block;
+  filter: drop-shadow(30px 10px 4px rgba(0, 0, 0, 0.5))
+} 
+
+input {
+  text-align: left;
 }
 
 

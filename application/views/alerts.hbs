@@ -4,14 +4,19 @@
     <div id="counter"></div>
     <div id="container">
 
-        {{!-- <form id="form" method="get" action="/" enctype="application/x-www-form-urlencoded">
-
-            <input placeholder=" search" type="text" name="search" id="search">
-            <button type="submit" id="button">GO</button>
-            <button type="button" id="filterButton">Advanced</button>
-        </form> --}}
         <h1>Alerts</h1>
         <h3>Get alerts for talent that meets your needs</h3>
+        </br>
+
+        <div class="my_alerts">My Alerts
+            {{>alertItems}}
+        </div>
+        
+        <form id="form" method="get" action="/" enctype="application/x-www-form-urlencoded">
+            <button type="button" id="filterButton">Create or Modify Alert</button>
+        </form>
+       
+        </br>
 
         <form id="form" method="get" action="/" enctype="application/x-www-form-urlencoded">
             <div id="filterContainer">
@@ -22,30 +27,29 @@
                                 <th class="title"><b>Ethnicity</b></th>
                             </tr>
                             <tr scope="col">
-                                <td><input name="ethnicity" value="african american"
-                                        type="radio">African-American</input></td>
+                                <td><input name="ethnicity" value="african american" type="checkbox">African-American</input></td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="ethnicity" value="hispanic" type="radio">Hispanic</input></td>
+                                <td><input name="ethnicity" value="hispanic" type="checkbox">Hispanic</input></td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="ethnicity" value="asian" type="radio">Asian</input></td>
+                                <td><input name="ethnicity" value="asian" type="checkbox">Asian</input></td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="ethnicity" value="latin" type="radio">Latin</input></td>
+                                <td><input name="ethnicity" value="latin" type="checkbox">Latin</input></td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="ethnicity" value="pacific islander" type="radio">Pacific
+                                <td><input name="ethnicity" value="pacific islander" type="checkbox">Pacific
                                     Islander</input></td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="ethnicity" value="indigeneous" type="radio">Indigeneous</input></td>
+                                <td><input name="ethnicity" value="indigeneous" type="checkbox">Indigeneous</input></td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="ethnicity" value="white" type="radio">White</input></td>
+                                <td><input name="ethnicity" value="white" type="checkbox">White</input></td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="ethnicity" value="other" type="radio">Other</input></td>
+                                <td><input name="ethnicity" value="other" type="checkbox">Other</input></td>
                             </tr>
                         </table>
                     </div>
@@ -55,34 +59,34 @@
                                 <th class="title"><b>Gender</b></th>
                             </tr>
                             <tr scope="col">
-                                <td><input name="gender" value="male" type="radio">Male</input></td>
+                                <td><input name="gender" value="male" type="checkbox">Male</input></td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="gender" value="female" type="radio">Female</input></td>
+                                <td><input name="gender" value="female" type="checkbox">Female</input></td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="gender" value="nonbinary" type="radio">Non-Binary</input></td>
+                                <td><input name="gender" value="nonbinary" type="checkbox">Non-Binary</input></td>
                             </tr>
 
                             <tr scope="col">
                                 <th class="title" id="major"><b>Major</b></th>
                             </tr>
                             <tr scope="col">
-                                <td><input name="major" value="Computer Science" type="radio">Computer Science</input>
+                                <td><input name="major" value="Computer Science" type="checkbox">Computer Science</input>
                                 </td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="major" value="Engineering" type="radio">Engineering</input></td>
+                                <td><input name="major" value="Engineering" type="checkbox">Engineering</input></td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="major" value="Mathematics" type="radio">Mathematics</input></td>
+                                <td><input name="major" value="Mathematics" type="checkbox">Mathematics</input></td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="major" value="Communications" type="radio">Communications</input>
+                                <td><input name="major" value="Communications" type="checkbox">Communications</input>
                                 </td>
                             </tr>
                             <tr scope="col">
-                                <td><input name="major" value="Business" type="radio">Business</input></td>
+                                <td><input name="major" value="Business" type="checkbox">Business</input></td>
                             </tr>
                         </table>
                     </div>
@@ -95,10 +99,9 @@
                 </div>
             </div>
         </form>
-        <div id="alert_cards_title">Recent Alerts
         <div id="output">
+            <div id="alert_cards_title" style="text-align: center;">Recent Alerts</div></br>
             {{>cards}}
-        </div>
         </div>
 
     </div>

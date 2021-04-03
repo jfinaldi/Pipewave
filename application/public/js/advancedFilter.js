@@ -5,8 +5,8 @@ styles = ["none", "inline", "flex"];
 
 filter.addEventListener("click", e => {
   check = !check;
-  goButton.style.display = styles[check ? 0 : 1];
   displayAdvancedFilter();
+  goButton.style.display = styles[check ? 0 : 1];
 });
 
 function displayAdvancedFilter() {
