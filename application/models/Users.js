@@ -173,10 +173,17 @@ User.getAlerts = async user_id => {
 
   var baseSQL = "SELECT ethnicity, major, gender FROM alerts WHERE fk_userid=?;";
   let [r, fields] = await db.query(baseSQL, [user_id]);
-  r[0].ethnicity = r[0].ethnicity.split(",");
-  r[0].major = r[0].major.split(",");
-  r[0].gender = r[0].gender.split(",");
-  return r;
+  if (r && r.length) {
+    r[0].ethnicity = r[0].ethnicity.split(",");
+    r[0].major = r[0].major.split(",");
+    r[0].gender = r[0].gender.split(",");
+    return r;
+  }
+  return false;
+};
+
+const alertsetter = async option => {
+  if (option == NULL || option == undefined) return NULL;
 };
 
 User.setAlert = async user_id => {

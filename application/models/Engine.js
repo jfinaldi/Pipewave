@@ -170,6 +170,7 @@ const filterHelper = (option, filter_name, count, base) => {
 };
 
 Engine.filterSearch = async filteredSearchArray => {
+  if (!filteredSearchArray) return;
   debugPrinter.printFunction("Engine.advancedSearch");
   let options = ["ethnicity", "gender", "major"];
   let base = "",
