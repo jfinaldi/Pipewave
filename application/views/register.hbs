@@ -6,8 +6,7 @@
                 <h1 id="ntitle">SIGN UP</h1>
                 <div id="error"></div>
 
-                {{!-- <form action="/users/register" id="form" method="POST"
-                    enctype="application/x-www-form-urlencoded">
+                {{!-- <form action="/user/register" id="form" method="POST" enctype="application/x-www-form-urlencoded">
                     <br><label for="Username" class="inputtags">Username</label><br>
                     <input placeholder=" Enter Username" pattern="[A-Za-z0-9]+" type=text id="username" name="username"
                         required />
@@ -46,7 +45,7 @@
                     <br>
                     <input type="submit" class="submit" value="Submit">
                 </form> --}}
-                <form action="/users/register" id="form" method="POST" enctype="application/x-www-form-urlencoded">
+                <form action="/user/register" id="form" method="POST" enctype="application/x-www-form-urlencoded">
                     <label class="inputtags">I am a...</label>
                     <select id="formSelector" name="role">
                         <option value="defaultValue">--Select--</option>
@@ -56,10 +55,10 @@
                         <option value="NPO">Non-Profit Organization (NPO)</option>
                         <option value="Recruiter">Recruiter</option>
                     </select>
-                    <div id= "formElements">
+                    <div id="formElements">
                         <br><label for="Username" class="inputtags">Username</label>
-                        <input placeholder=" Enter Username" pattern="[A-Za-z0-9]+" type=text id="username" name="username"
-                            required />
+                        <input placeholder=" Enter Username" pattern="[A-Za-z0-9]+" type=text id="username"
+                            name="username" required />
                         <br><label for="Name" class="inputtags">Name</label>
                         <input placeholder=" Enter Name" type="text" id="email" name="name" required />
 
@@ -76,11 +75,13 @@
                             id="confirmpassword" required></input>
                         <br>
                         <br>
-                        <input type="checkbox" id="age" value="age" required name="agecheckbox" /><a class="text">Over 13
+                        <input type="checkbox" id="age" value="age" required name="agecheckbox" /><a class="text">Over
+                            13
                             years of age</a><br>
                         <br>
                         <div>
-                            <input type="checkbox" id="TOS" value="tos" required /><a name="toscheckbox" class="text">Accept
+                            <input type="checkbox" id="TOS" value="tos" required /><a name="toscheckbox"
+                                class="text">Accept
                             </a><a href="#" id="tostext"> Terms and Conditions</a><br>
                         </div> <br>
                         <input type="submit" class="submit" value="Submit">

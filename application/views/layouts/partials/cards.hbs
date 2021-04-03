@@ -1,19 +1,19 @@
 {{#each data}}
-<a href="/users/{{this.username}}">
+<a href="/user/{{this.username}}">
     <div class="list_container">
         <table>
             <tr>
                 <td>
-                {{!-- {{#if this.alertNotSeenYet}} --}}
+                    {{!-- {{#if this.alertNotSeenYet}} --}}
                     <div class="dot"></div>
-                {{!-- {{/if}} --}}
+                    {{!-- {{/if}} --}}
                 </td>
                 <td>
-                {{#if this.profilepic}}
+                    {{#if this.profilepic}}
                     <img id="result_image" src="{{this.profilepic}}" />
-                {{else}}
+                    {{else}}
                     <img id="result_image" src="../assets/icons/defaultProfile.png" />
-                {{/if}}
+                    {{/if}}
                 </td>
                 <td id="name_title">
                     {{this.name}}</br>Major: {{this.title}}
@@ -28,10 +28,10 @@
 
 {{/each}}
 
-    {{!-- <a>{{this.description}}</a> --}}
+{{!-- <a>{{this.description}}</a> --}}
 
-    {{!-- <div class="moreinfo">
-        <a href="/users/{{this.username}}">
-            <button>More info</button>
-        </a>
-    </div> --}}
+{{!-- <div class="moreinfo">
+    <a href="/user/{{this.username}}">
+        <button>More info</button>
+    </a>
+</div> --}}

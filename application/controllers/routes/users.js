@@ -62,7 +62,6 @@ router.post("/register", async (req, res, next) => {
 
     // Communicate with the Users model to create the user
     let response = await User.create(username, name, password, active, usertype, email, title);
-
     // debugPrinter.printDebug(`User${response ? "" : " not"} created`);
 
     if (response) {
@@ -80,7 +79,7 @@ router.post("/register", async (req, res, next) => {
 
       debugPrinter.printSuccess("User is logged in, now redircting to User page");
 
-      res.redirect(`/users/${req.session.username}`);
+      res.redirect(`/user/${req.session.username}`);
     } else {
       debugPrinter.printError(`User: ${username} was not able to be created`);
 

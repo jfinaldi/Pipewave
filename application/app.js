@@ -87,7 +87,7 @@ app.use((req, res, next) => {
 app.use("/auth", authRouter);
 app.use("/", indexRouter);
 app.use("/about", aboutRouter);
-app.use("/users", userRouter);
+app.use("/user", userRouter);
 
 // app.use((err, req, res, next) => {
 //   res.render("error", { err_message: err });

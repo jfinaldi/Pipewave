@@ -30,8 +30,7 @@ Engine.getPostsApiEndpoint = async (limit, filter, order = "DESC") => {
   //ASC - DESC
   debugPrinter.printFunction("Engine.getPosts");
   debugPrinter.printDebug([limit, filter, order]);
-  let baseSQL =
-    "SELECT u.username,u.name,  p.id, p.title, p.description, p.resumePath, p.created FROM users u JOIN posts p ON u.id=fk_userid ORDER BY ? ? LIMIT ?";
+  let baseSQL = "SELECT u.username,u.name,  p.id, p.title, p.description, p.resumePath, p.created FROM users u JOIN posts p ON u.id=fk_userid ORDER BY ? ? LIMIT ?";
   let [r, fields] = await db.query(baseSQL, [filter, order, limit]);
   return r;
 };

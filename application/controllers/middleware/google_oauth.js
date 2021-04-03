@@ -255,7 +255,7 @@ passport.use(
 
           // debugPrinter.printSuccess("User is not logged in, now redircting to User page");
 
-          // res.redirect(`/users/${req.session.username}`);
+          // res.redirect(`/user/${req.session.username}`);
         } else {
           debugPrinter.printError(`User: ${username} was not able to be created given Google ID: ${google_id}`);
           return done(null, null);

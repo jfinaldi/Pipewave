@@ -4,6 +4,7 @@ var router = express.Router();
 var mytools = require("../helpers/mytools");
 const Engine = require("../../models/Engine");
 const Review = require("../../models/Review");
+const User = require("../../models/Users");
 
 // Debug printer
 const debugPrinter = require("../helpers/debug/debug_printer");
@@ -95,6 +96,7 @@ router.get("/alerts", async (req, res) => {
     data: mytools.resFormatDateCreated(await Engine.getAllPosts()),
     js: true,
     home: "active",
+    alerts: await User.getAlerts(req.session.userid),
     unique: "Home",
     search: true,
     user: req.session.username,

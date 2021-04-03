@@ -167,4 +167,15 @@ User.getInfo = async username => {
   let [r, fields] = await db.query(baseSQL, [username]);
   return r;
 };
+
+User.getAlerts = async user_id => {
+  debugPrinter.printFunction("User.getAlerts");
+
+  var baseSQL = "SELECT ethnicity, major, gender FROM alerts WHERE fk_userid=?;";
+  let [r, fields] = await db.query(baseSQL, [user_id]);
+  r[0].ethnicity = r[0].ethnicity.split(",");
+  r[0].major = r[0].major.split(",");
+  r[0].gender = r[0].gender.split(",");
+  return r;
+};
 module.exports = User;

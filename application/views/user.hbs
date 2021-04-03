@@ -7,7 +7,7 @@
         <a class="post_title" href="/post/{{data.postid}}"> {{data.name}}</a>
 
         <a class="username">{{user.name}}</a>
-        <form action="/users/edit_profile_picture" method="post" enctype="multipart/form-data">
+        <form action="/user/edit_profile_picture" method="post" enctype="multipart/form-data">
             <input type="file" name="photo" />
             <button type="submit">Save</button>
         </form>
@@ -48,11 +48,11 @@
             </div>
             <div class="boxes">
                 <ul class="list_boxes">
-                    <li><a href="/users/{{user.username}}">Resumes</a></li>
-                    <li><a href="/users/{{user.username}}">Reviews</a></li>
+                    <li><a href="/user/{{user.username}}">Resumes</a></li>
+                    <li><a href="/user/{{user.username}}">Reviews</a></li>
                     {{#if authpage}}
-                    <li><a href="/users/{{user.username}}/settings">Edit Settings</a></li>
-                    {{!-- <li><a href="/users/settings">Edit Settings</a></li> --}}
+                    <li><a href="/user/{{user.username}}/settings">Edit Settings</a></li>
+                    {{!-- <li><a href="/user/settings">Edit Settings</a></li> --}}
                     <li><a href="/">Messages</a></li>
                     {{/if}}
 
