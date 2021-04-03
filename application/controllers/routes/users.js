@@ -298,4 +298,7 @@ router.get("/:user/settings", async (req, res) => {
   });
 });
 
+router.get("/user/setAlert", (req, res) => {
+  let { ethnicity, gender, major } = req.body;
+});
 module.exports = router;

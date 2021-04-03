@@ -178,4 +178,9 @@ User.getAlerts = async user_id => {
   r[0].gender = r[0].gender.split(",");
   return r;
 };
+
+User.setAlert = async user_id => {
+  basesql = "UPDATE `website`.`alerts` SET `ethnicity` = ?, `major` = ?, `gender` = ? WHERE `fk_userid` = ?;";
+  db.query(baseSQL, [settings]);
+};
 module.exports = User;
