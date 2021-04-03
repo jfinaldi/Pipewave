@@ -30,8 +30,7 @@ User.create = async (username, name, password, active, usertype, email, title) =
 
   password = await bcrypt.hash(password, 15);
   if (!((await User.emailExists(email)) && (await User.usernameExists(username)))) {
-    let baseSQL =
-      "INSERT INTO users (`username`,`name`, `email`, `active`,`usertype`, `password`, `created`, `title`) VALUES (?,?,?,?,?,?, now(), ?);";
+    let baseSQL = "INSERT INTO users (`username`,`name`, `email`, `active`,`usertype`, `password`, `created`, `title`) VALUES (?,?,?,?,?,?, now(), ?);";
     let a = await db.execute(baseSQL, [username, name, email, active, usertype, password, title]);
     return a;
   }
@@ -41,8 +40,7 @@ User.createWithGoogleID = async (username, name, password, active, usertype, ema
 
   password = await bcrypt.hash(password, 15);
   if (!((await User.emailExists(email)) && (await User.usernameExists(username)))) {
-    let baseSQL =
-      "INSERT INTO users (`username`,`name`, `email`, `active`,`usertype`, `created`, `password`, googleid) VALUES (?,?,?,?,?, now(), ?, ?);";
+    let baseSQL = "INSERT INTO users (`username`,`name`, `email`, `active`,`usertype`, `created`, `password`, googleid) VALUES (?,?,?,?,?, now(), ?, ?);";
     let a = await db.execute(baseSQL, [username, name, email, active, usertype, password, googleid]);
     return a;
   }
@@ -165,7 +163,7 @@ User.changeUser = async (username, confirm_password, userid) => {
 User.getInfo = async username => {
   debugPrinter.printFunction("User.getInfo");
 
-  var baseSQL = "SELECT bio, id, name,email,usertype,title,created, username FROM users WHERE username=?;";
+  var baseSQL = "SELECT bio, id, profilepic, name,email,usertype,title,created, username FROM users WHERE username=?;";
   let [r, fields] = await db.query(baseSQL, [username]);
   return r;
 };
