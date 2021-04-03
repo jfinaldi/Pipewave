@@ -140,6 +140,8 @@ footer {
 }
 
 #username,
+#formSelector,
+#occupation,
 #password,
 #confirmpassword,
 #major,
@@ -197,4 +199,8 @@ footer {
   background-color: gray;
   color: rgb(41, 41, 41);
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.4), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+#formElements{
+  display: none;
 }

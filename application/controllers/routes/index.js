@@ -76,6 +76,7 @@ router.get("/register", (req, res, next) => {
     res.render("register", {
       register: "active",
       unique: "Registration",
+      render_js_files: ["register"],
     });
   }
 });

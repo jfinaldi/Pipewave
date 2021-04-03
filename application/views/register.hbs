@@ -47,37 +47,43 @@
                     <input type="submit" class="submit" value="Submit">
                 </form> --}}
                 <form action="/users/register" id="form" method="POST" enctype="application/x-www-form-urlencoded">
-                    <br><label for="Username" class="inputtags">Username</label>
-                    <input placeholder=" Enter Username" pattern="[A-Za-z0-9]+" type=text id="username" name="username"
-                        required />
-                    <br><label for="Name" class="inputtags">Name</label>
-                    <input placeholder=" Enter Name" type="text" id="email" name="name" required />
-
-                    <br><label for="email" class="inputtags">E-mail</label>
-                    <input placeholder=" Enter Email" type="email" id="email"
-                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" name="email" required />
-                    <br><label for="occupation" class="inputtags">Occupation</label>
-                    <input placeholder=" Occupation" id="password" minlength="8" name="title" required></input>
-                    <br><label for="password" class="inputtags">Password</label>
-                    <input placeholder=" Enter Password" type=password id="password" minlength="8" name="password"
-                        required></input>
-                    <br><label for="Username" class="inputtags">Confirm Password</label><br>
-                    <input placeholder=" Confirm Password" name="confirmpassword" type=password minlength="8"
-                        id="confirmpassword" required></input>
-                    <br>
-                    <br>
-                    <input type="checkbox" id="age" value="age" required name="agecheckbox" /><a class="text">Over 13
-                        years of age</a><br>
-                    <br>
-                    <div>
-                        <input type="checkbox" id="TOS" value="tos" required /><a name="toscheckbox" class="text">Accept
-                        </a><a href="#" id="tostext"> Terms and Coditions</a><br>
-                    </div> <br>
-                    <select id="password" name="role" required>
+                    <select id="formSelector" name="role" required>
+                        <option value="defaultValue">--Select--</option>
                         <option value="Student">Student</option>
-                        <option value="Organization">Recruiter or Company</option>
+                        <option value="Professor">Professor</option>
+                        <option value="ERG">ERG</option>
+                        <option value="NPO">NPO</option>
+                        <option value="Recruiter">Recruiter</option>
                     </select>
-                    <input type="submit" class="submit" value="Submit">
+                    <div id= "formElements">
+                        <br><label for="Username" class="inputtags">Username</label>
+                        <input placeholder=" Enter Username" pattern="[A-Za-z0-9]+" type=text id="username" name="username"
+                            required />
+                        <br><label for="Name" class="inputtags">Name</label>
+                        <input placeholder=" Enter Name" type="text" id="email" name="name" required />
+
+                        <br><label for="email" class="inputtags">E-mail</label>
+                        <input placeholder=" Enter Email" type="email" id="email"
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" name="email" required />
+                        <br><label id="occupationLabel" for="occupation" class="inputtags">Occupation</label>
+                        <input placeholder=" Occupation" id="occupation" minlength="8" name="title" required></input>
+                        <br><label for="password" class="inputtags">Password</label>
+                        <input placeholder=" Enter Password" type=password id="password" minlength="8" name="password"
+                            required></input>
+                        <br><label for="Username" class="inputtags">Confirm Password</label><br>
+                        <input placeholder=" Confirm Password" name="confirmpassword" type=password minlength="8"
+                            id="confirmpassword" required></input>
+                        <br>
+                        <br>
+                        <input type="checkbox" id="age" value="age" required name="agecheckbox" /><a class="text">Over 13
+                            years of age</a><br>
+                        <br>
+                        <div>
+                            <input type="checkbox" id="TOS" value="tos" required /><a name="toscheckbox" class="text">Accept
+                            </a><a href="#" id="tostext"> Terms and Coditions</a><br>
+                        </div> <br>
+                        <input type="submit" class="submit" value="Submit">
+                    </div>
                 </form>
 
             </div>
