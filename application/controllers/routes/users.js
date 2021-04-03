@@ -301,4 +301,19 @@ router.get("/:user/settings", async (req, res) => {
 router.get("/user/setAlert", (req, res) => {
   let { ethnicity, gender, major } = req.body;
 });
+
+// post update settings
+router.post("/updateSettings", async (req, res) => {
+  debugPrinter.printRouter("Post: /updateSettings");
+
+  // ADD STUFF HERE
+});
+
+// post update resume
+router.post("/edit_resume", uploader.single("resume"), async (req, res) => {
+  debugPrinter.printRouter("Post: /edit_resume");
+
+  // ADD STUFF HERE
+});
+
 module.exports = router;
