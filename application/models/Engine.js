@@ -145,6 +145,43 @@ Engine.advancedSearch = async advancedSearch => {
   [count, base] = helper_cluster(advancedSearch.major, options[2], count, base);
   base += ";";
 
+  //filter: [eth:[] major:[] gender: []]
+
+  debugPrinter.printFunction("BASE: ");
+  debugPrinter.printFunction(base);
+  try {
+    let baseSQL = "SELECT u.id,u.title, u.ethnicity, u.major, u.profilepic, u.username, u.name FROM users u " + base;
+    console.log(baseSQL);
+    let [r, fields] = await db.execute(baseSQL);
+    return r && r.length ? r : await Engine.getallPosts();
+  } catch (err) {
+    return false;
+  }
+};
+
+const filterHelper = (option, filter_name, count, base) => {
+  tempcount = count;
+  tempbase = base;
+  console.log(option);
+  for (x of option) {
+    [tempcount, tempbase] = helper_cluster(x, filter_name, tempcount, tempbase);
+  }
+  return [tempcount, tempbase];
+};
+
+Engine.filterSearch = async filteredSearchArray => {
+  debugPrinter.printFunction("Engine.advancedSearch");
+  let options = ["ethnicity", "gender", "major"];
+  let base = "",
+    count = 0;
+
+  debugPrinter.printSuccess(filteredSearchArray[0].ethnicity);
+  [count, base] = filterHelper(filteredSearchArray[0].ethnicity, options[0], count, base);
+  [count, base] = filterHelper(filteredSearchArray[0].gender, options[1], count, base);
+  [count, base] = filterHelper(filteredSearchArray[0].major, options[2], count, base);
+  base += ";";
+  //filter: [eth:[] major:[] gender: []]
+
   debugPrinter.printFunction("BASE: ");
   debugPrinter.printFunction(base);
   try {

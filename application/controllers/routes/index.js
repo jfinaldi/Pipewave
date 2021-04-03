@@ -92,11 +92,13 @@ router.get("/alerts", async (req, res) => {
     await advancedSearch(req, res, data);
   }
   debugPrinter.printRouter("Get: /alerts");
+  let alerts = await User.getAlerts(req.session.userid);
+  console.log(alerts);
   res.render("alerts", {
-    data: mytools.resFormatDateCreated(await Engine.getAllPosts()),
+    data: await Engine.filterSearch(alerts),
     js: true,
     home: "active",
-    alerts: await User.getAlerts(req.session.userid),
+    alerts: alerts,
     unique: "Home",
     search: true,
     user: req.session.username,
