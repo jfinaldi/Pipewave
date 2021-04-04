@@ -21,13 +21,13 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
-footer {
+/* footer {
   margin-top: auto;
   text-align: center;
   background-color: #a6d5df;
   height: 47px;
   padding: 2px;
-}
+} */
 
 .post_container {
   background-color: rgba(255, 255, 255, 0.5);
