@@ -7,25 +7,34 @@
         <a class="post_title" href="/post/{{data.postid}}"> {{data.name}}</a>
 
         <a class="username">{{user.name}}</a>
-        <form action="/user/edit_profile_picture" method="post" enctype="multipart/form-data">
+        {{!-- <form action="/user/edit_profile_picture" method="post" enctype="multipart/form-data">
             <input type="file" name="photo" />
             <button type="submit">Save</button>
-        </form>
+        </form> --}}
         <br>
+
+        {{!-- IF STUDENT --}}
         <a class="left_a"> Major: {{user.title}} </a>
+
+        {{!-- IF PROFESSOR --}}
+        {{!-- <a class="left_a"> Department: {{user.department}} </a> --}}
+
+        {{!-- IF INDUSTRY aka NPO, ERG, RECRUITER --}}
+        {{!-- <a class="left_a"> Company: {{user.company}} </a> --}}
+
         <a class="left_a"> Email: {{user.email}} </a>
-
-        <a class="left_a">{{user.company}} </a>
-
         <a class="left_a"> Date Created: {{user.created}}</a>
         <br>
         <br>
-        {{!-- <a class="left_a">Description: {{data.description}}</a> --}}
+        
+        {{!-- IF STUDENT --}}
         <div class="description">
             <p> Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto
                 obcaecati enim dicta
                 praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
 
+            {{!-- ONLY FOR STUDENTS --}}
+            {{!-- {{#if student}} --}}
             <div class="rating">
                 <a href="#5" titele="Give 5 stars">★</a>
                 <a href="#4" title="Give 4 stars">★</a>
@@ -33,11 +42,12 @@
                 <a href="#2" title="Give 2 stars">★</a>
                 <a href="#1" title="Give 1 star">★</a>
             </div>
+            {{!-- {{/if}} --}}
         </div>
         <br>
     </div>
 
-
+    {{!-- IF STUDENT --}}
     <div class="resume_container">
         <div class="right_userinfo">
             <div class="user_image">
@@ -49,7 +59,7 @@
             <div class="boxes">
                 <ul class="list_boxes">
                     <li><a href="/user/{{user.username}}">Resumes</a></li>
-                    <li><a href="/user/{{user.username}}">Reviews</a></li>
+                    <li><a href="/user/{{user.username}}/post">Reviews</a></li>
                     {{#if authpage}}
                     <li><a href="/user/{{user.username}}/settings">Edit Settings</a></li>
                     {{!-- <li><a href="/user/settings">Edit Settings</a></li> --}}

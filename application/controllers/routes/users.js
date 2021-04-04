@@ -302,6 +302,17 @@ router.get("/user/setAlert", (req, res) => {
   let { ethnicity, gender, major } = req.body;
 });
 
+// get settings page
+router.get("/:user/post", async (req, res) => {
+  debugPrinter.printRouter("Get: /:post");
+  res.render("post", {
+    unique: "Post", //css link
+    search: true,
+    user: { username: req.session.username },
+    render_css_files: ["Post"],
+  });
+});
+
 // post update settings
 router.post("/updateSettings", async (req, res) => {
   debugPrinter.printRouter("Post: /updateSettings");
