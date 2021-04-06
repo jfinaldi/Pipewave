@@ -56,10 +56,11 @@ router.post("/register", async (req, res, next) => {
   }
   // If not logged in
   else {
-    let { username, name, email, password, title } = req.body,
-      active = 0,
-      usertype = 0;
+    let { username, name, email, password, title, usertype } = req.body,
+      active = 0;
+    console.log("test");
 
+    console.log(usertype);
     // Communicate with the Users model to create the user
     let response = await User.create(username, name, password, active, usertype, email, title);
     // debugPrinter.printDebug(`User${response ? "" : " not"} created`);
