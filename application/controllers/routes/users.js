@@ -298,8 +298,15 @@ router.get("/:user/settings", async (req, res) => {
   });
 });
 
-router.get("/user/setAlert", (req, res) => {
+router.post("/setAlert", async (req, res) => {
   let { ethnicity, gender, major } = req.body;
+  // console.log(ethnicity.join());
+  // console.log(isArray(ethnicity));
+  // console.log(isArray(gender));
+  // console.log(isArray(major));
+
+  await User.setAlert({ ethnicity, gender, major }, req.session.userid);
+  res.send(ethnicity);
 });
 
 // get settings page

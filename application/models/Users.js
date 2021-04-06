@@ -168,26 +168,42 @@ User.getInfo = async username => {
   return r;
 };
 
+const handler = async value => {
+  try {
+    return await value.split();
+  } catch (err) {
+    return await value;
+  }
+};
+
 User.getAlerts = async user_id => {
   debugPrinter.printFunction("User.getAlerts");
 
   var baseSQL = "SELECT ethnicity, major, gender FROM alerts WHERE fk_userid=?;";
   let [r, fields] = await db.query(baseSQL, [user_id]);
   if (r && r.length) {
-    r[0].ethnicity = r[0].ethnicity.split(",");
-    r[0].major = r[0].major.split(",");
-    r[0].gender = r[0].gender.split(",");
+    r[0].ethnicity = await handler(r[0].ethnicity);
+    r[0].major = await handler(r[0].major);
+    r[0].gender = await handler(r[0].gender);
     return r;
   }
   return false;
 };
 
+User.hasAlerts = async user_id => {
+  let basesql = "SELECT id FROM alerts WHERE fk_userid=?;";
+  let [r, fields] = await db.query(baseSQL, [user_id]);
+  return r && r.length;
+};
 const alertsetter = async option => {
   if (option == NULL || option == undefined) return NULL;
 };
 
-User.setAlert = async user_id => {
-  basesql = "UPDATE `website`.`alerts` SET `ethnicity` = ?, `major` = ?, `gender` = ? WHERE `fk_userid` = ?;";
-  db.query(baseSQL, [settings]);
+User.setAlert = async (object, userid) => {
+  console.log(object[0]);
+
+  if (User.hasAlerts(userid)) basesql = "UPDATE `website`.`alerts` SET `ethnicity` = ?, `major` = ?, `gender` = ? WHERE `fk_userid` = ?;";
+  else basesql = "INSERT INTO `website`.`alerts` SET `ethnicity` = ?, `major` = ?, `gender` = ?, `fk_userid` = ?;";
+  db.query(basesql, [object.ethnicity, object.major, object.gender, userid]);
 };
 module.exports = User;

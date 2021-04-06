@@ -127,7 +127,7 @@ Engine.updatePFP = async (file, fk_userid) => {
 
 const helper_cluster = (x, filter_name, count, base) => {
   if (x) {
-    console.log("Gender passed in");
+    console.log(filter_name + " passed in");
     base += count ? ` and ${filter_name}="${x}"` : `WHERE ${filter_name}="${x}"`;
     return [++count, base];
   }
@@ -163,8 +163,12 @@ const filterHelper = (option, filter_name, count, base) => {
   tempcount = count;
   tempbase = base;
   console.log(option);
-  for (x of option) {
-    [tempcount, tempbase] = helper_cluster(x, filter_name, tempcount, tempbase);
+  try {
+    for (x of option) {
+      [tempcount, tempbase] = helper_cluster(x, filter_name, tempcount, tempbase);
+    }
+  } catch (err) {
+    [tempcount, tempbase] = helper_cluster(option, filter_name, tempcount, tempbase);
   }
   return [tempcount, tempbase];
 };
