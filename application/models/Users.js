@@ -192,7 +192,7 @@ User.getAlerts = async user_id => {
 
 User.hasAlerts = async user_id => {
   let basesql = "SELECT id FROM alerts WHERE fk_userid=?;";
-  let [r, fields] = await db.query(baseSQL, [user_id]);
+  let [r, fields] = await db.query(basesql, [user_id]);
   return r && r.length;
 };
 const alertsetter = async option => {
@@ -202,7 +202,7 @@ const alertsetter = async option => {
 User.setAlert = async (object, userid) => {
   console.log(object[0]);
 
-  if (User.hasAlerts(userid)) basesql = "UPDATE `website`.`alerts` SET `ethnicity` = ?, `major` = ?, `gender` = ? WHERE `fk_userid` = ?;";
+  if (await User.hasAlerts(userid)) basesql = "UPDATE `website`.`alerts` SET `ethnicity` = ?, `major` = ?, `gender` = ? WHERE `fk_userid` = ?;";
   else basesql = "INSERT INTO `website`.`alerts` SET `ethnicity` = ?, `major` = ?, `gender` = ?, `fk_userid` = ?;";
   db.query(basesql, [object.ethnicity, object.major, object.gender, userid]);
 };
