@@ -200,8 +200,6 @@ const alertsetter = async option => {
 };
 
 User.setAlert = async (object, userid) => {
-  console.log(object[0]);
-
   if (await User.hasAlerts(userid)) basesql = "UPDATE `website`.`alerts` SET `ethnicity` = ?, `major` = ?, `gender` = ? WHERE `fk_userid` = ?;";
   else basesql = "INSERT INTO `website`.`alerts` SET `ethnicity` = ?, `major` = ?, `gender` = ?, `fk_userid` = ?;";
   db.query(basesql, [object.ethnicity, object.major, object.gender, userid]);
