@@ -312,11 +312,15 @@ router.post("/setAlert", async (req, res) => {
 // get settings page
 router.get("/:user/post", async (req, res) => {
   debugPrinter.printRouter("Get: /:post");
+  let resp = await mytools.resFormatDateCreated(await Engine.getUserPosts(req.session.username));
+  debugPrinter.printRouter(resp[0]);
   res.render("post", {
-    unique: "Post", //css link
+    data: await resp[0],
+    unique: "Post",
     search: true,
     user: { username: req.session.username },
     render_css_files: ["Post"],
+    render_js_files: ["comment"],
   });
 });
 

@@ -79,7 +79,7 @@ Engine.getUserPosts = async username => {
   debugPrinter.printFunction("Engine.getUserPosts");
   try {
     var baseSQL =
-      "SELECT p.id as postid, p.role, p.title, p.description, p.resumePath,u.profilepic, p.created FROM users u JOIN posts p ON u.id=fk_userid WHERE u.username=?";
+      "SELECT p.id as postid, p.role, p.title, p.description, p.resumePath,u.name,u.username, u.profilepic, p.created FROM users u JOIN posts p ON u.id=fk_userid WHERE u.username=?";
     let [r, fields] = await db.query(baseSQL, [username]);
     return r;
   } catch (err) {

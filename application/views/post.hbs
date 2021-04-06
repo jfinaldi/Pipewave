@@ -5,70 +5,89 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
     integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
     crossorigin="anonymous" />
-<br><br>
+
+
 <div class="post_container">
+
     <div class="left">
-        <table>
-            <tr>
-                <td>
-                    {{#if data.profilepic}}
-                    <img id="result_image" src="{{data.profilepic}}" />
-                    {{else}}
-                    <img id="result_image" src="../../assets/icons/defaultProfile.png" style="height: 75px; width: 75px;"/>
-                    {{/if}}
-                </td>
-                <td>
-                    <a class="post_title" href="/post/{{data.postid}}">Username{{data.username}}</a>
-                    <a class="left_a" id="user" href="/user/{{data.username}}">Name: {{data.name}}</a>
-                    <a class="left_a top_left_a">Major: {{data.major}} </a>
-                    <a class="left_a top_left_a">Email: {{data.email}} </a>
-                    <a class="left_a bottom_left_a">Date Posted: {{data.created}}</a>
-                </td>
-            </tr>
-        </table>
+        <a class="post_title" href="/post/{{data.postid}}"> {{data.name}}</a>
+        <a class="left_a" id="user" href="/user/{{data.username}}">{{data.username}}</a>
+        <br>
+        <a class="left_a top_left_a">Job Title: {{data.title}} </a>
+        <a class="left_a">Company: {{data.company}} </a>
+
+        <a class="left_a bottom_left_a">Date Posted: {{data.created}}</a>
+        <br>
+        <br>
+        {{!-- <a class="left_a">Description: {{data.description}}</a> --}}
+        <div class="description">
+            <p> Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto
+                obcaecati enim dicta
+                praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
+            {{!-- <a id="readmore" href="#">seomthing about rating here</a> --}}
+            <div class="rating" id="ratingstars">
+                <p class="avg" id="avg">{{comment.avg}}</p>
+
+                <a id="star5" href="#5" title="Give 5 stars">★</a>
+                <a id="star4" href="#4" title="Give 4 stars">★</a>
+                <a id="star3" href="#3" title="Give 3 stars">★</a>
+                <a id="star2" href="#2" title="Give 2 stars">★</a>
+
+                <a id="star1" href="#1" title="Give 1 star">★</a>
+            </div>
+
+        </div>
+        <br>
     </div>
-    
+
+
     <div class="resume_container">
+        {{!-- <embed id="obj" src="{{data.resumePath}}" /> --}}
         <object id="obj" data="{{data.resumePath}}">object can't be rendered</object>
     </div>
 </div>
-
-<br>
-
 <div class="comments">
+
     <div class="left_title">
         <a class="post_title">Reviews</a>
-        <div class="right_post">
-            <button id="post_review">Post A Review</button>
-        </div>
+        <div class="right_post"><button id="post_review">Post A Review</button></div>
     </div>
-
+    <br>
     {{!-- comments section partial --}}
     <div class="comment_container">
-        {{!-- <div class="rating" id="ratingstars">
-            <a id="star5" href="#5" title="Give 5 stars" style="font-size: small;">★</a>
-            <a id="star4" href="#4" title="Give 4 stars" style="font-size: small;">★</a>
-            <a id="star3" href="#3" title="Give 3 stars" style="font-size: small;">★</a>
-            <a id="star2" href="#2" title="Give 2 stars" style="font-size: small;">★</a>
-            <a id="star1" href="#1" title="Give 1 star" style="font-size: small;">★</a>
+        <a class="note_title">Dr.Erlich Bachman</a>
+        <a class="review_user_title">Professor of Computer Science, SFSU</a>
+        <br>
+
+        <a class="review_content">Very bad student, dont recommend. Writes shit code and doesnt know how to spell, next.
+            bla
+            bla bla bla bla bla bla bla bla, words idk what to say</a>
+
+        {{!-- <div class="moreinfo">
+            <a href="/post/{{this.id}}">
+                <button>More info</button>
+            </a>
         </div> --}}
-        <a class="note_title">{{this.name}}Dr. Placeholder</a>
-        <a class="review_user_title">Professor of {{this.department}}Computer Science, SFSU</a>
-        <a class="review_content">{{this.review}}This is a generic review placeholder.</a>
-    </div><br>
+    </div>
     {{>comments}}
 
-    <h3 style="padding-left: 20px;">Leave A Review</h3> 
     <div id="leave_a_review">
         <form action="/comment" method="post" enctype="application/x-www-form-urlencoded">
-            <textarea type="text" name="comment" id="review_textarea" cols="30" rows="10">text placeholder</textarea>
+            <textarea type="text" name="comment" id="review_textarea" cols="30" rows="10">
+        </textarea>
             <div class="review_button_container">
                 <button>Submit Review</button>
             </div>
-    
+            {{!-- <div class="formrating" id="ratingstars">
+                <input id="formstar5" type="radio" name="review" href="#5" title="Give 5 stars">★</input>
+                <input id="formstar4" type="radio" name="review" href="#4" title="Give 4 stars">★</input>
+                <input id="formstar3" type="radio" name="review" href="#3" title="Give 3 stars">★</input>
+                <input id="formstar2" type="radio" name="review" href="#2" title="Give 2 stars">★</input>
+                <input id="formstar1" type="radio" name="review" href="#1" title="Give 1 star">★</input>
+            </div> --}}
             <div class="formrating">
                 <p class="avg" id="formavg">N/A</p>
-                <input type="radio" id="formstar5" name="rating" value="5" /><label for="star5" title="Rocks!">5
+                <input type="radio" name="rating" value="5" /><label for="star5" id="formstar5" title="Rocks!">5
                     stars</label>
                 <input type="radio" id="formstar4" name="rating" value="4" /><label for="star4" title="Pretty good">4
                     stars</label>
@@ -82,8 +101,7 @@
 
         </form>
     </div>
-</div>
-<footer></footer>
 
+</div>
 <br>
 <br>
