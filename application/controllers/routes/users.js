@@ -58,7 +58,11 @@ router.post("/register", async (req, res, next) => {
   else {
     let { username, name, email, password, title, usertype } = req.body,
       active = 0;
-    console.log("test");
+    let schooltypes = ["Student", "Professor"];
+    let orgtypes = ["ERG", "NPO", "Recruiter"];
+    if (usertype == schooltypes[0]) usertype = 0;
+    if (usertype == schooltypes[1]) usertype = 1;
+    if (usertype in orgtypes) usertype = 2;
 
     console.log(usertype);
     // Communicate with the Users model to create the user
