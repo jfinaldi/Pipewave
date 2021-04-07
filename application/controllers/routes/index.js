@@ -128,7 +128,7 @@ router.get("/post/:id(\\d+)", async (req, res, next) => {
       res.render("post", {
         data: r[0],
         comment: await Review.getReviews(req.params.id),
-        unique: "post",
+        unique: "Post",
         render_js_files: ["comment"],
       });
       req.session.viewing = req.params.id;

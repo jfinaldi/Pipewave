@@ -43,7 +43,7 @@
   float: right;
   margin-right: 50px;
   overflow: auto;
-  -webkit-overflow-scrolling: touch;
+  /* -webkit-overflow-scrolling: touch; */
   margin-bottom: 10px;
 }
 
