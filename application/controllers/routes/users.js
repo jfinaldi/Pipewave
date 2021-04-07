@@ -311,7 +311,9 @@ router.post("/setAlert", async (req, res) => {
   // console.log(isArray(major));
 
   await User.setAlert({ ethnicity, gender, major }, req.session.userid);
-  res.send(ethnicity);
+
+  // res.send(ethnicity);
+  res.redirect("/alerts");
 });
 
 // get settings page
