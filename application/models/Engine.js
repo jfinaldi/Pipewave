@@ -123,6 +123,24 @@ Engine.updatePFP = async (file, fk_userid) => {
     return null;
   }
 };
+
+Engine.updateRES = async (file, fk_userid) => {
+  debugPrinter.printFunction("Engine.updateRES");
+  try {
+    console.log(fk_userid);
+    let path = "/assets/resumes/" + file.filename;
+    // let tags = await pdfReader("./public" + path);
+    debugPrinter.printDebug(fk_userid);
+    // let path = "/assets/" + req.file.filename;
+    var baseSQL = "UPDATE `website`.`users` SET `resume` = ? WHERE `id` = ?;";
+    let [r, fields] = await db.query(baseSQL, [path, fk_userid]);
+    debugPrinter.printDebug("Response", r);
+    return r;
+  } catch (err) {
+    console.log("Couldnt update resume, boo.");
+    return null;
+  }
+};
 // SELECT u.id, u.ethnicity, u.major, u.profilepic, u.username, u.name FROM users u WHERE `gender`="male" and `major`="Computer Science" and `ethnicity`="hispanic";
 
 const helper_cluster = (x, filter_name, count, base) => {
