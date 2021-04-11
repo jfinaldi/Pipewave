@@ -29,7 +29,7 @@ User.create = async (username, name, password, active, usertype, email, title) =
   debugPrinter.printFunction("User.create");
 
   password = await bcrypt.hash(password, 15);
-  if (!((await User.emailExists(email)) && (await User.usernameExists(username)))) {
+  if (!((await User.emailExists(email)) || (await User.usernameExists(username)))) {
     let baseSQL = "INSERT INTO users (`username`,`name`, `email`, `active`,`usertype`, `password`, `created`, `title`) VALUES (?,?,?,?,?,?, now(), ?);";
     let a = await db.execute(baseSQL, [username, name, email, active, usertype, password, title]);
     return a;
@@ -39,7 +39,7 @@ User.createWithGoogleID = async (username, name, password, active, usertype, ema
   debugPrinter.printFunction("User.createWithGoogleID");
 
   password = await bcrypt.hash(password, 15);
-  if (!((await User.emailExists(email)) && (await User.usernameExists(username)))) {
+  if (!((await User.emailExists(email)) || (await User.usernameExists(username)))) {
     let baseSQL = "INSERT INTO users (`username`,`name`, `email`, `active`,`usertype`, `created`, `password`, googleid) VALUES (?,?,?,?,?, now(), ?, ?);";
     let a = await db.execute(baseSQL, [username, name, email, active, usertype, password, googleid]);
     return a;
@@ -109,13 +109,19 @@ User.authenticate = async (username, password) => {
   }
 };
 
-User.checkPassword = async (username, password) => {
+User.checkPassword = async (username, new_password) => {
   debugPrinter.printFunction("User.checkPassword");
 
   let baseSQL = "SELECT id,username, password FROM users WHERE username=?;";
   let [r, fields] = await db.execute(baseSQL, [username]);
+  console.log(r);
 
-  return r && r.length ? ((await bcrypt.compare(password, r[0].password)) ? true : false) : false;
+  let validResult = r && r.length;
+  console.log("validResult: " + validResult);
+  if(validResult == 0) return false;
+  let isTheSame = await bcrypt.compare(new_password, r[0].password);
+  console.log("isTheSame: " + isTheSame);
+  return (!isTheSame) ? true : false;
 };
 
 User.checkUser = async username => {
@@ -127,7 +133,7 @@ User.checkUser = async username => {
   return r && r.length ? true : false;
 };
 
-User.changePassword = async (username, confirm_password, new_password, userid) => {
+User.changePassword = async (username, new_password, confirm_password, userid) => {
   debugPrinter.printFunction("User.changePassword");
 
   if (await User.checkPassword(username, confirm_password)) {
@@ -138,26 +144,86 @@ User.changePassword = async (username, confirm_password, new_password, userid) =
   } else return null;
 };
 
-User.changeEmail = async (username, confirm_password, new_email, userid) => {
+User.changeEmail = async (new_email, userid) => {
   debugPrinter.printFunction("User.changeEmail");
 
-  if (await User.checkPassword(username, confirm_password)) {
+  if (!(await User.emailExists(new_email))) {
     let baseSQL = "UPDATE `users` SET `email` = ? WHERE `id` = ?;";
     let [r, fields] = await db.execute(baseSQL, [new_email, userid]);
     return r;
   } else return null;
 };
 
-User.changeUser = async (username, confirm_password, userid) => {
-  debugPrinter.printFunction("User.changeUser");
+// Change Username
+User.changeUsername = async (new_username, userid) => {
+  debugPrinter.printFunction("User.changeUsername");
 
-  if (await User.checkPassword(username, confirm_password)) {
-    if (!(await User.checkUser(username))) {
-      let baseSQL = "UPDATE `users` SET `email` = ? WHERE `id` = ?;";
-      let [r, fields] = await db.execute(baseSQL, [new_email, userid]);
-      return r;
-    } else return null;
-  } else return null;
+  if(!(await User.usernameExists(new_username))) {
+    let baseSQL = "UPDATE `users` SET `username` = ? WHERE `id` = ?;";
+    let [r, fields] = await db.execute(baseSQL, [new_username, userid]);
+    return r;
+  } else {
+    console.log("Error User.changeUsername: name already exists.");
+    return null;
+  }
+};
+
+// Change name
+User.changeName = async (username, new_name, userid) => {
+  debugPrinter.printFunction("User.changeName");
+
+  if (!(await User.checkUser(new_name))) {
+    let baseSQL = "UPDATE `users` SET `name` = ? WHERE `id` = ?;";
+    let [r, fields] = await db.execute(baseSQL, [new_name, userid]);
+    return r;
+  } else {
+    return null;
+  }
+};
+
+// Change Ethnicity
+User.changeEthnicity = async (new_ethnicity, userid) => {
+  debugPrinter.printFunction("User.changeEthnicity");
+
+  let baseSQL = "UPDATE `users` SET `ethnicity` = ? WHERE `id` = ?;";
+  let [r, fields] = await db.execute(baseSQL, [new_ethnicity, userid]);
+  return r;
+};
+
+// Change Gender
+User.changeGender = async (new_gender, userid) => {
+  debugPrinter.printFunction("User.changeGender");
+
+  let baseSQL = "UPDATE `users` SET `gender` = ? WHERE `id` = ?;";
+  let [r, fields] = await db.execute(baseSQL, [new_gender, userid]);
+  return r;
+};
+
+// Change Major
+User.changeMajor = async (new_major, userid) => {
+  debugPrinter.printFunction("User.changeMajor");
+
+  let baseSQL = "UPDATE `users` SET `major` = ? WHERE `id` = ?;";
+  let [r, fields] = await db.execute(baseSQL, [new_major, userid]);
+  return r;
+};
+
+// Change Company
+User.changeCompany = async (new_company, userid) => {
+  debugPrinter.printFunction("User.changeCompany");
+
+  let baseSQL = "UPDATE `users` SET `company` = ? WHERE `id` = ?;";
+  let [r, fields] = await db.execute(baseSQL, [new_company, userid]);
+  return r;
+};
+
+// Change Department
+User.changeDepartment = async (new_department, userid) => {
+  debugPrinter.printFunction("User.changeDepartment");
+
+  let baseSQL = "UPDATE `users` SET `department` = ? WHERE `id` = ?;";
+  let [r, fields] = await db.execute(baseSQL, [new_department, userid]);
+  return r;
 };
 
 User.getInfo = async username => {

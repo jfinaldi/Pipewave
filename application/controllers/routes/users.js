@@ -267,16 +267,15 @@ router.post("/changePassword", async (req, res) => {
 router.post("/changeEmail", async (req, res) => {
   debugPrinter.printRouter("Post: /changeEmail");
 
-  let { old_password, new_email } = req.body;
+  console.log(req.body);
+  console.log(req.body.email);
+
   let status;
-  let response = await User.changeEmail(old_password, new_email, req.session.userid);
+  let response = await User.changeEmail(req.body.email, req.session.userid);
   console.log("updated");
   console.log(response);
-  status = `Email Changed to ${new_email}`;
-  res.render("user", {
-    unique: "user",
-    user: { username: req.session.username, status: status },
-  });
+  status = `Email Changed to ${req.body.email}`;
+  res.redirect("/user/" + req.session.username + "/settings");
 });
 
 // Page user
@@ -295,12 +294,17 @@ router.get("/:user", async (req, res) => {
 // get settings page
 router.get("/:user/settings", async (req, res) => {
   debugPrinter.printRouter("Get: /:settings");
-  res.render("settings", {
-    unique: "Settings", //css link
-    search: true,
-    user: { username: req.session.username },
-    render_css_files: ["Settings"],
-  });
+
+  if(!req.session.username) {
+    res.redirect("/");
+  } else {
+    res.render("settings", {
+      unique: "Settings", //css link
+      search: true,
+      user: { username: req.session.username },
+      render_css_files: ["Settings"],
+    });
+  }
 });
 
 router.post("/setAlert", async (req, res) => {
@@ -316,7 +320,7 @@ router.post("/setAlert", async (req, res) => {
   res.redirect("/alerts");
 });
 
-// get settings page
+// get post aka Reviews page
 router.get("/:user/post", async (req, res) => {
   debugPrinter.printRouter("Get: /:post");
   let resp = await mytools.resFormatDateCreated(await Engine.getUserPosts(req.session.username));
@@ -335,7 +339,96 @@ router.get("/:user/post", async (req, res) => {
 router.post("/updateSettings", async (req, res) => {
   debugPrinter.printRouter("Post: /updateSettings");
 
-  // ADD STUFF HERE
+  if (!req.session.username) {
+    res.redirect("/");
+  } else {
+    console.log(req.body);
+
+    // change username
+    if(req.body.username != '') {
+      let status;
+      let response = await User.changeUsername(req.body.username, req.session.userid);
+      console.log("updated");
+      console.log(response);
+      status = `Username Changed to ${req.body.username}`;
+      req.session.username = await req.body.username;
+      res.locals.logged = true;
+    }
+
+    // name
+    if(req.body.name != '') {
+      let status;
+      let response = await User.changeName(req.session.username, req.body.name, req.session.userid);
+      console.log("updated");
+      console.log(response);
+      status = `Name Changed to ${req.body.name}`;
+    }
+
+    // change user email
+    if(req.body.email != '') {
+      let status;
+      let response = await User.changeEmail(req.body.email, req.session.userid);
+      console.log("updated");
+      console.log(response);
+      status = `Email Changed to ${req.body.email}`;
+    }
+
+    // change ethnicity
+    if(req.body.ethnicity != '') {
+      let status;
+      let response = await User.changeEthnicity(req.body.ethnicity, req.session.userid);
+      console.log("updated");
+      console.log(response);
+      status = `Ethnicity Changed to ${req.body.ethnicity}`;
+    }
+
+    // change gender
+    if(req.body.gender != '') {
+      let status;
+      let response = await User.changeGender(req.body.gender, req.session.userid);
+      console.log("updated");
+      console.log(response);
+      status = `Gender Changed to ${req.body.gender}`;
+    }
+
+    // change major
+    if(req.body.major != '') {
+      let status;
+      let response = await User.changeMajor(req.body.major, req.session.userid);
+      console.log("updated");
+      console.log(response);
+      status = `Major Changed to ${req.body.major}`;
+    }
+
+    // change company
+    if(req.body.company != '') {
+      let status;
+      let response = await User.changeCompany(req.body.company, req.session.userid);
+      console.log("updated");
+      console.log(response);
+      status = `Company Changed to ${req.body.company}`;
+    }
+
+    // change department
+    if(req.body.department != '') {
+      let status;
+      let response = await User.changeDepartment(req.body.department, req.session.userid);
+      console.log("updated");
+      console.log(response);
+      status = `Department Changed to ${req.body.department}`;
+    }
+
+    // change password
+    if(req.body.password != '') {
+      let status;
+      let response = await User.changePassword(req.session.username, req.body.password, 
+                                               req.body.confirmpassword, req.session.userid);
+      console.log("updated");
+      console.log(response);
+      status = `Password Changed to ${req.body.password}`;
+    }
+    res.redirect("/user/" + req.session.username);
+  }
 });
 
 // post update resume

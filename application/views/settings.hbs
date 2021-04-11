@@ -86,7 +86,8 @@
                 <button type="submit">Save</button>
             </form><br>
 
-            <form action="/user/updateSettings" id="form" method="POST" enctype="application/x-www-form-urlencoded">
+            {{!-- <form action="/user/updateSettings" id="form" method="POST" enctype="application/x-www-form-urlencoded"> --}}
+            <form action="/user/updateSettings" id="form" method="post" enctype="application/x-www-form-urlencoded">
                 <div id= "formElements"><br>
                     <h3>User Info</h3>
                         
@@ -94,33 +95,33 @@
                     <label for="Username" class="inputtags">Username</label>
                     <input placeholder=" Enter Username" pattern="[A-Za-z0-9]+" type=text id="username" name="username"/><br>
                     <label for="Name" class="inputtags">Name</label>
-                    <input placeholder=" Enter Name" type="text" id="email" name="name" required /><br>
+                    <input placeholder=" Enter Name" type="text" id="email" name="name" /><br>
 
                     {{!-- Change Email --}}
                     <label for="email" class="inputtags">E-mail</label>
                     <input placeholder=" Enter Email" type="email" id="email"
-                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" name="email" required /><br>
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" name="email" /><br>
                     <br>
 
                     {{!-- Change Ethnicity --}}
                     <label id="ethnicityLabel" for="ethnicity" class="inputtags">Ethnicity</label>
-                    <input placeholder="Ethnicity" id="ethnicity" name="title"></input><br>
+                    <input placeholder="Ethnicity" id="ethnicity" name="ethnicity"></input><br>
 
                     {{!-- Change Gender --}}
                     <label id="genderLabel" for="gender" class="inputtags">Gender</label>
-                    <input placeholder="Gender" id="gender" name="title"></input><br>
+                    <input placeholder="Gender" id="gender" name="gender"></input><br>
 
                     {{!-- Change Major --}}
                     <label id="majorLabel" for="major" class="inputtags">Major</label>
-                    <input placeholder="New Major" id="major" name="title"></input><br>
+                    <input placeholder="New Major" id="major" name="major"></input><br>
 
                     {{!-- Change Company  --}}
                     <label id="companyLabel" for="company" class="inputtags">Company</label>
-                    <input placeholder="New Company" id="company" name="title"></input><br>
+                    <input placeholder="New Company" id="company" name="company"></input><br>
 
                     {{!-- Change Department --}}
                     <label id="departmentLabel" for="department" class="inputtags">Department</label>
-                    <input placeholder="New Department" id="department" name="title"></input><br>
+                    <input placeholder="New Department" id="department" name="department"></input><br>
                     <br>
 
                     {{!-- Change Password --}}
