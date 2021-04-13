@@ -14,4 +14,4 @@ function displayAdvancedFilter() {
   x.style.display = styles[x.style.display === "flex" ? 0 : 2];
 }
 
-console.log("advancedFilter js connected");
+console.log("advancedFilter.js connected");

@@ -30,12 +30,13 @@ router.post("/login", async (req, res, next) => {
     var { username, password } = req.body;
 
     // Authenticate user
-    let [auth, userid] = await User.authenticate(username, password);
+    let [auth, userid, usertype] = await User.authenticate(username, password);
     if (auth) {
       // Assign stuff to user once logged in
       res.locals.logged = true;
       req.session.username = await username;
       req.session.userid = await userid;
+      req.session.usertype = await usertype;
 
       debugPrinter.printSuccess(username, "has logged in");
       res.redirect("/");
@@ -81,6 +82,7 @@ router.post("/register", async (req, res, next) => {
       res.locals.logged = true;
       req.session.username = await username;
       req.session.userid = await userid;
+      req.session.usertype = await usertype;
 
       debugPrinter.printSuccess("User is logged in, now redircting to User page");
 
@@ -281,8 +283,8 @@ router.post("/changeEmail", async (req, res) => {
 // Page user
 router.get("/:user", async (req, res) => {
   debugPrinter.printRouter(`Get: /users/${req.params.user}`);
-
   let r = await mytools.resFormatDateCreated(await Engine.getUserPosts(req.params.user));
+  debugPrinter.printRouter(r);
   successPrint(r[0]);
   res.render("user", {
     user: await mytools.resFormatDateCreated(await User.getInfo(req.params.user))[0],
@@ -302,7 +304,8 @@ router.get("/:user/settings", async (req, res) => {
       unique: "Settings", //css link
       search: true,
       user: { username: req.session.username },
-      render_css_files: ["Settings"],
+      usertype: { usertype : req.session.usertype},
+      render_js_files: ["settings"],
     });
   }
 });

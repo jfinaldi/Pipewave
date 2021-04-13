@@ -42,3 +42,5 @@ const display_comments = x => {
 post_review.addEventListener("click", () => {
   display_comments(!comments_displayed ? 1 : 0);
 });
+
+console.log("comment.js connected")

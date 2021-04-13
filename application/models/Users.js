@@ -89,16 +89,17 @@ User.getGoogleId = async googleid => {
 User.authenticate = async (username, password) => {
   debugPrinter.printFunction("User.authenticate");
 
-  let baseSQL = "SELECT id,username, password FROM users WHERE username=?;";
+  let baseSQL = "SELECT id,username, usertype, password FROM users WHERE username=?;";
   let [r, fields] = await db.execute(baseSQL, [username]);
 
   // If user stuff exists based on Username
   if (r && r.length) {
     let check = await bcrypt.compare(password, r[0].password);
     let userid = r[0].id;
+    let usertype = r[0].usertype;
 
     // If password is in the DB
-    if (check) return [true, userid];
+    if (check) return [true, userid, usertype];
     else return [false, null];
   }
 
@@ -229,7 +230,7 @@ User.changeDepartment = async (new_department, userid) => {
 User.getInfo = async username => {
   debugPrinter.printFunction("User.getInfo");
 
-  var baseSQL = "SELECT bio, id, profilepic, name,email,usertype,title,created, username FROM users WHERE username=?;";
+  var baseSQL = "SELECT bio, id, profilepic, name, email, usertype, title, created, username FROM users WHERE username=?;";
   let [r, fields] = await db.query(baseSQL, [username]);
   return r;
 };

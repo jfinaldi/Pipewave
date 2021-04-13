@@ -26,31 +26,35 @@ function displayFormElements() {
 
   formElements.style.display = "block";
   switch(formSelector.value) {
+    case "defaultValue":
+      formElements.style.display = "none"
+      break;
     case "Student":
-        occupationLabel.innerHTML = "Major";
-        occupation.placeholder = "Major";
+      occupationLabel.innerHTML = "Major";
+      occupation.placeholder = "Major";
       break;
     case "Professor":
-        occupationLabel.innerHTML = "Department";
-        occupation.placeholder = "Department";
+      occupationLabel.innerHTML = "Department";
+      occupation.placeholder = "Department";
       break;
     case "ERG":
-        occupationLabel.innerHTML = "Company";
-        occupation.placeholder = "Company";
+      occupationLabel.innerHTML = "Company";
+      occupation.placeholder = "Company";
       break;
     case "NPO":
-        occupationLabel.innerHTML = "Company";
-        occupation.placeholder = "Company";
+      occupationLabel.innerHTML = "Company";
+      occupation.placeholder = "Company";
       break;
     case "Recruiter":
-        occupationLabel.innerHTML = "Company";
-        occupation.placeholder = "Company";
+      occupationLabel.innerHTML = "Company";
+      occupation.placeholder = "Company";
       break;
     default:
-        occupationLabel.innerHTML = "Occupation";
-        occupation.placeholder = "Occupation";
+      occupationLabel.innerHTML = "Occupation";
+      occupation.placeholder = "Occupation";
+      break;
   }
 //   formElements.style.display = styles[formElements.style.display === "None" ? 0 : 2];
 }
 
-console.log("register js connected");
+console.log("register.js connected");
