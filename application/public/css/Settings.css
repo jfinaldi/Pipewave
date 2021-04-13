@@ -6,3 +6,75 @@ body {
   z-index: 0;
 }
 
+div{
+  color: white;
+}
+
+/* Page Container */
+.container {
+  animation: fadein 2s;
+  height: 760px;
+  margin-top: 100px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Profile Settings Container */
+.child {
+  background-image: linear-gradient(to bottom right, rgb(29, 29, 29), rgb(43, 40, 40));
+  opacity: 98%;
+  border-radius: 25px;
+  text-align: center;
+  opacity: 4;
+  width: 370px;
+  height: 700px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.4), 0 10px 10px rgba(0, 0, 0, 0.22);
+  display: inline-block;
+  transition: all 1s ease;
+}
+
+.inputtags {
+  display: block;
+  font-size: 15px;
+  color: white;
+  font-family: "Open Sans", sans-serif;
+  margin-top: 7px;
+}
+
+#username,
+#name,
+#occupation,
+#password,
+#confirmpassword,
+#major,
+#company,
+#department,
+#ethnicity,
+#gender,
+#email {
+  border-radius: 7px;
+  height: 33px;
+  width: 70%;
+  font-family: "Open Sans", sans-serif;
+  margin-top: 5px;
+  transition: all 0.2s ease;
+}
+
+.submit {
+  margin-top: 14px;
+  border-radius: 5px;
+  height: 30px;
+  background-color: #2aa7d8;
+  color: white;
+  width: 100px;
+  font-family: "Open Sans", sans-serif;
+  outline: none;
+  border: none;
+  transition: all 0.4s ease;
+}
+
+/* Form Elements */

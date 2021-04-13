@@ -11,7 +11,6 @@ const debugPrinter = require("../helpers/debug/debug_printer");
 
 // Get Home
 router.get("/", async (req, res) => {
-  console.log(req.query);
   if (req.query.search) await search(req, res, req.query.search);
   if (req.query.gender || req.query.ethnicity || req.query.major) {
     console.log(req.query);
@@ -19,6 +18,7 @@ router.get("/", async (req, res) => {
     await advancedSearch(req, res, data);
   }
   debugPrinter.printRouter("Get: /");
+  console.log(req)
   res.render("index", {
     data: mytools.resFormatDateCreated(await Engine.getAllPosts()),
     js: true,
@@ -38,11 +38,11 @@ router.get("/api/getposts/:id", async (req, res) => {
   // args[2] ASC - DESC
   res.send(await mytools.resFormatDateCreated(await Engine.getPostsApiEndpoint(parseInt(args[0]), args[1], args[2])));
 });
+
 // Get login
 router.get("/login", (req, res, next) => {
   debugPrinter.printRouter("Get: /login");
   if (req.session.username) {
-    console.log("asd");
     res.redirect("/");
   } else {
     res.render("login", {

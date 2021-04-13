@@ -2,7 +2,7 @@
 <div>
     <div class="container">
         <div class="child"><br>
-            <h1 id="ntitle">Profile Settings</h1>
+            <h2 id="ntitle">Profile Settings</h2>
             <div id="error"></div>
 
             <a class="username">{{user.name}}</a>
@@ -19,11 +19,11 @@
             <form action="/user/edit_resume" method="post" enctype="multipart/form-data">
                 <input type="file" name="resume" />
                 <button type="submit">Save</button>
-            </form><br>
+            </form>
 
             {{!-- <form action="/user/updateSettings" id="form" method="POST" enctype="application/x-www-form-urlencoded"> --}}
             <form action="/user/updateSettings" id="form" method="post" enctype="application/x-www-form-urlencoded">
-                <div id= "formElements"><br>
+                <div id= "formElements">
                     <h3>User Info</h3>
                         
                     {{!-- Change Username --}}
@@ -38,17 +38,16 @@
                     <label for="email" class="inputtags">E-mail</label>
                     <input placeholder=" Enter Email" type="email" id="email"
                             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" name="email" /><br>
-                    <br>
-
-                    {{!-- Change Ethnicity --}}
-                    <label id="ethnicityLabel" for="ethnicity" class="inputtags">Ethnicity</label>
-                    <input placeholder="Ethnicity" id="ethnicity" name="ethnicity"></input><br>
-
-                    {{!-- Change Gender --}}
-                    <label id="genderLabel" for="gender" class="inputtags">Gender</label>
-                    <input placeholder="Gender" id="gender" name="gender"></input><br>
                     
                     {{#equal usertype.usertype 0}}
+                        {{!-- Change Ethnicity --}}
+                        <label id="ethnicityLabel" for="ethnicity" class="inputtags">Ethnicity</label>
+                        <input placeholder="Ethnicity" id="ethnicity" name="ethnicity"></input><br>
+
+                        {{!-- Change Gender --}}
+                        <label id="genderLabel" for="gender" class="inputtags">Gender</label>
+                        <input placeholder="Gender" id="gender" name="gender"></input><br>
+
                         {{!-- Change Major --}}
                         <label id="majorLabel" for="major" class="inputtags">Major</label>
                         <input placeholder="New Major" id="major" name="major"></input><br>
@@ -75,7 +74,7 @@
                     <input placeholder=" Confirm Password" name="confirmpassword" type=password minlength="8"
                             id="confirmpassword"></input><br><br>
 
-                    <input type="submit" class="submit" value="Submit">
+                    <input type="submit" class="submit" value="Save Settings"></input>
                 </div>
             </form>
         </div>

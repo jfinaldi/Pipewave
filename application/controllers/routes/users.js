@@ -367,58 +367,64 @@ router.post("/updateSettings", async (req, res) => {
       status = `Name Changed to ${req.body.name}`;
     }
 
-    // change user email
-    if(req.body.email != '') {
-      let status;
-      let response = await User.changeEmail(req.body.email, req.session.userid);
-      console.log("updated");
-      console.log(response);
-      status = `Email Changed to ${req.body.email}`;
+    if(req.session.usertype == 0){
+      // change user email
+      if(req.body.email != '') {
+        let status;
+        let response = await User.changeEmail(req.body.email, req.session.userid);
+        console.log("updated");
+        console.log(response);
+        status = `Email Changed to ${req.body.email}`;
+      }
+
+      // change ethnicity
+      if(req.body.ethnicity != '') {
+        let status;
+        let response = await User.changeEthnicity(req.body.ethnicity, req.session.userid);
+        console.log("updated");
+        console.log(response);
+        status = `Ethnicity Changed to ${req.body.ethnicity}`;
+      }
+
+      // change gender
+      if(req.body.gender != '') {
+        let status;
+        let response = await User.changeGender(req.body.gender, req.session.userid);
+        console.log("updated");
+        console.log(response);
+        status = `Gender Changed to ${req.body.gender}`;
+      }
+
+      // change major
+      if(req.body.major != '') {
+        let status;
+        let response = await User.changeMajor(req.body.major, req.session.userid);
+        console.log("updated");
+        console.log(response);
+        status = `Major Changed to ${req.body.major}`;
+      }
     }
 
-    // change ethnicity
-    if(req.body.ethnicity != '') {
-      let status;
-      let response = await User.changeEthnicity(req.body.ethnicity, req.session.userid);
-      console.log("updated");
-      console.log(response);
-      status = `Ethnicity Changed to ${req.body.ethnicity}`;
+    if(req.session.usertype == 1){
+      // change department
+      if(req.body.department != '') {
+        let status;
+        let response = await User.changeDepartment(req.body.department, req.session.userid);
+        console.log("updated");
+        console.log(response);
+        status = `Department Changed to ${req.body.department}`;
+      }
     }
-
-    // change gender
-    if(req.body.gender != '') {
-      let status;
-      let response = await User.changeGender(req.body.gender, req.session.userid);
-      console.log("updated");
-      console.log(response);
-      status = `Gender Changed to ${req.body.gender}`;
-    }
-
-    // change major
-    if(req.body.major != '') {
-      let status;
-      let response = await User.changeMajor(req.body.major, req.session.userid);
-      console.log("updated");
-      console.log(response);
-      status = `Major Changed to ${req.body.major}`;
-    }
-
-    // change company
-    if(req.body.company != '') {
-      let status;
-      let response = await User.changeCompany(req.body.company, req.session.userid);
-      console.log("updated");
-      console.log(response);
-      status = `Company Changed to ${req.body.company}`;
-    }
-
-    // change department
-    if(req.body.department != '') {
-      let status;
-      let response = await User.changeDepartment(req.body.department, req.session.userid);
-      console.log("updated");
-      console.log(response);
-      status = `Department Changed to ${req.body.department}`;
+    
+    if(req.session.usertype == 2){
+      // change company
+      if(req.body.company != '') {
+        let status;
+        let response = await User.changeCompany(req.body.company, req.session.userid);
+        console.log("updated");
+        console.log(response);
+        status = `Company Changed to ${req.body.company}`;
+      }
     }
 
     // change password
