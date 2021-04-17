@@ -9,9 +9,21 @@ const User = require("../../models/Users");
 // Debug printer
 const debugPrinter = require("../helpers/debug/debug_printer");
 
+// Input validation for search function
+function isLetter(str) {
+  return str.length === 1 && str.match("/^[a-z0-9]+$/i");
+}
+
 // Get Home
 router.get("/", async (req, res) => {
-  if (req.query.search) await search(req, res, req.query.search);
+  if (req.query.search) {
+    if (!isLetter(req.query.search)){
+      console.log("Yo our regex did work");
+      //console.log(req.query.search);
+      await res.redirect("/");
+    }
+    await search(req, res, req.query.search);
+  } 
   if (req.query.gender || req.query.ethnicity || req.query.major) {
     console.log(req.query);
     data = { gender: req.query.gender, ethnicity: req.query.ethnicity, major: req.query.major };
@@ -33,13 +45,10 @@ router.get("/", async (req, res) => {
 router.get("/api/getposts/:id", async (req, res) => {
   let { id } = req.params;
   let args = id.split(",");
-  // args[0] 10
-  // args[1] created
-  // args[2] ASC - DESC
   res.send(await mytools.resFormatDateCreated(await Engine.getPostsApiEndpoint(parseInt(args[0]), args[1], args[2])));
 });
 
-// Get login
+// Get login page
 router.get("/login", (req, res, next) => {
   debugPrinter.printRouter("Get: /login");
   if (req.session.username) {

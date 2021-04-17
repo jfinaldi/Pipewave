@@ -11,8 +11,10 @@
                 <td>
                     {{#if this.profilepic}}
                     <img id="result_image" src="{{this.profilepic}}" />
+
+                    {{!-- only output default value if no profile exists --}}
                     {{else}}
-                    <img id="result_image" src="../assets/icons/defaultProfile.png" />
+                    <img id="result_image" src="../assets/icons/defaultProfile.png" /> 
                     {{/if}}
                 </td>
                 <td id="name_title">
@@ -27,11 +29,3 @@
 </a>
 
 {{/each}}
-
-{{!-- <a>{{this.description}}</a> --}}
-
-{{!-- <div class="moreinfo">
-    <a href="/user/{{this.username}}">
-        <button>More info</button>
-    </a>
-</div> --}}

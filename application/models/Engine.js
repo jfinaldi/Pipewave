@@ -13,15 +13,23 @@ const Engine = {};
 //   return r;
 // };
 
+//get 
 Engine.getPosts = async limit => {
   debugPrinter.printFunction("Engine.getPosts");
-  let baseSQL = "SELECT * FROM website.users ORDER BY created DESC LIMIT ?;";
-  let [r, fields] = await db.query(baseSQL, [limit]);
-  return r;
+  try {
+    let baseSQL = "SELECT * FROM website.users WHERE usertype=0 ORDER BY created DESC LIMIT ?;";
+    let [r, fields] = await db.query(baseSQL, [limit]);
+    return r;
+  }catch (err) {
+    res.send(err);
+  }
 };
+
+// fetch all 
 Engine.getAllPosts = async _ => {
   debugPrinter.printFunction("Engine.getPosts");
-  let baseSQL = "SELECT * FROM website.users ORDER BY created DESC;";
+  //let baseSQL = "SELECT * FROM website.users ORDER BY created DESC;";
+  let baseSQL = "SELECT * FROM website.users WHERE usertype=0 ORDER BY created DESC";
   let [r, fields] = await db.query(baseSQL);
   return r;
 };
@@ -38,8 +46,10 @@ Engine.getPostsApiEndpoint = async (limit, filter, order = "DESC") => {
 Engine.search = async search => {
   debugPrinter.printFunction("Engine.search");
   try {
+    // let baseSQL =
+    //   "SELECT u.id,u.name,u.profilepic, u.title,u.created, u.username, concat_ws(' ', u.name, u.username, u.title) AS haystack FROM users u HAVING haystack like ?;";
     let baseSQL =
-      "SELECT u.id,u.name,u.profilepic, u.title,u.created, u.username, concat_ws(' ', u.name, u.username, u.title) AS haystack FROM users u HAVING haystack like ?;";
+    "SELECT u.id,u.name,u.profilepic, u.title,u.created, u.username, concat_ws(' ', u.name, u.username, u.title) AS haystack FROM users u WHERE u.usertype=0 HAVING haystack like ?;";
     let sqlready = "%" + search + "%";
     let [r, fields] = await db.execute(baseSQL, [sqlready]);
     return r && r.length ? r : await Engine.getPosts(10);
@@ -61,6 +71,7 @@ Engine.search = async search => {
 //   }
 // };
 
+// get a single review
 Engine.getPost = async id => {
   debugPrinter.printFunction("Engine.getPost");
   try {
@@ -74,7 +85,7 @@ Engine.getPost = async id => {
   }
 };
 
-// Get all posts from 1 User
+// Get all reviews from 1 User
 Engine.getUserPosts = async username => {
   debugPrinter.printFunction("Engine.getUserPosts");
   try {
