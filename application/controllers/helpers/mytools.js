@@ -12,6 +12,10 @@ module.exports = {
     }
     return res_data;
   },
+  // Input validation for search function
+  isLetter: str => {
+    return str.length > 0 && str.match(/^[a-z\d\-_\s]+$/i);
+  },
 };
 
 // //   for (var i = 0; i < res.locals.results.length; i++) {

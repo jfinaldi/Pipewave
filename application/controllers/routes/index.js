@@ -9,28 +9,22 @@ const User = require("../../models/Users");
 // Debug printer
 const debugPrinter = require("../helpers/debug/debug_printer");
 
-// Input validation for search function
-function isLetter(str) {
-  return str.length === 1 && str.match("/^[a-z0-9]+$/i");
-}
-
 // Get Home
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
   if (req.query.search) {
-    if (!isLetter(req.query.search)){
-      console.log("Yo our regex did work");
-      //console.log(req.query.search);
-      await res.redirect("/");
+    if (!(await mytools.isLetter(req.query.search))) {
+      res.redirect("/");
+    } else {
+      await search(req, res, req.query.search);
     }
-    await search(req, res, req.query.search);
-  } 
+  }
   if (req.query.gender || req.query.ethnicity || req.query.major) {
     console.log(req.query);
     data = { gender: req.query.gender, ethnicity: req.query.ethnicity, major: req.query.major };
     await advancedSearch(req, res, data);
   }
   debugPrinter.printRouter("Get: /");
-  console.log(req)
+  // console.log(req);
   res.render("index", {
     data: mytools.resFormatDateCreated(await Engine.getAllPosts()),
     js: true,
@@ -176,13 +170,13 @@ router.post("/comment", async (req, res, next) => {
 
 // Post search
 const search = async (req, res, search) => {
-  console.log(search);
+  // console.log(search);
   debugPrinter.printRouter("Get: /search");
 
   if (!search) {
     debugPrinter.printDebug(`Search is empty!`);
     res.render("index", {
-      data: await mytools.resFormatDateCreated(await Engine.getPosts(10)),
+      data: await mytools.resFormatDateCreated(await Engine.advancedSearch(10)),
       js: true,
       home: "active",
       unique: "Home",
