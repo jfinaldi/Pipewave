@@ -13,27 +13,29 @@ const debugPrinter = require("../helpers/debug/debug_printer");
 router.get("/", async (req, res, next) => {
   if (req.query.search) {
     if (!(await mytools.isLetter(req.query.search))) {
+      req.query.search = null;
       res.redirect("/");
     } else {
       await search(req, res, req.query.search);
     }
+  } else {
+    if (req.query.gender || req.query.ethnicity || req.query.major) {
+      console.log(req.query);
+      data = { gender: req.query.gender, ethnicity: req.query.ethnicity, major: req.query.major };
+      await advancedSearch(req, res, data);
+    }
+    debugPrinter.printRouter("Get: /");
+    // console.log(req);
+    res.render("index", {
+      data: mytools.resFormatDateCreated(await Engine.getAllPosts()),
+      js: true,
+      home: "active",
+      unique: "Home",
+      search: true,
+      user: req.session.username,
+      render_js_files: ["home", "advancedFilter"],
+    });
   }
-  if (req.query.gender || req.query.ethnicity || req.query.major) {
-    console.log(req.query);
-    data = { gender: req.query.gender, ethnicity: req.query.ethnicity, major: req.query.major };
-    await advancedSearch(req, res, data);
-  }
-  debugPrinter.printRouter("Get: /");
-  // console.log(req);
-  res.render("index", {
-    data: mytools.resFormatDateCreated(await Engine.getAllPosts()),
-    js: true,
-    home: "active",
-    unique: "Home",
-    search: true,
-    user: req.session.username,
-    render_js_files: ["home", "advancedFilter"],
-  });
 });
 
 router.get("/api/getposts/:id", async (req, res) => {
