@@ -35,6 +35,7 @@ router.post("/login", async (req, res, next) => {
     if (auth) {
       // Assign stuff to user once logged in
       res.locals.logged = true;
+      req.session.hasNewAlerts = false;
       req.session.username = await username;
       req.session.userid = await userid;
       req.session.usertype = await usertype; // Kevin added
@@ -48,10 +49,13 @@ router.post("/login", async (req, res, next) => {
         let lastLogin = await lastlogin;
         let newAlerts = await User.hasNewAlerts(lastLogin);
         if(newAlerts === true) {
-          res.locals.hasNewAlerts = true;
+          req.session.hasNewAlerts = true;
           console.log("We have new alerts! yay");
-          console.log(res.locals.hasNewAlerts);
-        } //else req.session.noNewAlerts = true;
+        } else {
+          console.log("We have no new alerts boo")
+          req.session.hasNewAlerts = false;
+        }
+        console.log(req.session.hasNewAlerts);
       }
       // } else {
       //   console.log("We have no new alerts");

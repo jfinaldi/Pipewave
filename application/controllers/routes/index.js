@@ -25,6 +25,8 @@ router.get("/", async (req, res, next) => {
       await advancedSearch(req, res, data);
     }
     debugPrinter.printRouter("Get: /");
+    console.log(req.session)
+    console.log(res.locals)
     // console.log(req);
     res.render("index", {
       data: mytools.resFormatDateCreated(await Engine.getAllPosts()),
@@ -33,6 +35,7 @@ router.get("/", async (req, res, next) => {
       unique: "Home",
       search: true,
       user: req.session.username,
+      hasNewAlerts: req.session.hasNewAlerts,
       render_js_files: ["home", "advancedFilter"],
     });
   }

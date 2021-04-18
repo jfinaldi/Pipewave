@@ -98,7 +98,7 @@ User.authenticate = async (username, password) => {
     let userid = r[0].id;
     let usertype = r[0].usertype;
     let lastlogin = r[0].lastlogin;
-
+    
     // If password is in the DB
     if (check) {
       return [true, userid, usertype, lastlogin];
