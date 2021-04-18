@@ -89,7 +89,7 @@ User.getGoogleId = async googleid => {
 User.authenticate = async (username, password) => {
   debugPrinter.printFunction("User.authenticate");
 
-  let baseSQL = "SELECT id,username, usertype, password FROM users WHERE username=?;";
+  let baseSQL = "SELECT id,username, usertype, lastlogin, password FROM users WHERE username=?;";
   let [r, fields] = await db.execute(baseSQL, [username]);
 
   // If user stuff exists based on Username
@@ -97,9 +97,12 @@ User.authenticate = async (username, password) => {
     let check = await bcrypt.compare(password, r[0].password);
     let userid = r[0].id;
     let usertype = r[0].usertype;
+    let lastlogin = r[0].lastlogin;
 
     // If password is in the DB
-    if (check) return [true, userid, usertype];
+    if (check) {
+      return [true, userid, usertype, lastlogin];
+    }
     else return [false, null];
   }
 
@@ -107,6 +110,28 @@ User.authenticate = async (username, password) => {
   else {
     debugPrinter.printWarning(`Username: ${username} is not in the DB`);
     return [false, null];
+  }
+};
+
+User.updateLastLogin = async (username) => {
+  // Update their last login to right now
+  let baseSQL2 = "UPDATE `users` SET `lastlogin` = now() WHERE `username`=?;";
+  await db.execute(baseSQL2, [username]);
+};
+
+// returns true or false depending on if this account has new unseen alerts
+// meaning new profiles relevant to their alert that they have not seen yet
+User.hasNewAlerts = async (lastLogin) => {
+  let baseSQL = "SELECT * from users WHERE `usertype`=0 AND UNIX_TIMESTAMP(`created`) > UNIX_TIMESTAMP(?);";
+  let [r, fields] = await db.execute(baseSQL, [lastLogin]);
+
+  if (r && r.length) {
+    console.log("New alert");
+    return true;
+  }
+  else {
+    console.log("No new alert");
+    return false;
   }
 };
 

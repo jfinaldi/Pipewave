@@ -13,6 +13,7 @@ const Email = require("../helpers/email/notifyCreate");
 
 // Debug printer
 const debugPrinter = require("../helpers/debug/debug_printer");
+const { hasAlerts } = require("../../models/Users");
 
 // Post login
 router.post("/login", async (req, res, next) => {
@@ -30,13 +31,35 @@ router.post("/login", async (req, res, next) => {
     var { username, password } = req.body;
 
     // Authenticate user
-    let [auth, userid, usertype] = await User.authenticate(username, password);
+    let [auth, userid, usertype, lastlogin] = await User.authenticate(username, password);
     if (auth) {
       // Assign stuff to user once logged in
       res.locals.logged = true;
       req.session.username = await username;
       req.session.userid = await userid;
-      req.session.usertype = await usertype;
+      req.session.usertype = await usertype; // Kevin added
+
+      // If this user is an industry account
+      // create a hasAlerts variable in session and
+      // set it to true if last login < created of some alert
+      // object relevant to this account
+      if(req.session.usertype === 2) {
+        console.log("usertype is industry. Checking for new alerts now...");
+        let lastLogin = await lastlogin;
+        let newAlerts = await User.hasNewAlerts(lastLogin);
+        if(newAlerts === true) {
+          res.locals.hasNewAlerts = true;
+          console.log("We have new alerts! yay");
+          console.log(res.locals.hasNewAlerts);
+        } //else req.session.noNewAlerts = true;
+      }
+      // } else {
+      //   console.log("We have no new alerts");
+      //   req.session.noNewAlerts = true;
+      // }
+
+      // update the last login to now
+      await User.updateLastLogin(username);
 
       debugPrinter.printSuccess(username, "has logged in");
       res.redirect("/");
