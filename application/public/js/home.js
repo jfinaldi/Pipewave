@@ -1,8 +1,5 @@
-// const counter = getElementById("counter");
-console.log("home.js connected");
 const searchbar = document.getElementById("search");
 const button = document.getElementById("button");
-
 const error_output = document.getElementById("error_output");
 
 const isLetter = str => {
