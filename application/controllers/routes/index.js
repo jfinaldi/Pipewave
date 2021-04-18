@@ -13,7 +13,7 @@ const debugPrinter = require("../helpers/debug/debug_printer");
 router.get("/", async (req, res, next) => {
   if (req.query.search) {
     if (!(await mytools.isLetter(req.query.search))) {
-      req.query.search = null;
+      // OUTPUT ERROR to front end
       res.redirect("/");
     } else {
       await search(req, res, req.query.search);
