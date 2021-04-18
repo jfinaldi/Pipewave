@@ -66,6 +66,7 @@ router.get("/profile", async (req, res) => {
   res.render("user", {
     unique: "User",
     search: true,
+    hasNewAlerts: req.session.hasNewAlerts,
     user: { username: req.session.username },
   });
 });
@@ -102,6 +103,7 @@ router.get("/alerts", async (req, res) => {
   debugPrinter.printRouter("Get: /alerts");
   let alerts = await User.getAlerts(req.session.userid);
   console.log(alerts);
+  req.session.hasNewAlerts = false;
   res.render("alerts", {
     data: await Engine.filterSearch(alerts),
     js: true,
@@ -110,6 +112,7 @@ router.get("/alerts", async (req, res) => {
     unique: "Home",
     search: true,
     user: req.session.username,
+    hasNewAlerts: req.session.hasNewAlerts,
     render_js_files: ["home", "advancedFilter"],
   });
 });
