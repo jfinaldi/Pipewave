@@ -4,13 +4,15 @@
         <a href="/user/logout">
             <button type="submit" id="logout_button" class="right">Logout</button>
         </a>
-        {{#if hasNewAlerts}}
-        <a href="/alerts" class="right">Alerts
-            <div class="right" id="nav_dot"></div>
-        </a>
-        {{else}}
-            <a href="/alerts" class="right">No Alerts</a>
-        {{/if}}
+        {{#equal usertype 2}}
+            {{#if hasNewAlerts}}
+            <a href="/alerts" class="right">Alerts
+                <div class="right" id="nav_dot"></div>
+            </a>
+            {{else}}
+                <a href="/alerts" class="right">No Alerts</a>
+            {{/if}}
+        {{/equal}}
         <a href="/user/{{username}}" class="right">{{username}}</a>
     {{else}}
         <a href="/register" class="right">Register</a>

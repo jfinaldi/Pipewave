@@ -36,6 +36,7 @@ router.get("/", async (req, res, next) => {
       search: true,
       user: req.session.username,
       hasNewAlerts: req.session.hasNewAlerts,
+      usertype: req.session.usertype,
       render_js_files: ["home", "advancedFilter"],
     });
   }
@@ -67,6 +68,7 @@ router.get("/profile", async (req, res) => {
     unique: "User",
     search: true,
     user: { username: req.session.username },
+    usertype: req.session.usertype,
   });
 });
 
@@ -93,6 +95,10 @@ router.get("/register", (req, res, next) => {
 // Get Alerts
 router.get("/alerts", async (req, res) => {
   console.log(req.query);
+  // if user is not an industry user, redirect back to homepage
+  if (req.session.usertype != 2){
+    res.redirect("/");
+  }
   if (req.query.search) await search(req, res, req.query.search);
   if (req.query.gender || req.query.ethnicity || req.query.major) {
     console.log(req.query);
