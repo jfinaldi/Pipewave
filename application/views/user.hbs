@@ -1,11 +1,7 @@
 {{> nav}}
 
-
 <div class="user_info_container">
-
     <div class="left">
-        <a class="post_title" href="/post/{{data.postid}}"> {{data.name}}</a>
-
         <a class="username">{{user.name}}</a>
         {{!-- <form action="/user/edit_profile_picture" method="post" enctype="multipart/form-data">
             <input type="file" name="photo" />
@@ -14,7 +10,7 @@
         <br>
 
         {{!-- IF STUDENT --}}
-        <a class="left_a"> Major: {{user.title}} </a>
+        <a class="left_a"> Major: {{user.major}} </a>
 
         {{!-- IF PROFESSOR --}}
         {{!-- <a class="left_a"> Department: {{user.department}} </a> --}}
@@ -23,7 +19,6 @@
         {{!-- <a class="left_a"> Company: {{user.company}} </a> --}}
 
         <a class="left_a"> Email: {{user.email}} </a>
-        <a class="left_a"> Date Created: {{user.created}}</a>
         <br>
         <br>
 
@@ -58,8 +53,7 @@
             </div>
             <div class="boxes">
                 <ul class="list_boxes">
-                    <li><a href="/user/{{user.username}}">Resumes</a></li>
-                    <li><a href="/post/4">Reviews</a></li>
+                    <li><a href="/post/{{user.id}}">Reviews</a></li>
                     {{#if authpage}}
                     <li><a href="/user/{{user.username}}/settings">Edit Settings</a></li>
                     {{!-- <li><a href="/user/settings">Edit Settings</a></li> --}}
@@ -72,6 +66,7 @@
     </div>
 
 </div>
+
 {{!-- <div class="posts_container">
     <a class="username" id="userpost_label">User Posts</a>
     {{> posts}}

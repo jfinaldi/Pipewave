@@ -310,7 +310,7 @@ router.post("/changeEmail", async (req, res) => {
 // Page user
 router.get("/:user", async (req, res) => {
   debugPrinter.printRouter(`Get: /users/${req.params.user}`);
-  let r = await mytools.resFormatDateCreated(await Engine.getUserPosts(req.params.user));
+  let r = await Engine.getUserPosts(req.params.user);
   debugPrinter.printRouter(r);
   successPrint(r[0]);
   res.render("user", {
@@ -355,6 +355,7 @@ router.get("/:user/post", async (req, res) => {
   debugPrinter.printRouter("Get: /:post");
   let resp = await mytools.resFormatDateCreated(await Engine.getUserPosts(req.session.username));
   debugPrinter.printRouter(resp[0]);
+  console.log(resp[0])
   res.render("post", {
     data: await resp[0],
     unique: "Post",
@@ -483,6 +484,7 @@ router.post("/edit_resume", uploader.single("resume"), async (req, res) => {
       res.redirect("/user/" + user + "/settings");
     } catch (err) {
       console.log("Error: could not update resume");
+      console.log(err);
       res.redirect("/user/" + user + "/settings");
     }
 

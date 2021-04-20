@@ -10,20 +10,18 @@
 <div class="post_container">
 
     <div class="left">
-        <a class="post_title" href="/post/{{data.postid}}"> {{data.name}}</a>
-        <a class="left_a" id="user" href="/user/{{data.username}}">{{data.username}}</a>
+        <p class="post_title"> {{data.name}}</p>
+        <p class="left_a" id="user">{{data.username}}</p>
         <br>
-        <a class="left_a top_left_a">Job Title: {{data.title}} </a>
-        <a class="left_a">Company: {{data.company}} </a>
+        <p class="left_a">Major: {{data.major}} </p>
+        <p class="left_a">Email: {{data.email}} </p>
 
-        <a class="left_a bottom_left_a">Date Posted: {{data.created}}</a>
+        <p class="left_a bottom_left_a">Date Posted: {{data.created}}</a>
         <br>
         <br>
         {{!-- <a class="left_a">Description: {{data.description}}</a> --}}
         <div class="description">
-            <p> Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto
-                obcaecati enim dicta
-                praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
+            <p> {{data.bio}}</p>
             {{!-- <a id="readmore" href="#">seomthing about rating here</a> --}}
             <div class="rating" id="ratingstars">
                 <p class="avg" id="avg">{{comment.avg}}</p>
@@ -42,33 +40,21 @@
 
 
     <div class="resume_container">
-        {{!-- <embed id="obj" src="{{data.resumePath}}"> --}}
-        <object id="obj" data="{{data.resumePath}}">object can't be rendered</object>
+        {{!-- <embed id="obj" src="{{data.resume}}"> --}}
+        <object id="obj" data="{{data.resume}}">object can't be rendered</object>
     </div> 
 </div>
 <div class="comments">
-
     <div class="left_title">
         <a class="post_title">Reviews</a>
-        <div class="right_post"><button id="post_review">Post A Review</button></div>
+        {{!-- If user is a student post button will not be available --}}
+        {{#if usertype}}
+            <div class="right_post"><button id="post_review">Post A Review</button></div>
+        {{/if}}
     </div>
     <br>
+
     {{!-- comments section partial --}}
-    <div class="comment_container">
-        <a class="note_title">Dr.Erlich Bachman</a>
-        <a class="review_user_title">Professor of Computer Science, SFSU</a>
-        <br>
-
-        <a class="review_content">Very good student, recommend. Writes good code and knows how to spell, next.
-            bla
-            bla bla bla bla bla bla bla bla, words idk what to say</a>
-
-        {{!-- <div class="moreinfo">
-            <a href="/post/{{this.id}}">
-                <button>More info</button>
-            </a>
-        </div> --}}
-    </div>
     {{>comments}}
 
     <div id="leave_a_review">

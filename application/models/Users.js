@@ -255,7 +255,7 @@ User.changeDepartment = async (new_department, userid) => {
 User.getInfo = async username => {
   debugPrinter.printFunction("User.getInfo");
 
-  var baseSQL = "SELECT bio, id, profilepic, name, email, usertype, title, created, username FROM users WHERE username=?;";
+  var baseSQL = "SELECT id, username, name, email, created, title, bio, profilepic, gender, ethnicity, major, company, department, resume FROM users WHERE username=?;";
   let [r, fields] = await db.query(baseSQL, [username]);
   return r;
 };

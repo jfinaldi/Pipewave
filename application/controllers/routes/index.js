@@ -123,7 +123,7 @@ router.get("/alerts", async (req, res) => {
   });
 });
 
-// Get Upload
+// Test Page for Upload -> Get Upload
 router.get("/upload", (req, res, next) => {
   debugPrinter.printRouter("Get: /upload");
   res.render("upload", {
@@ -136,9 +136,9 @@ router.get("/upload", (req, res, next) => {
 // Get post id
 router.get("/post/:id(\\d+)", async (req, res, next) => {
   debugPrinter.printRouter("Get: /post/" + req.params.id);
-
+  console.log(req.session)
   try {
-    let r = mytools.resFormatDateCreated(await Engine.getPost(req.params.id));
+    let r = await Engine.getPost(req.params.id);
 
     // If post does exist!
     if (r && r.length) {
@@ -146,6 +146,7 @@ router.get("/post/:id(\\d+)", async (req, res, next) => {
         data: r[0],
         comment: await Review.getReviews(req.params.id),
         unique: "Post",
+        usertype: req.session.usertype,
         render_js_files: ["comment"],
       });
       req.session.viewing = req.params.id;

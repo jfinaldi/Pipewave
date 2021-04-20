@@ -75,9 +75,9 @@ Engine.search = async search => {
 Engine.getPost = async id => {
   debugPrinter.printFunction("Engine.getPost");
   try {
-    var baseSQL =
-      "SELECT p.id as postid, p.role, u.id,u.email, u.profilepic,u.name, u.username, p.title, p.description, p.resumePath, p.created FROM users u JOIN posts p ON u.id=fk_userid WHERE p.id=?;";
+    var baseSQL = "SELECT id, username, name, email, created, title, bio, profilepic, gender, ethnicity, major, resume FROM users WHERE id=?;";
     let [r, fields] = await db.query(baseSQL, [id]);
+    console.log(r)
     return r;
   } catch (err) {
     debugPrinter.printWarning(`Post id: ${id} does not exist in the DB`);
