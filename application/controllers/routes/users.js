@@ -185,7 +185,7 @@ const multerStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     // Image upload location
 
-    let pathImageFileUploadLocation = "public/assets";
+    let pathImageFileUploadLocation = "public/assets/resumes";
 
     cb(null, pathImageFileUploadLocation);
   },
