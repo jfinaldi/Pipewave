@@ -4,7 +4,6 @@ const { successPrint, errorPrint } = require("../helpers/printers");
 const User = require("../../models/Users");
 const Engine = require("../../models/Engine");
 var mytools = require("../helpers/mytools");
-var mytools = require("../helpers/mytools");
 const multer = require("multer");
 const crypto = require("crypto");
 
@@ -55,12 +54,7 @@ router.post("/login", async (req, res, next) => {
           console.log("We have no new alerts boo")
           req.session.hasNewAlerts = false;
         }
-        console.log(req.session.hasNewAlerts);
       }
-      // } else {
-      //   console.log("We have no new alerts");
-      //   req.session.noNewAlerts = true;
-      // }
 
       // update the last login to now
       await User.updateLastLogin(username);
@@ -122,35 +116,6 @@ router.post("/register", async (req, res, next) => {
   }
 });
 
-// Post Logout
-// router.post("/logout", async (req, res) => {
-//   debugPrinter.printRouter("Post: /logout");
-
-//   // If not logged in
-//   if (!req.session.username) {
-//     debugPrinter.printWarning("User not logged in trying to log out");
-//     res.redirect("/");
-//   }
-//   // If user is logged in
-//   else {
-//     debugPrinter.printSuccess(`User ${req.session.username} has logged out!`);
-
-//     req.session.destroy(async err => {
-//       // If an error has occurred during the User's session being destroyed
-//       if (err) {
-//         debugPrinter.printError("Session could not be destroyed!");
-//       }
-//       // If the User's session was destroyed
-//       else {
-//         debugPrinter.printSuccess("Session was destroyed!");
-//         res.clearCookie("qwerty");
-//         res.redirect("/");
-//       }
-//     });
-//     debugPrinter.printSuccess("Post: /logout route was successful!");
-//   }
-// });
-
 // Get Logout
 router.get("/logout", async (req, res) => {
   debugPrinter.printRouter("Get: /logout");
@@ -180,6 +145,7 @@ router.get("/logout", async (req, res) => {
   }
 });
 
+// Storage for all file uploads
 const multerStorage = multer.diskStorage({
   // Add an new key called destination
   destination: (req, file, cb) => {
@@ -203,8 +169,34 @@ const multerStorage = multer.diskStorage({
   },
 });
 
-const uploader = multer({ storage: multerStorage });
+// Storage for Profile Photos
+// Doesn't Work Yet, Same functionality as original storage different path
+const multerPhotoStorage = multer.diskStorage({
+  // Add an new key called destination
+  destination: (req, file, cb) => {
+    // Image upload location
+    let pathImageFileUploadLocation = "public/assets/photos";
 
+    cb(null, pathImageFileUploadLocation);
+  },
+
+  // Add a new key called filename
+  filename: (req, file, cb) => {
+    // Get file ext
+    debugPrinter.printDebug(`file: ${file}`);
+
+    let fileExt = file.mimetype.split("/")[1];
+
+    // Generate file name
+    let randomName = crypto.randomBytes(22).toString("hex");
+    cb(null, `${randomName}.${fileExt}`);
+  },
+});
+
+let uploader = multer({ storage: multerStorage });
+let photoUploader = multer({ storage: multerPhotoStorage});
+
+// Upload for the test upload page
 router.post("/upload", uploader.single("photofile"), async (req, res, next) => {
   debugPrinter.printRouter("Post: /upload");
   debugPrinter.printDebug(`PATH: ${req.file.path}`);
@@ -224,7 +216,7 @@ router.post("/upload", uploader.single("photofile"), async (req, res, next) => {
   }
 });
 
-router.post("/edit_profile_picture", uploader.single("photo"), async (req, res) => {
+router.post("/edit_profile_picture", photoUploader.single("photo"), async (req, res) => {
   if (!req.session.username) {
     res.redirect("/");
   } else {

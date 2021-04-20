@@ -121,7 +121,7 @@ Engine.updatePFP = async (file, fk_userid) => {
   debugPrinter.printFunction("Engine.setPost");
   try {
     console.log(fk_userid);
-    let path = "/assets/" + file.filename;
+    let path = "/assets/photos/" + file.filename;
     // let tags = await pdfReader("./public" + path);
     debugPrinter.printDebug(fk_userid);
     // let path = "/assets/" + req.file.filename;
