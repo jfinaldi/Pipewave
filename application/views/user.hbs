@@ -53,10 +53,10 @@
             </div>
             <div class="boxes">
                 <ul class="list_boxes">
+                    <li><a href="/resume/{{user.id}}">Resume</a></li>
                     <li><a href="/post/{{user.id}}">Reviews</a></li>
                     {{#if authpage}}
                     <li><a href="/user/{{user.username}}/settings">Edit Settings</a></li>
-                    {{!-- <li><a href="/user/settings">Edit Settings</a></li> --}}
                     <li><a href="/">Messages</a></li>
                     {{/if}}
 

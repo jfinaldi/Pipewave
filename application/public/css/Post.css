@@ -49,18 +49,20 @@ body {
   display: block;
   font-family: "Open Sans", sans-serif;
 }
+
 .resume_container {
+  margin-left: 25%;
+  margin-right: 50px;
   margin-top: 1%;
+  margin-bottom: 10px;
   border-radius: 10px;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.16);
 
   height: 900px;
+  width: 700px;
 
-  float: right;
-  margin-right: 50px;
   overflow: auto;
   /* -webkit-overflow-scrolling: touch; */
-  margin-bottom: 10px;
 }
 
 .post_title {

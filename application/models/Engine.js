@@ -152,6 +152,20 @@ Engine.updateRES = async (file, fk_userid) => {
     return null;
   }
 };
+
+Engine.getRES = async(userid) => {
+  debugPrinter.printFunction("Engine.getRES");
+  console.log(userid);
+  try {
+    var baseSQL = "SELECT resume FROM users WHERE id=?";
+    let [r, fields] = await db.query(baseSQL, [userid]);
+    console.log(r[0]);
+    return r[0].resume;
+  } catch (err) {
+    console.log("Error, userid does not exist in db.");
+    return null;
+  }
+};
 // SELECT u.id, u.ethnicity, u.major, u.profilepic, u.username, u.name FROM users u WHERE `gender`="male" and `major`="Computer Science" and `ethnicity`="hispanic";
 
 const helper_cluster = (x, filter_name, count, base) => {

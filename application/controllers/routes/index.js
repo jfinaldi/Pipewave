@@ -161,6 +161,25 @@ router.get("/post/:id(\\d+)", async (req, res, next) => {
   }
 });
 
+// Get resume id
+router.get("/resume/:id(\\d+)", async (req, res, next) => {
+  debugPrinter.printRouter("Get: /resume/" + req.params.id);
+  console.log(req.session)
+
+  let resume = await Engine.getRES(req.params.id);
+  console.log(resume);
+
+  res.render("resume", {
+    //data: await resp[0],
+    data: resume,
+    unique: "Post",
+    search: true,
+    user: { username: req.session.username },
+    render_css_files: ["Post"],
+    render_js_files: ["comment"],
+  });
+});
+
 // Post commment
 router.post("/comment", async (req, res, next) => {
   debugPrinter.printRouter("Get: /comment/");
