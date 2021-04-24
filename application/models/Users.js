@@ -119,7 +119,7 @@ User.updateLastLogin = async (username) => {
   await db.execute(baseSQL2, [username]);
 };
 
-// returns true or false depending on if this account has new unseen alerts
+// returns a list of any new unseen alerts 
 // meaning new profiles relevant to their alert that they have not seen yet
 User.hasNewAlerts = async (lastLogin) => {
   let baseSQL = "SELECT * from users WHERE `usertype`=0 AND UNIX_TIMESTAMP(`created`) > UNIX_TIMESTAMP(?);";
@@ -268,6 +268,7 @@ const handler = async value => {
   }
 };
 
+// Get all the relevant alerts for an account
 User.getAlerts = async user_id => {
   debugPrinter.printFunction("User.getAlerts");
 
@@ -296,4 +297,5 @@ User.setAlert = async (object, userid) => {
   else basesql = "INSERT INTO `website`.`alerts` SET `ethnicity` = ?, `major` = ?, `gender` = ?, `fk_userid` = ?;";
   db.query(basesql, [object.ethnicity, object.major, object.gender, userid]);
 };
+
 module.exports = User;

@@ -111,7 +111,7 @@ router.get("/alerts", async (req, res) => {
   console.log(alerts);
   req.session.hasNewAlerts = false;
   res.render("alerts", {
-    data: await Engine.filterSearch(alerts),
+    data: await Engine.filterSearch(alerts, req.session.lastLogin),
     js: true,
     home: "active",
     alerts: alerts,

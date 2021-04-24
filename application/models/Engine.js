@@ -1,6 +1,7 @@
 var db = require("../config/database");
 const pdfReader = require("../controllers/helpers/pdf_handler");
 const debugPrinter = require("../controllers/helpers/debug/debug_printer");
+const User = require("./Users");
 
 const Engine = {};
 
@@ -28,11 +29,13 @@ Engine.getPosts = async limit => {
 // fetch all 
 Engine.getAllPosts = async _ => {
   debugPrinter.printFunction("Engine.getPosts");
-  //let baseSQL = "SELECT * FROM website.users ORDER BY created DESC;";
   let baseSQL = "SELECT * FROM website.users WHERE usertype=0 ORDER BY created DESC";
+  //let baseSQL = "SELECT * FROM website.users WHERE usertype=0 ORDER BY created ASC";
   let [r, fields] = await db.query(baseSQL);
   return r;
 };
+
+
 Engine.getPostsApiEndpoint = async (limit, filter, order = "DESC") => {
   //filter = created, reviews
   //ASC - DESC
@@ -196,7 +199,7 @@ Engine.advancedSearch = async advancedSearch => {
     let baseSQL = "SELECT u.id,u.title, u.ethnicity, u.major, u.profilepic, u.username, u.name FROM users u " + base;
     console.log(baseSQL);
     let [r, fields] = await db.execute(baseSQL);
-    return r && r.length ? r : await Engine.getallPosts();
+    return r && r.length ? r : await Engine.getAllPosts();
   } catch (err) {
     return false;
   }
@@ -216,27 +219,38 @@ const filterHelper = (option, filter_name, count, base) => {
   return [tempcount, tempbase];
 };
 
-Engine.filterSearch = async filteredSearchArray => {
+// Grabs all relevant alerts for an industry account
+Engine.filterSearch = async (filteredSearchArray, lastLogin) => {
   if (!filteredSearchArray) return;
-  debugPrinter.printFunction("Engine.advancedSearch");
+  debugPrinter.printFunction("Engine.filterSearch");
   let options = ["ethnicity", "gender", "major"];
   let base = "",
     count = 0;
+  let base2 = " ORDER BY u.created DESC;";
+
+  console.log("Engine.filterSearch");
+  console.log(lastLogin);
+  let baseSQL2 = "SELECT * from users WHERE `usertype`=0 AND UNIX_TIMESTAMP(`created`) > UNIX_TIMESTAMP(?);";
+  let [r2, fields2] = await db.execute(baseSQL2, [lastLogin]);
+  if(r2 && r2.length) {
+    console.log("outputting r2[0].username: ");
+    console.log(r2[0].username);
+  } else { console.log("r2 is empty."); }
 
   debugPrinter.printSuccess(filteredSearchArray[0].ethnicity);
   [count, base] = filterHelper(filteredSearchArray[0].ethnicity, options[0], count, base);
   [count, base] = filterHelper(filteredSearchArray[0].gender, options[1], count, base);
   [count, base] = filterHelper(filteredSearchArray[0].major, options[2], count, base);
-  base += ";";
   //filter: [eth:[] major:[] gender: []]
 
   debugPrinter.printFunction("BASE: ");
   debugPrinter.printFunction(base);
   try {
-    let baseSQL = "SELECT u.id,u.title, u.ethnicity, u.major, u.profilepic, u.username, u.name FROM users u " + base;
+    //let baseSQL = "SELECT u.id,u.title, u.ethnicity, u.major, u.profilepic, u.username, u.name FROM users u " + base;
+    let baseSQL = "SELECT u.id,u.title, u.ethnicity, u.major, u.profilepic, u.username, u.name FROM users u " + base + base2;
     console.log(baseSQL);
     let [r, fields] = await db.execute(baseSQL);
-    return r && r.length ? r : await Engine.getallPosts();
+    return r && r.length ? r : await Engine.getAllPosts();
   } catch (err) {
     return false;
   }

@@ -32,13 +32,18 @@ router.post("/login", async (req, res, next) => {
     // Authenticate user
     let [auth, userid, usertype, lastlogin] = await User.authenticate(username, password);
     if (auth) {
+      console.log("authorized login!");
       // Assign stuff to user once logged in
       res.locals.logged = true;
       req.session.hasNewAlerts = false;
       req.session.username = await username;
       req.session.userid = await userid;
       req.session.usertype = await usertype; // Kevin added
+      req.session.lastLogin = lastlogin;
 
+      console.log("Last login:");
+      console.log(lastlogin);
+    
       // If this user is an industry account
       // create a hasAlerts variable in session and
       // set it to true if last login < created of some alert
@@ -47,7 +52,7 @@ router.post("/login", async (req, res, next) => {
         console.log("usertype is industry. Checking for new alerts now...");
         let lastLogin = await lastlogin;
         let newAlerts = await User.hasNewAlerts(lastLogin);
-        if(newAlerts === true) {
+        if(newAlerts == true) {
           req.session.hasNewAlerts = true;
           console.log("We have new alerts! yay");
         } else {
