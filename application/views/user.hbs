@@ -10,26 +10,36 @@
         <br>
 
         {{!-- IF STUDENT --}}
-        <a class="left_a"> Major: {{user.major}} </a>
+        {{#equal usertype 0}}
+            <a class="left_a"> Major: {{user.major}} </a>
+        {{/equal}}
 
         {{!-- IF PROFESSOR --}}
-        {{!-- <a class="left_a"> Department: {{user.department}} </a> --}}
+        {{#equal usertype 1}}
+            <a class="left_a"> Department: {{user.department}} </a>
+        {{/equal}}
 
         {{!-- IF INDUSTRY aka NPO, ERG, RECRUITER --}}
-        {{!-- <a class="left_a"> Company: {{user.company}} </a> --}}
+        {{#equal usertype 2}}
+            <a class="left_a"> Company: {{user.company}} </a>
+        {{/equal}}
 
         <a class="left_a"> Email: {{user.email}} </a>
         <br>
         <br>
 
         {{!-- IF STUDENT --}}
+        About Me
+        <button type="button" id="editBioButton" style="float: right;">Edit Bio</button>
         <div class="description">
-            <p> Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto
-                obcaecati enim dicta
-                praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
+            <p id="current_bio" style="display: flex;">{{user.bio}}</p>
+            <form action="/user/savebio" id="bioForm" method="POST">
+                <input type="text" id="bio_textfield" placeholder="{{user.bio}}" name="bio" style="display: none;">
+                <button type="submit" id="button" style="float: right;display: none;">Save</button>
+            </form>
 
             {{!-- ONLY FOR STUDENTS --}}
-            {{!-- {{#if student}} --}}
+            {{#equal usertype 0}}
             <div class="rating">
                 <a href="#5" titele="Give 5 stars">★</a>
                 <a href="#4" title="Give 4 stars">★</a>
@@ -37,7 +47,7 @@
                 <a href="#2" title="Give 2 stars">★</a>
                 <a href="#1" title="Give 1 star">★</a>
             </div>
-            {{!-- {{/if}} --}}
+            {{/equal}}
         </div>
         <br>
     </div>
@@ -53,8 +63,10 @@
             </div>
             <div class="boxes">
                 <ul class="list_boxes">
-                    <li><a href="/resume/{{user.id}}">Resume</a></li>
-                    <li><a href="/post/{{user.id}}">Reviews</a></li>
+                    {{#equal usertype 0}}
+                        <li><a href="/resume/{{user.id}}">Resume</a></li>
+                        <li><a href="/post/{{user.id}}">Reviews</a></li>
+                    {{/equal}}
                     {{#if authpage}}
                     <li><a href="/user/{{user.username}}/settings">Edit Settings</a></li>
                     <li><a href="/">Messages</a></li>

@@ -61,17 +61,17 @@ router.get("/login", (req, res, next) => {
   }
 });
 
-// Get Profile
-router.get("/profile", async (req, res) => {
-  debugPrinter.printRouter("Get: /profile");
-  res.render("user", {
-    unique: "User",
-    search: true,
-    hasNewAlerts: req.session.hasNewAlerts,
-    user: { username: req.session.username },
-    usertype: req.session.usertype,
-  });
-});
+// // Get Profile
+// router.get("/profile", async (req, res) => {
+//   debugPrinter.printRouter("Get: /profile");
+//   res.render("user", {
+//     unique: "User",
+//     search: true,
+//     hasNewAlerts: req.session.hasNewAlerts,
+//     user: { username: req.session.username },
+//     usertype: req.session.usertype,
+//   });
+// });
 
 // Get Register
 router.get("/register", (req, res, next) => {
@@ -119,6 +119,7 @@ router.get("/alerts", async (req, res) => {
     search: true,
     user: req.session.username,
     hasNewAlerts: req.session.hasNewAlerts,
+    usertype: req.session.usertype,
     render_js_files: ["home", "advancedFilter"],
   });
 });
@@ -146,6 +147,7 @@ router.get("/post/:id(\\d+)", async (req, res, next) => {
         data: r[0],
         comment: await Review.getReviews(req.params.id),
         unique: "Post",
+        hasNewAlerts: req.session.hasAlerts,
         usertype: req.session.usertype,
         render_js_files: ["comment"],
       });
@@ -174,6 +176,8 @@ router.get("/resume/:id(\\d+)", async (req, res, next) => {
     data: resume,
     unique: "Post",
     search: true,
+    hasNewAlerts: req.session.hasAlerts,
+    usertype: req.session.usertype,
     user: { username: req.session.username },
     render_css_files: ["Post"],
     render_js_files: ["comment"],

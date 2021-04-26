@@ -219,7 +219,7 @@ const filterHelper = (option, filter_name, count, base) => {
   return [tempcount, tempbase];
 };
 
-// Grabs all relevant alerts for an industry account
+// Grabs all filtered results 
 Engine.filterSearch = async (filteredSearchArray, lastLogin) => {
   if (!filteredSearchArray) return;
   debugPrinter.printFunction("Engine.filterSearch");
@@ -229,12 +229,14 @@ Engine.filterSearch = async (filteredSearchArray, lastLogin) => {
   let base2 = " ORDER BY u.created DESC;";
 
   console.log("Engine.filterSearch");
-  console.log(lastLogin);
-  let baseSQL2 = "SELECT * from users WHERE `usertype`=0 AND UNIX_TIMESTAMP(`created`) > UNIX_TIMESTAMP(?);";
-  let [r2, fields2] = await db.execute(baseSQL2, [lastLogin]);
+  console.log(lastLogin); //output one day ahead
+  let baseSQL2 = "SELECT * from users WHERE `usertype`=0 AND UNIX_TIMESTAMP(`created`) < UNIX_TIMESTAMP(?);";
+  let [r2, fields2] = await db.execute(baseSQL2, [lastLogin]); // this gives us a whole list of all students who are new since last login
   if(r2 && r2.length) {
-    console.log("outputting r2[0].username: ");
-    console.log(r2[0].username);
+    console.log("outputting r2: ");
+    for(i = 0; i < r2.length; i++){
+      console.log(r2[i].username + "\t" + r2[i].created);
+    }
   } else { console.log("r2 is empty."); }
 
   debugPrinter.printSuccess(filteredSearchArray[0].ethnicity);
@@ -249,7 +251,7 @@ Engine.filterSearch = async (filteredSearchArray, lastLogin) => {
     //let baseSQL = "SELECT u.id,u.title, u.ethnicity, u.major, u.profilepic, u.username, u.name FROM users u " + base;
     let baseSQL = "SELECT u.id,u.title, u.ethnicity, u.major, u.profilepic, u.username, u.name FROM users u " + base + base2;
     console.log(baseSQL);
-    let [r, fields] = await db.execute(baseSQL);
+    let [r, fields] = await db.execute(baseSQL); // this gives us a list of all relevant search items
     return r && r.length ? r : await Engine.getAllPosts();
   } catch (err) {
     return false;

@@ -39,7 +39,8 @@ router.post("/login", async (req, res, next) => {
       req.session.username = await username;
       req.session.userid = await userid;
       req.session.usertype = await usertype; // Kevin added
-      req.session.lastLogin = lastlogin;
+      //req.session.lastLogin = lastlogin;
+      req.session.lastLogin = await User.getLastLogin(req.session.username);
 
       console.log("Last login:");
       console.log(lastlogin);
@@ -231,6 +232,7 @@ router.post("/edit_profile_picture", photoUploader.single("photo"), async (req, 
     res.redirect("/");
   }
 });
+
 // Post changeUsername
 router.post("/changeUsername", async (req, res) => {
   debugPrinter.printRouter("Post: /changeUsername");
@@ -313,7 +315,10 @@ router.get("/:user", async (req, res) => {
   res.render("user", {
     user: await mytools.resFormatDateCreated(await User.getInfo(req.params.user))[0],
     post: r,
+    usertype: req.session.usertype,
+    hasNewAlerts: req.session.hasNewAlerts,
     unique: "User",
+    render_js_files: ["profile"],
   });
 });
 
@@ -327,8 +332,9 @@ router.get("/:user/settings", async (req, res) => {
     res.render("settings", {
       unique: "Settings", //css link
       search: true,
+      hasNewAlerts: req.session.hasNewAlerts,
       user: { username: req.session.username },
-      usertype: { usertype : req.session.usertype},
+      usertype: req.session.usertype,
       render_js_files: ["settings"],
     });
   }
@@ -357,6 +363,8 @@ router.get("/:user/post", async (req, res) => {
     data: await resp[0],
     unique: "Post",
     search: true,
+    hasNewAlerts: req.session.hasAlerts,
+    usertype: req.session.usertype,
     user: { username: req.session.username },
     render_css_files: ["Post"],
     render_js_files: ["comment"],
@@ -486,6 +494,22 @@ router.post("/edit_resume", uploader.single("resume"), async (req, res) => {
     }
 
   }
+});
+
+// post update bio
+router.post("/savebio", async(req, res) => {
+  debugPrinter.printRouter("Post: /user/savebio");
+
+  try {
+    var result = await User.changeBio(req.body.bio, req.session.userid);
+    if (result) console.log("this shit worked");
+    else console.log("error bio not updated");
+    res.redirect("/user/" + req.session.username);
+  } catch (err) {
+    console.log(err);
+    res.redirect("/user/:user");
+  }
+
 });
 
 module.exports = router;

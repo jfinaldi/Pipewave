@@ -39,7 +39,7 @@
                     <input placeholder=" Enter Email" type="email" id="email"
                             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" name="email" /><br>
                     
-                    {{#equal usertype.usertype 0}}
+                    {{#equal usertype 0}}
                         {{!-- Change Ethnicity --}}
                         <label id="ethnicityLabel" for="ethnicity" class="inputtags">Ethnicity</label>
                         <input placeholder="Ethnicity" id="ethnicity" name="ethnicity"></input><br>
@@ -53,14 +53,14 @@
                         <input placeholder="New Major" id="major" name="major"></input><br>
                     {{/equal}}
 
-                    {{#equal usertype.usertype 1}}
+                    {{#equal usertype 1}}
                         {{!-- Change Department --}}
                         <label id="departmentLabel" for="department" class="inputtags">Department</label>
                         <input placeholder="New Department" id="department" name="department"></input><br>
                         <br>
                     {{/equal}}
 
-                    {{#equal usertype.usertype 2}}
+                    {{#equal usertype 2}}
                         {{!-- Change Company  --}}
                         <label id="companyLabel" for="company" class="inputtags">Company</label>
                         <input placeholder="New Company" id="company" name="company"></input><br>

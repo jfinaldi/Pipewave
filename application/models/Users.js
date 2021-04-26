@@ -119,6 +119,18 @@ User.updateLastLogin = async (username) => {
   await db.execute(baseSQL2, [username]);
 };
 
+User.getLastLogin = async (username) => {
+  let baseSQL = "SELECT `lastlogin` FROM users WHERE `username`=?;";
+  [r, fields] = await db.execute(baseSQL, [username]);
+  if (r && r.length) {
+    console.log("r: ");
+    console.log(r);
+    return r;
+  } else {
+    return null;
+  }
+}
+
 // returns a list of any new unseen alerts 
 // meaning new profiles relevant to their alert that they have not seen yet
 User.hasNewAlerts = async (lastLogin) => {
@@ -179,6 +191,18 @@ User.changeEmail = async (new_email, userid) => {
     return r;
   } else return null;
 };
+
+User.changeBio = async (new_bio, userid) => {
+  debugPrinter.printFunction("User.changeBio");
+
+  // verify user input by taking out ``
+
+  // update the database
+  let baseSQL = "UPDATE `users` SET `bio` = ? WHERE `id` = ?;";
+  let [r, fields] = await db.execute(baseSQL, [new_bio, userid]);
+
+  return r;
+}
 
 // Change Username
 User.changeUsername = async (new_username, userid) => {
