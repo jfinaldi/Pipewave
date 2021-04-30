@@ -79,8 +79,14 @@
                     {{#equal usertype 1}}
                         {{!-- Change Department --}}
                         <label id="departmentLabel" for="department" class="inputtags">Department</label>
-                        <input placeholder="New Department" id="department" name="department"></input><br>
-                        <br>
+                        <select name="department" id="formSelector" name="role">
+                            <option name="" value="">--Select--</option>
+                            <option name="Computer Science" value="Computer Science">Computer Science</option>
+                            <option name="Engineering" value="Engineering">Engineering</option>
+                            <option name="Mathematics" value="Mathematics">Mathematics</option>
+                            <option name="Communications" value="Communications">Communications</option>
+                            <option name="Business" value="Business">Business</option>
+                        </select>
                     {{/equal}}
 
                     {{#equal usertype 2}}
