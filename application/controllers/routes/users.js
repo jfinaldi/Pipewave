@@ -490,11 +490,11 @@ router.post("/edit_resume", uploader.single("resume"), async (req, res) => {
 
     try {
       let [r, fields] = await Engine.updateRES(req.file, req.session.userid);
-      res.redirect("/user/" + user + "/settings");
+      res.redirect("/resume/" + req.session.userid);
     } catch (err) {
       console.log("Error: could not update resume");
       console.log(err);
-      res.redirect("/user/" + user + "/settings");
+      res.redirect("/resume/" + req.session.userid);
     }
 
   }
