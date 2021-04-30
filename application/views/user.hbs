@@ -59,21 +59,32 @@
     {{!-- IF STUDENT --}}
     <div class="resume_container">
         <div class="right_userinfo">
-            <div class="user_image">
-                <img id="pfp" src="{{data.profilepic}}" width="250px"></img>
-            </div>
             <div class="username_info">
                 <a id="username_info">{{data.username}}</a>
             </div>
+            <div class="user_image">
+                <img id="pfp" src="{{data.profilepic}}" width="250px"></img>
+            </div>
             <div class="boxes">
                 <ul class="list_boxes">
+                    {{#if authpage}}
+                        {{!-- Change Photo --}}
+                        <div class="photoUpload">
+                            <div>Upload Photo</div>
+                            <form action="/user/edit_profile_picture" method="post" 
+                                enctype="multipart/form-data">
+                            <input type="file" name="photo" />
+                            <button type="submit" id="photoSubmitButton">Save</button>
+                            </form>
+                        </div>
+                    {{/if}}
                     {{#equal data.usertype 0}}
                         <li><a href="/resume/{{data.id}}">Resume</a></li>
                         <li><a href="/post/{{data.id}}">Reviews</a></li>
                     {{/equal}}
                     {{#if authpage}}
                         <li><a href="/user/{{data.username}}/settings">Edit Settings</a></li>
-                        <li><a href="/">Messages</a></li>
+                        {{!-- <li><a href="/">Messages</a></li> --}}
                     {{/if}}
 
                 </ul>

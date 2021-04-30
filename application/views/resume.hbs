@@ -3,7 +3,7 @@
 {{!-- Change Resume --}}
 {{#equal userid userviewerid}} {{!-- if the user viewing is the owner of the resume, allow resume editing --}}
 <br>
-<div class="resumeUpload" style="margin: auto;">
+<div class="resumeUpload">
     <div>Upload Resume</div>
     <form action="/user/edit_resume" method="post" enctype="multipart/form-data">
         <input type="file" name="resume" />

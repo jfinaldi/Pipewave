@@ -229,7 +229,7 @@ router.post("/edit_profile_picture", photoUploader.single("photo"), async (req, 
     debugPrinter.printRouter(req.file);
 
     await Engine.updatePFP(req.file, req.session.userid);
-    res.redirect("/");
+    res.redirect("/user/" + req.session.username);
   }
 });
 
