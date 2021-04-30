@@ -42,7 +42,7 @@
             </form>
 
             {{!-- ONLY FOR STUDENTS --}}
-            {{#equal usertype 0}}
+            {{#equal data.usertype 0}}
             <div class="rating">
                 <a href="#5" titele="Give 5 stars">★</a>
                 <a href="#4" title="Give 4 stars">★</a>
@@ -66,7 +66,7 @@
             </div>
             <div class="boxes">
                 <ul class="list_boxes">
-                    {{#equal usertype 0}}
+                    {{#equal data.usertype 0}}
                         <li><a href="/resume/{{data.id}}">Resume</a></li>
                         <li><a href="/post/{{data.id}}">Reviews</a></li>
                     {{/equal}}

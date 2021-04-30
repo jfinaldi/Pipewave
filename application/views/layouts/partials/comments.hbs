@@ -1,7 +1,8 @@
 {{#each comment}}
+
 <div class="comment_container">
     <a class="comment_title" href="/user/{{this.username}}">{{this.name}}</a>
-    <a class="review_user_title">{{this.title}}</a>
+    <a class="review_user_title">{{comment.title}}</a>
     <br>
 
     <a class="review_content">{{this.comment}}</a>

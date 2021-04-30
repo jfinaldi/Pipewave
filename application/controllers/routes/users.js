@@ -367,10 +367,10 @@ router.get("/:user/post", async (req, res) => {
     data: await resp[0],
     unique: "Post",
     search: true,
+    comment: await Review.getReviews(req.params.id),
     hasNewAlerts: req.session.hasAlerts,
     usertype: req.session.usertype,
     user: { username: req.session.username },
-    render_css_files: ["Post"],
     render_js_files: ["comment"],
   });
 });

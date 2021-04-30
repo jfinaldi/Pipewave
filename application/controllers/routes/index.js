@@ -137,7 +137,6 @@ router.get("/upload", (req, res, next) => {
 // Get post id
 router.get("/post/:id(\\d+)", async (req, res, next) => {
   debugPrinter.printRouter("Get: /post/" + req.params.id);
-  console.log(req.session)
   try {
     let r = await Engine.getPost(req.params.id);
 
@@ -152,6 +151,7 @@ router.get("/post/:id(\\d+)", async (req, res, next) => {
         render_js_files: ["comment"],
       });
       req.session.viewing = req.params.id;
+      console.log(req.session);
     }
     // If post does not exist
     else {
@@ -196,7 +196,7 @@ router.post("/comment", async (req, res, next) => {
 
   // If user is logged in
   else {
-    if (!req.session.usertype) {
+    if (req.session.usertype) {
       let comment = req.body.comment;
       debugPrinter.printDebug("User Comment:");
       debugPrinter.printDebug(comment);

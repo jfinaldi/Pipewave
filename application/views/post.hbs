@@ -1,4 +1,4 @@
-{{> nav}}
+    {{> nav}}
 {{!-- 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> --}}
 {{!-- <link rel="stylesheet" type="text/css" href="/css/nav.css" />
@@ -24,13 +24,12 @@
             <p> {{data.bio}}</p>
             {{!-- <a id="readmore" href="#">seomthing about rating here</a> --}}
             <div class="rating" id="ratingstars">
-                <p class="avg" id="avg">{{comment.avg}}</p>
+                {{!-- TODO: <p class="avg" id="avg">{{comment}}</p> --}}
 
                 <a id="star5" href="#5" title="Give 5 stars">★</a>
                 <a id="star4" href="#4" title="Give 4 stars">★</a>
                 <a id="star3" href="#3" title="Give 3 stars">★</a>
                 <a id="star2" href="#2" title="Give 2 stars">★</a>
-
                 <a id="star1" href="#1" title="Give 1 star">★</a>
             </div>
 
@@ -54,6 +53,7 @@
     <br>
 
     {{!-- comments section partial --}}
+    
     {{>comments}}
 
     {{#if usertype}}
@@ -87,7 +87,6 @@
         </form>
     </div>
     {{/if}}
-
 </div>
 <br>
 <br>
