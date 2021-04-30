@@ -43,7 +43,8 @@
 
             {{!-- ONLY FOR STUDENTS --}}
             {{#equal data.usertype 0}}
-            <div class="rating">
+            <div class="rating" id="ratingstars">
+                <p class="avg" id="avg">{{data.comment}}</p>
                 <a href="#5" titele="Give 5 stars">★</a>
                 <a href="#4" title="Give 4 stars">★</a>
                 <a href="#3" title="Give 3 stars">★</a>
