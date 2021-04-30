@@ -2,7 +2,7 @@
 
 <div class="user_info_container">
     <div class="left">
-        <a class="username">{{user.name}}</a>
+        <a class="username">{{data.name}}</a>
         {{!-- <form action="/user/edit_profile_picture" method="post" enctype="multipart/form-data">
             <input type="file" name="photo" />
             <button type="submit">Save</button>
@@ -10,31 +10,34 @@
         <br>
 
         {{!-- IF STUDENT --}}
-        {{#equal usertype 0}}
-            <a class="left_a"> Major: {{user.major}} </a>
+        {{#equal data.usertype 0}}
+            <a class="left_a"> Major: {{data.major}} </a>
         {{/equal}}
 
         {{!-- IF PROFESSOR --}}
-        {{#equal usertype 1}}
-            <a class="left_a"> Department: {{user.department}} </a>
+        {{#equal data.usertype 1}}
+            <a class="left_a"> Department: {{data.department}} </a>
         {{/equal}}
 
         {{!-- IF INDUSTRY aka NPO, ERG, RECRUITER --}}
-        {{#equal usertype 2}}
-            <a class="left_a"> Company: {{user.company}} </a>
+        {{#equal user.usertype 2}}
+            <a class="left_a"> Company: {{data.company}} </a>
         {{/equal}}
 
-        <a class="left_a"> Email: {{user.email}} </a>
+        <a class="left_a"> Email: {{data.email}} </a>
         <br>
         <br>
 
-        {{!-- IF STUDENT --}}
         About Me
-        <button type="button" id="editBioButton" style="float: right;">Edit Bio</button>
+        {{#if logged}}
+            {{#equal user.userid data.id}}
+                <button type="button" id="editBioButton" style="float: right;">Edit Bio</button>
+            {{/equal}}
+        {{/if}}
         <div class="description">
-            <p id="current_bio" style="display: flex;">{{user.bio}}</p>
+            <p id="current_bio" style="display: flex;">{{data.bio}}</p>
             <form action="/user/savebio" id="bioForm" method="POST">
-                <input type="text" id="bio_textfield" placeholder="{{user.bio}}" name="bio" style="display: none;">
+                <input type="text" id="bio_textfield" placeholder="{{data.bio}}" name="bio" style="display: none;">
                 <button type="submit" id="button" style="float: right;display: none;">Save</button>
             </form>
 
@@ -56,19 +59,19 @@
     <div class="resume_container">
         <div class="right_userinfo">
             <div class="user_image">
-                <img id="pfp" src="{{user.profilepic}}" width="250px"></img>
+                <img id="pfp" src="{{data.profilepic}}" width="250px"></img>
             </div>
             <div class="username_info">
-                <a id="username_info">{{user.username}}</a>
+                <a id="username_info">{{data.username}}</a>
             </div>
             <div class="boxes">
                 <ul class="list_boxes">
                     {{#equal usertype 0}}
-                        <li><a href="/resume/{{user.id}}">Resume</a></li>
-                        <li><a href="/post/{{user.id}}">Reviews</a></li>
+                        <li><a href="/resume/{{data.id}}">Resume</a></li>
+                        <li><a href="/post/{{data.id}}">Reviews</a></li>
                     {{/equal}}
                     {{#if authpage}}
-                    <li><a href="/user/{{user.username}}/settings">Edit Settings</a></li>
+                    <li><a href="/user/{{data.username}}/settings">Edit Settings</a></li>
                     <li><a href="/">Messages</a></li>
                     {{/if}}
 

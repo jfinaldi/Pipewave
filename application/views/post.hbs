@@ -56,6 +56,7 @@
     {{!-- comments section partial --}}
     {{>comments}}
 
+    {{#if usertype}}
     <div id="leave_a_review">
         <form action="/comment" method="post" enctype="application/x-www-form-urlencoded">
             <textarea type="text" name="comment" id="review_textarea" cols="30" rows="10">
@@ -83,9 +84,9 @@
                 <input type="radio" id="formstar1" name="rating" value="1" /><label for="star1" title="Sucks big time">1
                     star</label>
             </div>
-
         </form>
     </div>
+    {{/if}}
 
 </div>
 <br>

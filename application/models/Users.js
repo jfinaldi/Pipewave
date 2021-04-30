@@ -27,14 +27,27 @@ User.usernameExists = async user => {
 
 User.create = async (username, name, password, active, usertype, email, title) => {
   debugPrinter.printFunction("User.create");
-
+  let baseSQL = "";
   password = await bcrypt.hash(password, 15);
   if (!((await User.emailExists(email)) || (await User.usernameExists(username)))) {
-    let baseSQL = "INSERT INTO users (`username`,`name`, `email`, `active`,`usertype`, `password`, `created`, `title`) VALUES (?,?,?,?,?,?, now(), ?);";
+    switch(usertype){
+      case 0:
+        baseSQL = "INSERT INTO users (`username`,`name`, `email`, `active`,`usertype`, `password`, `created`, `title`) VALUES (?,?,?,?,?,?, now(), ?);";
+        break;
+      case 1:
+        baseSQL = "INSERT INTO users (`username`,`name`, `email`, `active`,`usertype`, `password`, `created`, `department`) VALUES (?,?,?,?,?,?, now(), ?);";
+        break;
+      case 2:
+        baseSQL = "INSERT INTO users (`username`,`name`, `email`, `active`,`usertype`, `password`, `created`, `company`) VALUES (?,?,?,?,?,?, now(), ?);";
+        break;
+      default:
+        console.log("Usertype not listed");
+    }
     let a = await db.execute(baseSQL, [username, name, email, active, usertype, password, title]);
     return a;
   }
 };
+
 User.createWithGoogleID = async (username, name, password, active, usertype, email, googleid) => {
   debugPrinter.printFunction("User.createWithGoogleID");
 
@@ -279,7 +292,7 @@ User.changeDepartment = async (new_department, userid) => {
 User.getInfo = async username => {
   debugPrinter.printFunction("User.getInfo");
 
-  var baseSQL = "SELECT id, username, name, email, created, title, bio, profilepic, gender, ethnicity, major, company, department, resume FROM users WHERE username=?;";
+  var baseSQL = "SELECT id, username, name, email, usertype, created, title, bio, profilepic, gender, ethnicity, major, company, department, resume FROM users WHERE username=?;";
   let [r, fields] = await db.query(baseSQL, [username]);
   return r;
 };

@@ -313,9 +313,13 @@ router.get("/:user", async (req, res) => {
   debugPrinter.printRouter(r);
   successPrint(r[0]);
   res.render("user", {
-    user: await mytools.resFormatDateCreated(await User.getInfo(req.params.user))[0],
+    data: await mytools.resFormatDateCreated(await User.getInfo(req.params.user))[0],
+    user: { 
+      userid: req.session.userid,
+      username: req.session.username,
+      usertype: req.session.usertype
+    },
     post: r,
-    usertype: req.session.usertype,
     hasNewAlerts: req.session.hasNewAlerts,
     unique: "User",
     render_js_files: ["profile"],

@@ -196,13 +196,18 @@ router.post("/comment", async (req, res, next) => {
 
   // If user is logged in
   else {
-    let comment = req.body.comment;
-    debugPrinter.printDebug("User Comment:");
-    debugPrinter.printDebug(comment);
-    await Review.addReview(comment, req.session.viewing, req.session.userid);
-    // res.render("/post/" + res.locals.viewing)
-    // successPrint(`User: ${req.session.userid}\nReview Left: ${comment}\nPost ID: ${req.session.viewing}`);
-    res.redirect("/post/" + req.session.viewing);
+    if (!req.session.usertype) {
+      let comment = req.body.comment;
+      debugPrinter.printDebug("User Comment:");
+      debugPrinter.printDebug(comment);
+      await Review.addReview(comment, req.session.viewing, req.session.userid);
+      // res.render("/post/" + res.locals.viewing)
+      // successPrint(`User: ${req.session.userid}\nReview Left: ${comment}\nPost ID: ${req.session.viewing}`);
+      res.redirect("/post/" + req.session.viewing);
+    } 
+    else {
+      debugPrinter.printWarning("Students are not allowed to leave reviews");
+    }
   }
 });
 
