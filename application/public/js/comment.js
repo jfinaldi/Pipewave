@@ -30,7 +30,6 @@ document.getElementById("formstar5").addEventListener("click", () => {
   color(5, "form");
 });
 
-console.log(review.textContent);
 let comments_displayed = false;
 // clean code to toggle review section :)
 const display_comments = x => {

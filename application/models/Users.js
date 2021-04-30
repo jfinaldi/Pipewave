@@ -32,7 +32,7 @@ User.create = async (username, name, password, active, usertype, email, title) =
   if (!((await User.emailExists(email)) || (await User.usernameExists(username)))) {
     switch(usertype){
       case 0:
-        baseSQL = "INSERT INTO users (`username`,`name`, `email`, `active`,`usertype`, `password`, `created`, `title`) VALUES (?,?,?,?,?,?, now(), ?);";
+        baseSQL = "INSERT INTO users (`username`,`name`, `email`, `active`,`usertype`, `password`, `created`, `major`) VALUES (?,?,?,?,?,?, now(), ?);";
         break;
       case 1:
         baseSQL = "INSERT INTO users (`username`,`name`, `email`, `active`,`usertype`, `password`, `created`, `department`) VALUES (?,?,?,?,?,?, now(), ?);";
