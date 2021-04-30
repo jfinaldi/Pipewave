@@ -448,3 +448,26 @@ a[href*="intent"] {
   top: 2px;
   left: 2px;
 }
+
+.resumeUpload {
+  background-color: rgba(235,235,235, 0.75);
+  padding: 8px;
+  text-align: center;
+  border-radius: 7px;
+  font-family: "Open Sans", sans-serif;
+  transition: all 0.2s ease;
+  overflow: none;
+}
+
+#resumeSubmitButton {
+  margin-top: 14px;
+  border-radius: 5px;
+  height: 30px;
+  background-color: #2aa7d8;
+  color: white;
+  width: 100px;
+  font-family: "Open Sans", sans-serif;
+  outline: none;
+  border: none;
+  transition: all 0.4s ease;
+}

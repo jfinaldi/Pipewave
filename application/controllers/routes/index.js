@@ -179,6 +179,8 @@ router.get("/resume/:id(\\d+)", async (req, res, next) => {
     hasNewAlerts: req.session.hasAlerts,
     usertype: req.session.usertype,
     user: { username: req.session.username },
+    userid: req.params.id, //userid of the resume page
+    userviewerid: req.session.userid,
     render_css_files: ["Post"],
     render_js_files: ["comment"],
   });
