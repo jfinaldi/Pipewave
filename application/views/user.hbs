@@ -63,7 +63,11 @@
                 <a id="username_info">{{data.username}}</a>
             </div>
             <div class="user_image">
-                <img id="pfp" src="{{data.profilepic}}" width="250px"></img>
+                {{#if data.profilepic}}
+                    <img id="pfp" src="{{data.profilepic}}" width="250px"></img>
+                {{else}}
+                    <img id="pfp" src="../assets/defaultProfile.png" width="250px"></img>
+                {{/if}}
             </div>
             <div class="boxes">
                 <ul class="list_boxes">
