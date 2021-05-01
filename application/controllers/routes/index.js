@@ -13,30 +13,28 @@ const debugPrinter = require("../helpers/debug/debug_printer");
 router.get("/", async (req, res, next) => {
   if (req.query.search) {
     if (!(await mytools.isLetter(req.query.search))) {
-      // OUTPUT ERROR to front end
-      res.redirect("/");
+      console.log("Error with search input");
     } else {
       await search(req, res, req.query.search);
     }
   } else {
-    if (req.query.gender || req.query.ethnicity || req.query.major) {
-      console.log(req.query);
-      data = { gender: req.query.gender, ethnicity: req.query.ethnicity, major: req.query.major };
-      await advancedSearch(req, res, data);
-    }
     debugPrinter.printRouter("Get: /");
-    console.log(req.session)
-    console.log(res.locals)
-    // console.log(req);
+    let posts = mytools.resFormatDateCreated(await Engine.getAllPosts());
+    if (req.query.gender || req.query.ethnicity || req.query.major) {
+      data = { gender: req.query.gender, ethnicity: req.query.ethnicity, major: req.query.major };
+      posts = await Engine.advancedSearch(data);
+    } 
     res.render("index", {
-      data: mytools.resFormatDateCreated(await Engine.getAllPosts()),
+      data: posts,
       js: true,
       home: "active",
       unique: "Home",
       search: true,
-      user: req.session.username,
+      user: { 
+        username : req.session.username, 
+        usertype : req.session.usertype,
+      },
       hasNewAlerts: req.session.hasNewAlerts,
-      usertype: req.session.usertype,
       render_js_files: ["home", "advancedFilter"],
     });
   }
@@ -235,43 +233,6 @@ const search = async (req, res, search) => {
 
     res.render("index", {
       data: await mytools.resFormatDateCreated(await Engine.search(search)),
-      js: true,
-      home: "active",
-      unique: "Home",
-      search: true,
-      render_js_files: ["home", "advancedFilter"],
-    });
-  }
-};
-
-const advancedSearch = async (req, res, search) => {
-  debugPrinter.printRouter("Get: Advanced Search");
-  debugPrinter.printRouter(search);
-
-  if (!search) {
-    debugPrinter.printDebug(`Search is empty!`);
-    res.render("index", {
-      data: await mytools.resFormatDateCreated(await Engine.getallPosts()),
-      js: true,
-      home: "active",
-      unique: "Home",
-      search: true,
-      render_js_files: ["home", "advancedFilter"],
-    });
-  }
-
-  // Search given
-  else {
-    debugPrinter.printDebug(`Search: ${JSON.stringify(search)}`);
-    // search = search.filter(x => x != null);
-    //
-    let testing = await Engine.advancedSearch(search);
-    debugPrinter.printDebug("Output");
-
-    debugPrinter.printDebug(testing);
-
-    res.render("index", {
-      data: testing,
       js: true,
       home: "active",
       unique: "Home",

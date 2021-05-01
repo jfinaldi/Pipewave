@@ -2,6 +2,7 @@ var db = require("../config/database");
 const pdfReader = require("../controllers/helpers/pdf_handler");
 const debugPrinter = require("../controllers/helpers/debug/debug_printer");
 const User = require("./Users");
+const search = require("../controllers/routes");
 
 const Engine = {};
 
@@ -28,18 +29,21 @@ Engine.getPosts = async limit => {
 
 // fetch all 
 Engine.getAllPosts = async _ => {
-  debugPrinter.printFunction("Engine.getPosts");
-  let baseSQL = "SELECT * FROM website.users WHERE usertype=0 ORDER BY created DESC";
-  //let baseSQL = "SELECT * FROM website.users WHERE usertype=0 ORDER BY created ASC";
-  let [r, fields] = await db.query(baseSQL);
-  return r;
+  debugPrinter.printFunction("Engine.getAllPosts");
+  try {
+    let baseSQL = "SELECT * FROM website.users WHERE usertype=0 ORDER BY created DESC";
+    let [r, fields] = await db.query(baseSQL);
+    return r;
+  } catch (err) {
+    res.send(err);
+  }
 };
 
 
 Engine.getPostsApiEndpoint = async (limit, filter, order = "DESC") => {
   //filter = created, reviews
   //ASC - DESC
-  debugPrinter.printFunction("Engine.getPosts");
+  debugPrinter.printFunction("Engine.getPostApiEndPoint");
   debugPrinter.printDebug([limit, filter, order]);
   let baseSQL = "SELECT u.username,u.name,  p.id, p.title, p.description, p.resumePath, p.created FROM users u JOIN posts p ON u.id=fk_userid ORDER BY ? ? LIMIT ?";
   let [r, fields] = await db.query(baseSQL, [filter, order, limit]);
@@ -61,6 +65,7 @@ Engine.search = async search => {
   }
 };
 
+// Old search function to get posts 10 at a time
 // Engine.search = async search => {
 //   debugPrinter.printFunction("Engine.search");
 //   try {
@@ -121,7 +126,7 @@ Engine.setPost = async (title, description, file, fk_userid) => {
 };
 
 Engine.updatePFP = async (file, fk_userid) => {
-  debugPrinter.printFunction("Engine.setPost");
+  debugPrinter.printFunction("Engine.updatePFP");
   try {
     console.log(fk_userid);
     let path = "/assets/photos/" + file.filename;
@@ -173,8 +178,9 @@ Engine.getRES = async(userid) => {
 
 const helper_cluster = (x, filter_name, count, base) => {
   if (x) {
-    console.log(filter_name + " passed in");
-    base += count ? ` and ${filter_name}="${x}"` : `WHERE ${filter_name}="${x}"`;
+    base += count ? ` AND ${filter_name}="${x}"` : `WHERE ${filter_name}="${x}"`;
+    searchOnlyStudents = " AND usertype=0"
+    base += searchOnlyStudents;
     return [++count, base];
   }
   return [count, base];
@@ -193,11 +199,8 @@ Engine.advancedSearch = async advancedSearch => {
 
   //filter: [eth:[] major:[] gender: []]
 
-  debugPrinter.printFunction("BASE: ");
-  debugPrinter.printFunction(base);
   try {
     let baseSQL = "SELECT u.id,u.title, u.ethnicity, u.major, u.profilepic, u.username, u.name FROM users u " + base;
-    console.log(baseSQL);
     let [r, fields] = await db.execute(baseSQL);
     return r && r.length ? r : await Engine.getAllPosts();
   } catch (err) {
