@@ -4,7 +4,7 @@
         <a href="/user/logout">
             <button type="submit" id="logout_button" class="right">Logout</button>
         </a>
-        {{#equal usertype 2}}
+        {{#equal user.usertype 2}}
             {{#if hasNewAlerts}}
             <a href="/alerts" class="right">Alerts
                 <div class="right" id="nav_dot"></div>

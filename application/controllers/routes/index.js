@@ -28,6 +28,7 @@ router.get("/", async (req, res, next) => {
       data: posts,
       js: true,
       home: "active",
+      title: "PipeWave",
       unique: "Home",
       search: true,
       user: { 
@@ -53,23 +54,12 @@ router.get("/login", (req, res, next) => {
     res.redirect("/");
   } else {
     res.render("login", {
+      title: "Login to PipeWave",
       login: "active",
       unique: "Login",
     });
   }
 });
-
-// // Get Profile
-// router.get("/profile", async (req, res) => {
-//   debugPrinter.printRouter("Get: /profile");
-//   res.render("user", {
-//     unique: "User",
-//     search: true,
-//     hasNewAlerts: req.session.hasNewAlerts,
-//     user: { username: req.session.username },
-//     usertype: req.session.usertype,
-//   });
-// });
 
 // Get Register
 router.get("/register", (req, res, next) => {
@@ -84,6 +74,7 @@ router.get("/register", (req, res, next) => {
   // If not logged in
   else {
     res.render("register", {
+      title: "PipeWave Registration",
       register: "active",
       unique: "Registration",
       render_js_files: ["register"],
@@ -112,6 +103,7 @@ router.get("/alerts", async (req, res) => {
     data: await Engine.filterSearch(alerts, req.session.lastLogin),
     js: true,
     home: "active",
+    title: ("" + req.session.username + "Alerts"),
     alerts: alerts,
     unique: "Home",
     search: true,
@@ -122,15 +114,15 @@ router.get("/alerts", async (req, res) => {
   });
 });
 
-// Test Page for Upload -> Get Upload
-router.get("/upload", (req, res, next) => {
-  debugPrinter.printRouter("Get: /upload");
-  res.render("upload", {
-    upload: "active",
-    unique: "Upload",
-    search: true,
-  });
-});
+// // Test Page for Upload -> Get Upload
+// router.get("/upload", (req, res, next) => {
+//   debugPrinter.printRouter("Get: /upload");
+//   res.render("upload", {
+//     upload: "active",
+//     unique: "Upload",
+//     search: true,
+//   });
+// });
 
 // Get post id
 router.get("/post/:id(\\d+)", async (req, res, next) => {
@@ -143,6 +135,7 @@ router.get("/post/:id(\\d+)", async (req, res, next) => {
       res.render("post", {
         data: r[0],
         comment: await Review.getReviews(req.params.id),
+        title: "Reviews for " + (r[0].name) + "",
         unique: "Post",
         hasNewAlerts: req.session.hasAlerts,
         usertype: req.session.usertype,
@@ -166,12 +159,16 @@ router.get("/resume/:id(\\d+)", async (req, res, next) => {
   debugPrinter.printRouter("Get: /resume/" + req.params.id);
   console.log(req.session)
 
-  let resume = await Engine.getRES(req.params.id);
+  let r = await Engine.getRES(req.params.id);
+  let resume = r[0];
+  let name = r[1];
   console.log(resume);
+  console.log(name);
 
   res.render("resume", {
     //data: await resp[0],
     data: resume,
+    title: ("" + name + "'s Resume"),
     unique: "Post",
     search: true,
     hasNewAlerts: req.session.hasAlerts,
@@ -221,6 +218,7 @@ const search = async (req, res, search) => {
     res.render("index", {
       data: await mytools.resFormatDateCreated(await Engine.advancedSearch(10)),
       js: true,
+      title: "PipeWave",
       home: "active",
       unique: "Home",
       search: true,
@@ -235,6 +233,7 @@ const search = async (req, res, search) => {
       data: await mytools.resFormatDateCreated(await Engine.search(search)),
       js: true,
       home: "active",
+      title: "PipeWave",
       unique: "Home",
       search: true,
       render_js_files: ["home", "advancedFilter"],

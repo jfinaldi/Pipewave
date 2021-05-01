@@ -143,10 +143,10 @@ Engine.getRES = async(userid) => {
   debugPrinter.printFunction("Engine.getRES");
   console.log(userid);
   try {
-    var baseSQL = "SELECT resume FROM users WHERE id=?";
+    var baseSQL = "SELECT resume, name FROM users WHERE id=?";
     let [r, fields] = await db.query(baseSQL, [userid]);
     console.log(r[0]);
-    return r[0].resume;
+    return [r[0].resume, r[0].name];
   } catch (err) {
     console.log("Error, userid does not exist in db.");
     return null;

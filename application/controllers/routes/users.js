@@ -58,7 +58,7 @@ router.post("/login", async (req, res, next) => {
           console.log("We have new alerts! yay");
         } else {
           console.log("We have no new alerts boo")
-          req.session.hasNewAlerts = false;
+          //req.session.hasNewAlerts = false;
         }
       }
 
@@ -278,6 +278,7 @@ router.post("/changePassword", async (req, res) => {
     status = "Password Updated";
     res.render("user", {
       unique: "user",
+      title: "PipeWave",
       search: true,
       user: { username: req.session.username, status: status },
     });
@@ -285,6 +286,7 @@ router.post("/changePassword", async (req, res) => {
     status = "Server Error, please try again later";
     res.render("user", {
       unique: "user",
+      title: "PipeWave",
       search: true,
       user: { username: req.session.username, status: status },
     });
@@ -320,10 +322,12 @@ router.get("/:user", async (req, res) => {
       usertype: req.session.usertype
     },
     post: r,
+    title: "" + (req.params.user) + "'s Profile",
     hasNewAlerts: req.session.hasNewAlerts,
     unique: "User",
     render_js_files: ["profile"],
   });
+  console.log(req.session);
 });
 
 // get settings page
@@ -335,6 +339,7 @@ router.get("/:user/settings", async (req, res) => {
   } else {
     res.render("settings", {
       unique: "Settings", //css link
+      title: "Update Settings",
       search: true,
       hasNewAlerts: req.session.hasNewAlerts,
       user: { username: req.session.username },
@@ -358,22 +363,22 @@ router.post("/setAlert", async (req, res) => {
 });
 
 // get post aka Reviews page
-router.get("/:user/post", async (req, res) => {
-  debugPrinter.printRouter("Get: /:post");
-  let resp = await mytools.resFormatDateCreated(await Engine.getUserPosts(req.session.username));
-  debugPrinter.printRouter(resp[0]);
-  console.log(resp[0])
-  res.render("post", {
-    data: await resp[0],
-    unique: "Post",
-    search: true,
-    comment: await Review.getReviews(req.params.id),
-    hasNewAlerts: req.session.hasAlerts,
-    usertype: req.session.usertype,
-    user: { username: req.session.username },
-    render_js_files: ["comment"],
-  });
-});
+// router.get("/:user/post", async (req, res) => {
+//   debugPrinter.printRouter("Get: /:post");
+//   let resp = await mytools.resFormatDateCreated(await Engine.getUserPosts(req.session.username));
+//   debugPrinter.printRouter(resp[0]);
+//   console.log(resp[0])
+//   res.render("post", {
+//     data: await resp[0],
+//     unique: "Post",
+//     search: true,
+//     comment: await Review.getReviews(req.params.id),
+//     hasNewAlerts: req.session.hasAlerts,
+//     usertype: req.session.usertype,
+//     user: { username: req.session.username },
+//     render_js_files: ["comment"],
+//   });
+// });
 
 // post update settings
 router.post("/updateSettings", async (req, res) => {
