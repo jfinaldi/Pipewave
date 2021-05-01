@@ -21,7 +21,7 @@ Engine.getPosts = async limit => {
     let baseSQL = "SELECT * FROM website.users WHERE usertype=0 ORDER BY created DESC LIMIT ?;";
     let [r, fields] = await db.query(baseSQL, [limit]);
     return r;
-  }catch (err) {
+  } catch (err) {
     res.send(err);
   }
 };
@@ -30,15 +30,13 @@ Engine.getPosts = async limit => {
 Engine.getAllPosts = async _ => {
   debugPrinter.printFunction("Engine.getPosts");
   let baseSQL = "SELECT * FROM website.users WHERE usertype=0 ORDER BY created DESC";
-  //let baseSQL = "SELECT * FROM website.users WHERE usertype=0 ORDER BY created ASC";
   let [r, fields] = await db.query(baseSQL);
   return r;
 };
 
-
 Engine.getPostsApiEndpoint = async (limit, filter, order = "DESC") => {
   //filter = created, reviews
-  //ASC - DESC
+  //Display descending: "DESC"
   debugPrinter.printFunction("Engine.getPosts");
   debugPrinter.printDebug([limit, filter, order]);
   let baseSQL = "SELECT u.username,u.name,  p.id, p.title, p.description, p.resumePath, p.created FROM users u JOIN posts p ON u.id=fk_userid ORDER BY ? ? LIMIT ?";
@@ -49,8 +47,6 @@ Engine.getPostsApiEndpoint = async (limit, filter, order = "DESC") => {
 Engine.search = async search => {
   debugPrinter.printFunction("Engine.search");
   try {
-    // let baseSQL =
-    //   "SELECT u.id,u.name,u.profilepic, u.title,u.created, u.username, concat_ws(' ', u.name, u.username, u.title) AS haystack FROM users u HAVING haystack like ?;";
     let baseSQL =
     "SELECT u.id,u.name,u.profilepic, u.title,u.created, u.username, concat_ws(' ', u.name, u.username, u.title) AS haystack FROM users u WHERE u.usertype=0 HAVING haystack like ?;";
     let sqlready = "%" + search + "%";
@@ -60,19 +56,6 @@ Engine.search = async search => {
     return false;
   }
 };
-
-// Engine.search = async search => {
-//   debugPrinter.printFunction("Engine.search");
-//   try {
-//     let baseSQL =
-//       "SELECT p.id, p.title, p.description, p.created,u.profilepic, u.username, u.name, concat_ws(' ', p.title,u.name, p.description, p.tags) AS haystack FROM users u JOIN posts p ON u.id=fk_userid HAVING haystack like ?;";
-//     let sqlready = "%" + search + "%";
-//     let [r, fields] = await db.execute(baseSQL, [sqlready]);
-//     return r && r.length ? r : await Engine.getPosts(10);
-//   } catch (err) {
-//     return false;
-//   }
-// };
 
 // get a single review
 Engine.getPost = async id => {
