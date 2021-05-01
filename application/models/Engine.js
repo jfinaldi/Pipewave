@@ -2,7 +2,6 @@ var db = require("../config/database");
 const pdfReader = require("../controllers/helpers/pdf_handler");
 const debugPrinter = require("../controllers/helpers/debug/debug_printer");
 const User = require("./Users");
-const search = require("../controllers/routes");
 
 const Engine = {};
 
@@ -29,32 +28,16 @@ Engine.getPosts = async limit => {
 
 // fetch all 
 Engine.getAllPosts = async _ => {
-<<<<<<< HEAD
   debugPrinter.printFunction("Engine.getPosts");
   let baseSQL = "SELECT * FROM website.users WHERE usertype=0 ORDER BY created DESC";
   let [r, fields] = await db.query(baseSQL);
   return r;
-=======
-  debugPrinter.printFunction("Engine.getAllPosts");
-  try {
-    let baseSQL = "SELECT * FROM website.users WHERE usertype=0 ORDER BY created DESC";
-    let [r, fields] = await db.query(baseSQL);
-    return r;
-  } catch (err) {
-    res.send(err);
-  }
->>>>>>> 6ef871468f10b37c7e55c01de9d5081b3ab66f24
 };
 
 Engine.getPostsApiEndpoint = async (limit, filter, order = "DESC") => {
   //filter = created, reviews
-<<<<<<< HEAD
   //Display descending: "DESC"
-  debugPrinter.printFunction("Engine.getPosts");
-=======
-  //ASC - DESC
-  debugPrinter.printFunction("Engine.getPostApiEndPoint");
->>>>>>> 6ef871468f10b37c7e55c01de9d5081b3ab66f24
+  debugPrinter.printFunction("Engine.getPostsApiEndpoint");
   debugPrinter.printDebug([limit, filter, order]);
   let baseSQL = "SELECT u.username,u.name,  p.id, p.title, p.description, p.resumePath, p.created FROM users u JOIN posts p ON u.id=fk_userid ORDER BY ? ? LIMIT ?";
   let [r, fields] = await db.query(baseSQL, [filter, order, limit]);
@@ -74,23 +57,6 @@ Engine.search = async search => {
   }
 };
 
-<<<<<<< HEAD
-=======
-// Old search function to get posts 10 at a time
-// Engine.search = async search => {
-//   debugPrinter.printFunction("Engine.search");
-//   try {
-//     let baseSQL =
-//       "SELECT p.id, p.title, p.description, p.created,u.profilepic, u.username, u.name, concat_ws(' ', p.title,u.name, p.description, p.tags) AS haystack FROM users u JOIN posts p ON u.id=fk_userid HAVING haystack like ?;";
-//     let sqlready = "%" + search + "%";
-//     let [r, fields] = await db.execute(baseSQL, [sqlready]);
-//     return r && r.length ? r : await Engine.getPosts(10);
-//   } catch (err) {
-//     return false;
-//   }
-// };
-
->>>>>>> 6ef871468f10b37c7e55c01de9d5081b3ab66f24
 // get a single review
 Engine.getPost = async id => {
   debugPrinter.printFunction("Engine.getPost");
@@ -190,9 +156,8 @@ Engine.getRES = async(userid) => {
 
 const helper_cluster = (x, filter_name, count, base) => {
   if (x) {
-    base += count ? ` AND ${filter_name}="${x}"` : `WHERE ${filter_name}="${x}"`;
-    searchOnlyStudents = " AND usertype=0"
-    base += searchOnlyStudents;
+    console.log(filter_name + " passed in");
+    base += count ? ` and ${filter_name}="${x}"` : `WHERE ${filter_name}="${x}"`;
     return [++count, base];
   }
   return [count, base];
@@ -211,8 +176,11 @@ Engine.advancedSearch = async advancedSearch => {
 
   //filter: [eth:[] major:[] gender: []]
 
+  debugPrinter.printFunction("BASE: ");
+  debugPrinter.printFunction(base);
   try {
     let baseSQL = "SELECT u.id,u.title, u.ethnicity, u.major, u.profilepic, u.username, u.name FROM users u " + base;
+    console.log(baseSQL);
     let [r, fields] = await db.execute(baseSQL);
     return r && r.length ? r : await Engine.getAllPosts();
   } catch (err) {
