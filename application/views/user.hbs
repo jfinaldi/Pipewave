@@ -28,7 +28,7 @@
         <br>
         <br>
 
-        About Me
+        <label for="description">About Me</label>
         {{#if logged}}
             {{#equal user.userid data.id}}
                 <button type="button" id="editBioButton" style="float: right;">Edit Bio</button>
@@ -37,8 +37,8 @@
         <div class="description">
             <p id="current_bio" style="display: flex;">{{data.bio}}</p>
             <form action="/user/savebio" id="bioForm" method="POST">
-                <input type="text" id="bio_textfield" placeholder="{{data.bio}}" name="bio" style="display: none;">
-                <button type="submit" id="button" style="float: right;display: none;">Save</button>
+                <textarea cols="113" rows="15" id="bio_textfield" placeholder="{{data.bio}}" name="bio" maxlength="1096"></textarea>
+                <button type="submit" id="save_biobutton">Save</button>
             </form>
 
             {{!-- ONLY FOR STUDENTS --}}

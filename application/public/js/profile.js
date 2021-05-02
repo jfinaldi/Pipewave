@@ -18,7 +18,7 @@ editBio.addEventListener("click", e => {
 function displayBioTextField() {
     console.log("displayBioTextField");
     var y = document.getElementById("bio_textfield");
-    var z = document.getElementById("button");
+    var z = document.getElementById("save_biobutton");
     var x = document.getElementById("current_bio");
     y.style.display = styles[y.style.display === "flex" ? 0 : 2];
     z.style.display = styles[z.style.display === "flex" ? 0 : 2];
