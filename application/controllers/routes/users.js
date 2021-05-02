@@ -409,15 +409,16 @@ router.post("/updateSettings", async (req, res) => {
       status = `Name Changed to ${req.body.name}`;
     }
 
-    if(req.session.usertype == 0){
-      // change user email
-      if(req.body.email != '') {
-        let status;
-        let response = await User.changeEmail(req.body.email, req.session.userid);
-        console.log("updated");
-        console.log(response);
-        status = `Email Changed to ${req.body.email}`;
-      }
+    // change user email
+    if(req.body.email != '') {
+      let status;
+      let response = await User.changeEmail(req.body.email, req.session.userid);
+      console.log("updated");
+      console.log(response);
+      status = `Email Changed to ${req.body.email}`;
+    }
+
+    if(req.session.usertype == 0) {
 
       // change ethnicity
       if(req.body.ethnicity != '') {

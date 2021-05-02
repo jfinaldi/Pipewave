@@ -7,21 +7,6 @@
 
             <a class="username">{{user.name}}</a>
 
-            {{!-- Change Photo
-            <div>Upload Photo</div>
-            <form action="/user/edit_profile_picture" method="post" enctype="multipart/form-data">
-                <input type="file" name="photo" />
-                <button type="submit">Save</button>
-            </form><br> --}}
-
-            {{!-- Change Resume
-            <div>Upload Resume</div>
-            <form action="/user/edit_resume" method="post" enctype="multipart/form-data">
-                <input type="file" name="resume" />
-                <button type="submit">Save</button>
-            </form> --}}
-
-            {{!-- <form action="/user/updateSettings" id="form" method="POST" enctype="application/x-www-form-urlencoded"> --}}
             <form action="/user/updateSettings" id="form" method="post" enctype="application/x-www-form-urlencoded">
                 <div id= "formElements">
                     <h3>User Info</h3>
@@ -52,7 +37,6 @@
                             <option name="ethnicity" value="indigeneous">Indigenous</option>
                             <option name="ethnicity" value="white">White</option>
                             <option name="ethnicity" value="other">Other</option>
-                            <option value="Recruiter">Recruiter</option>
                         </select>
 
                         {{!-- Change Gender --}}
