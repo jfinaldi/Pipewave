@@ -84,15 +84,31 @@ router.post("/register", async (req, res, next) => {
   }
   // If not logged in
   else {
-    let { username, name, email, password, title, usertype } = req.body,
+    let { username, name, email, password, major, company, department, usertype } = req.body,
       active = 0;
     let schooltypes = ["Student", "Professor"];
     let orgtypes = ["ERG", "NPO", "Recruiter"];
-    if (usertype == schooltypes[0]) usertype = 0;
-    if (usertype == schooltypes[1]) usertype = 1;
-    if (orgtypes.includes(usertype)) usertype = 2;
+    var title = "";
+    if (usertype == schooltypes[0]) {
+      usertype = 0;
+      title = major;
+    }
+    if (usertype == schooltypes[1]) {
+      usertype = 1;
+      title = department;
+    }
+    if (orgtypes.includes(usertype)) {
+      usertype = 2;
+      title = company;
+    }
 
-    console.log(usertype);
+    console.log(req.body);
+    console.log("req.body.title: " + req.body.title);
+    console.log(major);
+    console.log(company);
+    console.log(department);
+    console.log(title);
+
     // Communicate with the Users model to create the user
     let response = await User.create(username, name, password, active, usertype, email, title);
     // debugPrinter.printDebug(`User${response ? "" : " not"} created`);
