@@ -10,13 +10,13 @@
 <div class="post_container">
 
     <div class="left">
-        <p class="post_title"> {{data.name}}</p>
-        <p class="left_a" id="user">{{data.username}}</p>
+        <p class="post_title"> {{data.username}}</p>
         <br>
+        <p class="left_a" id="user">Name: {{data.name}}</p>
         <p class="left_a">Major: {{data.major}} </p>
         <p class="left_a">Email: {{data.email}} </p>
 
-        <p class="left_a bottom_left_a">Date Posted: {{data.created}}</a>
+        {{!-- <p class="left_a bottom_left_a">Date Posted: {{data.created}}</a> --}}
         <br>
         <br>
         {{!-- <a class="left_a">Description: {{data.description}}</a> --}}
@@ -64,13 +64,6 @@
             <div class="review_button_container">
                 <button>Submit Review</button>
             </div>
-            {{!-- <div class="formrating" id="ratingstars">
-                <input id="formstar5" type="radio" name="review" href="#5" title="Give 5 stars">★</input>
-                <input id="formstar4" type="radio" name="review" href="#4" title="Give 4 stars">★</input>
-                <input id="formstar3" type="radio" name="review" href="#3" title="Give 3 stars">★</input>
-                <input id="formstar2" type="radio" name="review" href="#2" title="Give 2 stars">★</input>
-                <input id="formstar1" type="radio" name="review" href="#1" title="Give 1 star">★</input>
-            </div> --}}
             <div class="formrating">
                 <p class="avg" id="formavg">N/A</p>
                 <input type="radio" name="rating" value="5" /><label for="star5" id="formstar5" title="Rocks!">5
