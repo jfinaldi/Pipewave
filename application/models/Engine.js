@@ -108,14 +108,13 @@ Engine.setPost = async (title, description, file, fk_userid) => {
   }
 };
 
+// Update profile photo
 Engine.updatePFP = async (file, fk_userid) => {
   debugPrinter.printFunction("Engine.updatePFP");
   try {
     console.log(fk_userid);
     let path = "/assets/photos/" + file.filename;
-    // let tags = await pdfReader("./public" + path);
     debugPrinter.printDebug(fk_userid);
-    // let path = "/assets/" + req.file.filename;
     var baseSQL = "UPDATE `website`.`users` SET `profilepic` = ? WHERE `id` = ?;";
     let [r, fields] = await db.query(baseSQL, [path, fk_userid]);
     debugPrinter.printDebug("Response", r);
