@@ -7,24 +7,47 @@
   box-sizing: border-box;
 }
 
+body {
+  box-sizing: border-box;
+  margin: 0;
+  background: url(../assets/background.png);
+  padding: 0;
+  text-decoration: none;
+  /* background-size: 100%; */
+  /* background-size: 1920px 1080px; */
+  flex-direction: column;
+  min-height: 100vh;
+  webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 .post_container {
   height: 400px;
   width: auto;
+  margin-top: 50px;
+}
+
+.description {
+  height: 240px;
+  background-color: white;
 }
 
 .left {
-  /* border-radius: 10px; */
-  /* background-color: rgb(247, 247, 247); */
+  border-radius: 7px; 
+  background-color: rgba(255, 255, 255, 0.5);
   float: left;
   padding: 7px;
   margin-left: 30px;
-  height: 370px;
+  height: auto;
   /* display: inline-block; */
   position: relative;
-  width: 900px;
+  width: 600px;
   transition: all 0.4s ease;
   /* box-shadow: 0 0 12px rgba(0, 0, 0, 0.14); */
 }
+
 /* .left:hover {
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
 } */
@@ -124,13 +147,13 @@ p {
 
 .comment_container {
   /* border-radius: 12px; */
-  background-color: rgb(185, 225, 252);
+  background-color: rgb(237 239 241);
   height: 125px;
   width: 98%;
   text-align: left;
 
   transition: all 0.4s ease;
-  margin-left: 20px;
+  margin-left: 6px;
 
   margin-bottom: 10px;
 }
@@ -142,20 +165,18 @@ p {
   padding: 6px;
 }
 .comments {
-  position: relative;
+  border-radius: 7px; 
+  background-color: #dbdce0;
+  float: left;
+  padding: 7px;
   margin-left: 30px;
-  /* border-radius: 10px; */
-  /* box-shadow: 0 0 12px rgba(0, 0, 0, 0.16); */
-  height: 400px;
-  width: 900px;
-  /* background-color: rgb(235, 235, 235); */
-  /* margin-top: 60px; */
-  font-family: "Open Sans", sans-serif;
-  /* font-family: "Barlow Condensed", sans-serif; */
-  text-align: left;
-  padding: 10px;
-  font-size: 17px;
+  height: auto;
+  /* display: inline-block; */
+  position: relative;
+  width: 600px;
   transition: all 0.4s ease;
+  margin-top: 50px;
+  /* box-shadow: 0 0 12px rgba(0, 0, 0, 0.14); */
 }
 .moreinfo {
   float: right;
@@ -167,6 +188,8 @@ p {
   float: right;
   right: 0;
   /* width: 100%; */
+  margin-top: 10px;
+  margin-right: 6px;
 }
 .left_title {
   /* float: left; */
@@ -194,13 +217,14 @@ p {
   font-family: "Open Sans", sans-serif;
   font-weight: bold;
   width: 150px;
-  background-color: rgb(185, 225, 252);
+  background-color: rgb(202 243 245);
 }
 #leave_a_review {
-  background-color: rgb(29, 29, 29);
+  background-color: rgb(255 253 253);
   height: 200px;
   width: 98%;
-  margin-left: 20px;
+  margin-left: 6px;
+  margin-top: 10px;
   margin-bottom: 100px;
 
   opacity: 0;
