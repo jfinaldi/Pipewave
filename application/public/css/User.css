@@ -20,7 +20,6 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
-
 footer {
   margin-top: auto;
   text-align: center;
@@ -121,11 +120,6 @@ object {
   height: 240px;
   background-color: white;
 }
-
-/* Edit bio textfield */
-#bio_textfield {
-  display: none;
-} 
 .description a {
   font-family: "Roboto", sans-serif;
   color: rgb(29, 29, 29);
@@ -342,8 +336,8 @@ a[href*="intent"] {
   margin: auto;
   text-align: center;
   font-family: "Roboto", sans-serif;
-  background-color: #2aa7d8;
-  color: white;
+
+  background-color: #65bdf8;
   height: 40px;
   width: 80%;
   margin-bottom: 20px;
@@ -373,45 +367,10 @@ a[href*="intent"] {
   text-decoration: none;
   text-emphasis: none;
   border: none;
-  color: white;
+  color: rgb(0, 0, 0);
   display: block;
   width: 100%;
   height: 100%;
   font-family: "Roboto", sans-serif;
   /* border: none; */
-}
-
-.photoUpload {
-  margin-left: 32px;
-  margin-right: 32px;
-  /* background-color: rgba(235,235,235, 0.75); */
-  padding-top: 8px;
-  padding-bottom: 8px;
-  text-align: center;
-  border-radius: 7px;
-  font-family: "Open Sans", sans-serif;
-  /* transition: all 0.2s ease; */
-  overflow: none;
-}
-
-#photoSubmitButton,
-#editBioButton,
-#save_biobutton {
-  margin-top: 14px;
-  border-radius: 5px;
-  height: 30px;
-  background-color: #2aa7d8;
-  color: white;
-  width: 75px;
-  font-family: "Open Sans", sans-serif;
-  outline: none;
-  border: none;
-  transition: all 0.4s ease;
-}
-
-#save_biobutton {
-  display: none;
-  float: right;
-  padding-left: 20px;
-  padding-top: 5px;
 }

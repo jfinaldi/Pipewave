@@ -141,25 +141,17 @@ footer {
 
 #username,
 #formSelector,
+#occupation,
 #password,
 #confirmpassword,
 #major,
-#company,
-#email,
-#majorSelector,
-#departmentSelector {
+#email {
   border-radius: 7px;
   height: 33px;
   width: 70%;
   font-family: "Open Sans", sans-serif;
   margin-top: 5px;
   transition: all 0.2s ease;
-}
-
-#Student2,
-#Professor2,
-#Recruiter2 {
-  margin-bottom: -10px;
 }
 #username:hover,
 #major:hover,

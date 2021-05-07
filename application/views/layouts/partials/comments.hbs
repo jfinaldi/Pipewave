@@ -1,15 +1,9 @@
 {{#each comment}}
 <div class="comment_container">
     <a class="comment_title" href="/user/{{this.username}}">{{this.name}}</a>
-    {{#equal this.usertype 1}}
-        <a class="review_user_title">{{this.department}}</a>
-    {{/equal}}
-    {{#equal this.usertype 2}}
-        <a class="review_user_title">{{this.company}}</a>
-    {{/equal}}
-    <p class="left_a bottom_left_a">Date Posted: {{this.created}}</a>
+    <a class="review_user_title">{{this.title}}</a>
     <br>
-    
+
     <a class="review_content">{{this.comment}}</a>
 
     {{!-- <div class="moreinfo">

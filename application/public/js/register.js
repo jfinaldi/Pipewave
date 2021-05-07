@@ -20,12 +20,9 @@ function selectorCheck(selectedElement) {
 
 function displayFormElements() {
   var formElements = document.getElementById("formElements");
-  var student = document.getElementById("Student");
-  var student2 = document.getElementById("Student2");
-  var professor = document.getElementById("Professor");
-  var professor2 = document.getElementById("Professor2");
-  var recruiter = document.getElementById("Recruiter");
-  var recruiter2 = document.getElementById("Recruiter2");
+  var occupationLabel = document.getElementById("occupationLabel");
+  var occupation = document.getElementById("occupation");
+  console.log(occupation);
 
   formElements.style.display = "block";
   switch(formSelector.value) {
@@ -33,53 +30,28 @@ function displayFormElements() {
       formElements.style.display = "none"
       break;
     case "Student":
-      student.style.display = "block";
-      student2.style.display = "block";
-      professor.style.display = "none";
-      professor2.style.display = "none";
-      recruiter.style.display = "none";
-      recruiter2.style.display = "none";
+      occupationLabel.innerHTML = "Major";
+      occupation.placeholder = "Major";
       break;
     case "Professor":
-      student.style.display = "none";
-      student2.style.display = "none";
-      professor.style.display = "block";
-      professor2.style.display = "block";
-      recruiter.style.display = "none";
-      recruiter2.style.display = "none";
+      occupationLabel.innerHTML = "Department";
+      occupation.placeholder = "Department";
       break;
     case "ERG":
-      student.style.display = "none";
-      student2.style.display = "none";
-      professor.style.display = "none";
-      professor2.style.display = "none";
-      recruiter.style.display = "block";
-      recruiter2.style.display = "block";
-      recruiter2.placeholder = "Company";
+      occupationLabel.innerHTML = "Company";
+      occupation.placeholder = "Company";
+      break;
     case "NPO":
-      student.style.display = "none";
-      student2.style.display = "none";
-      professor.style.display = "none";
-      professor2.style.display = "none";
-      recruiter.style.display = "block";
-      recruiter2.style.display = "block";
-      recruiter2.placeholder = "Company";
+      occupationLabel.innerHTML = "Company";
+      occupation.placeholder = "Company";
+      break;
     case "Recruiter":
-      student.style.display = "none";
-      student2.style.display = "none";
-      professor.style.display = "none";
-      professor2.style.display = "none";
-      recruiter.style.display = "block";
-      recruiter2.style.display = "block";
-      recruiter2.placeholder = "Company";
+      occupationLabel.innerHTML = "Company";
+      occupation.placeholder = "Company";
       break;
     default:
-      student.style.display = "none";
-      student2.style.display = "none";
-      professor.style.display = "none";
-      professor2.style.display = "none";
-      recruiter.style.display = "none";
-      recruiter2.style.display = "none";
+      occupationLabel.innerHTML = "Occupation";
+      occupation.placeholder = "Occupation";
       break;
   }
 //   formElements.style.display = styles[formElements.style.display === "None" ? 0 : 2];

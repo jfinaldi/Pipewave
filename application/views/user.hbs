@@ -1,8 +1,12 @@
 {{> nav}}
 
+
 <div class="user_info_container">
+
     <div class="left">
-        <a class="username">{{data.name}}</a>
+        <a class="post_title" href="/post/{{data.postid}}"> {{data.name}}</a>
+
+        <a class="username">{{user.name}}</a>
         {{!-- <form action="/user/edit_profile_picture" method="post" enctype="multipart/form-data">
             <input type="file" name="photo" />
             <button type="submit">Save</button>
@@ -10,48 +14,35 @@
         <br>
 
         {{!-- IF STUDENT --}}
-        {{#equal data.usertype 0}}
-            <a class="left_a"> Major: {{data.major}} </a>
-        {{/equal}}
+        <a class="left_a"> Major: {{user.title}} </a>
 
         {{!-- IF PROFESSOR --}}
-        {{#equal data.usertype 1}}
-            <a class="left_a"> Department: {{data.department}} </a>
-        {{/equal}}
+        {{!-- <a class="left_a"> Department: {{user.department}} </a> --}}
 
         {{!-- IF INDUSTRY aka NPO, ERG, RECRUITER --}}
-        {{#equal data.usertype 2}}
-            <a class="left_a"> Company: {{data.company}} </a>
-        {{/equal}}
+        {{!-- <a class="left_a"> Company: {{user.company}} </a> --}}
 
-        <a class="left_a"> Email: {{data.email}} </a>
+        <a class="left_a"> Email: {{user.email}} </a>
+        <a class="left_a"> Date Created: {{user.created}}</a>
         <br>
         <br>
 
-        <label for="description">About Me</label>
-        {{#if logged}}
-            {{#equal user.userid data.id}}
-                <button type="button" id="editBioButton" style="float: right;">Edit Bio</button>
-            {{/equal}}
-        {{/if}}
+        {{!-- IF STUDENT --}}
         <div class="description">
-            <p id="current_bio" style="display: flex;">{{data.bio}}</p>
-            <form action="/user/savebio" id="bioForm" method="POST">
-                <textarea cols="90" rows="15" id="bio_textfield" placeholder="{{data.bio}}" name="bio" maxlength="1096"></textarea>
-                <button type="submit" id="save_biobutton">Save</button>
-            </form>
+            <p> Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto
+                obcaecati enim dicta
+                praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
 
             {{!-- ONLY FOR STUDENTS --}}
-            {{#equal data.usertype 0}}
-            <div class="rating" id="ratingstars">
-                <p class="avg" id="avg">{{data.comment}}</p>
+            {{!-- {{#if student}} --}}
+            <div class="rating">
                 <a href="#5" titele="Give 5 stars">★</a>
                 <a href="#4" title="Give 4 stars">★</a>
                 <a href="#3" title="Give 3 stars">★</a>
                 <a href="#2" title="Give 2 stars">★</a>
                 <a href="#1" title="Give 1 star">★</a>
             </div>
-            {{/equal}}
+            {{!-- {{/if}} --}}
         </div>
         <br>
     </div>
@@ -59,36 +50,20 @@
     {{!-- IF STUDENT --}}
     <div class="resume_container">
         <div class="right_userinfo">
-            <div class="username_info">
-                <a id="username_info">{{data.username}}</a>
-            </div>
             <div class="user_image">
-                {{#if data.profilepic}}
-                    <img id="pfp" src="{{data.profilepic}}" width="250px"></img>
-                {{else}}
-                    <img id="pfp" src="../assets/defaultProfile.png" width="250px"></img>
-                {{/if}}
+                <img id="pfp" src="{{user.profilepic}}" width="250px"></img>
+            </div>
+            <div class="username_info">
+                <a id="username_info">{{user.username}}</a>
             </div>
             <div class="boxes">
                 <ul class="list_boxes">
+                    <li><a href="/user/{{user.username}}">Resumes</a></li>
+                    <li><a href="/post/4">Reviews</a></li>
                     {{#if authpage}}
-                        {{!-- Change Photo --}}
-                        <div class="photoUpload">
-                            <div>Upload Photo</div>
-                            <form action="/user/edit_profile_picture" method="post" 
-                                enctype="multipart/form-data">
-                            <input type="file" name="photo" />
-                            <button type="submit" id="photoSubmitButton">Save</button>
-                            </form>
-                        </div>
-                    {{/if}}
-                    {{#equal data.usertype 0}}
-                        <li><a href="/resume/{{data.id}}">Resume</a></li>
-                        <li><a href="/post/{{data.id}}">Reviews</a></li>
-                    {{/equal}}
-                    {{#if authpage}}
-                        <li><a href="/user/{{data.username}}/settings">Edit Settings</a></li>
-                        {{!-- <li><a href="/">Messages</a></li> --}}
+                    <li><a href="/user/{{user.username}}/settings">Edit Settings</a></li>
+                    {{!-- <li><a href="/user/settings">Edit Settings</a></li> --}}
+                    <li><a href="/">Messages</a></li>
                     {{/if}}
 
                 </ul>
@@ -97,7 +72,6 @@
     </div>
 
 </div>
-
 {{!-- <div class="posts_container">
     <a class="username" id="userpost_label">User Posts</a>
     {{> posts}}

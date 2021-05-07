@@ -55,8 +55,7 @@ div{
 #department,
 #ethnicity,
 #gender,
-#email,
-select {
+#email {
   border-radius: 7px;
   height: 33px;
   width: 70%;

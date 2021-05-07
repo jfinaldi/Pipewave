@@ -3,20 +3,22 @@
     <div class="list_container">
         <table>
             <tr>
-                {{!-- <td>
+                <td>
+                    {{!-- {{#if this.alertNotSeenYet}} --}}
                     <div class="dot"></div>
-                </td> --}}
+                    {{!-- {{/if}} --}}
+                </td>
                 <td>
                     {{#if this.profilepic}}
                     <img id="result_image" src="{{this.profilepic}}" />
 
                     {{!-- only output default value if no profile exists --}}
                     {{else}}
-                    <img id="result_image" src="../assets/defaultProfile.png"/> 
+                    <img id="result_image" src="../assets/icons/defaultProfile.png" /> 
                     {{/if}}
                 </td>
                 <td id="name_title">
-                    {{this.name}}</br>Major: {{this.major}}
+                    {{this.name}}</br>Major: {{this.title}}
                 </td>
                 {{!-- <td colspan="3" rowspan="3" id="date_created">
                     Date Created: {{this.created}}

@@ -27,27 +27,14 @@ User.usernameExists = async user => {
 
 User.create = async (username, name, password, active, usertype, email, title) => {
   debugPrinter.printFunction("User.create");
-  let baseSQL = "";
+
   password = await bcrypt.hash(password, 15);
   if (!((await User.emailExists(email)) || (await User.usernameExists(username)))) {
-    switch(usertype){
-      case 0:
-        baseSQL = "INSERT INTO users (`username`,`name`, `email`, `active`,`usertype`, `password`, `created`, `major`) VALUES (?,?,?,?,?,?, now(), ?);";
-        break;
-      case 1:
-        baseSQL = "INSERT INTO users (`username`,`name`, `email`, `active`,`usertype`, `password`, `created`, `department`) VALUES (?,?,?,?,?,?, now(), ?);";
-        break;
-      case 2:
-        baseSQL = "INSERT INTO users (`username`,`name`, `email`, `active`,`usertype`, `password`, `created`, `company`) VALUES (?,?,?,?,?,?, now(), ?);";
-        break;
-      default:
-        console.log("Usertype not listed");
-    }
+    let baseSQL = "INSERT INTO users (`username`,`name`, `email`, `active`,`usertype`, `password`, `created`, `title`) VALUES (?,?,?,?,?,?, now(), ?);";
     let a = await db.execute(baseSQL, [username, name, email, active, usertype, password, title]);
     return a;
   }
 };
-
 User.createWithGoogleID = async (username, name, password, active, usertype, email, googleid) => {
   debugPrinter.printFunction("User.createWithGoogleID");
 
@@ -132,19 +119,7 @@ User.updateLastLogin = async (username) => {
   await db.execute(baseSQL2, [username]);
 };
 
-User.getLastLogin = async (username) => {
-  let baseSQL = "SELECT `lastlogin` FROM users WHERE `username`=?;";
-  [r, fields] = await db.execute(baseSQL, [username]);
-  if (r && r.length) {
-    console.log("r: ");
-    console.log(r);
-    return r;
-  } else {
-    return null;
-  }
-}
-
-// returns a list of any new unseen alerts 
+// returns true or false depending on if this account has new unseen alerts
 // meaning new profiles relevant to their alert that they have not seen yet
 User.hasNewAlerts = async (lastLogin) => {
   let baseSQL = "SELECT * from users WHERE `usertype`=0 AND UNIX_TIMESTAMP(`created`) > UNIX_TIMESTAMP(?);";
@@ -204,18 +179,6 @@ User.changeEmail = async (new_email, userid) => {
     return r;
   } else return null;
 };
-
-User.changeBio = async (new_bio, userid) => {
-  debugPrinter.printFunction("User.changeBio");
-
-  // verify user input by taking out ``
-
-  // update the database
-  let baseSQL = "UPDATE `users` SET `bio` = ? WHERE `id` = ?;";
-  let [r, fields] = await db.execute(baseSQL, [new_bio, userid]);
-
-  return r;
-}
 
 // Change Username
 User.changeUsername = async (new_username, userid) => {
@@ -292,7 +255,7 @@ User.changeDepartment = async (new_department, userid) => {
 User.getInfo = async username => {
   debugPrinter.printFunction("User.getInfo");
 
-  var baseSQL = "SELECT id, username, name, email, usertype, created, title, bio, profilepic, gender, ethnicity, major, company, department, resume FROM users WHERE username=?;";
+  var baseSQL = "SELECT bio, id, profilepic, name, email, usertype, title, created, username FROM users WHERE username=?;";
   let [r, fields] = await db.query(baseSQL, [username]);
   return r;
 };
@@ -305,7 +268,6 @@ const handler = async value => {
   }
 };
 
-// Get all the relevant alerts for an account
 User.getAlerts = async user_id => {
   debugPrinter.printFunction("User.getAlerts");
 
@@ -334,5 +296,4 @@ User.setAlert = async (object, userid) => {
   else basesql = "INSERT INTO `website`.`alerts` SET `ethnicity` = ?, `major` = ?, `gender` = ?, `fk_userid` = ?;";
   db.query(basesql, [object.ethnicity, object.major, object.gender, userid]);
 };
-
 module.exports = User;

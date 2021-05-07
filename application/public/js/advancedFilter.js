@@ -1,13 +1,12 @@
 const filter = document.getElementById("filterButton");
 var goButton = document.getElementById("button");
-
 check = false;
 styles = ["none", "inline", "flex"];
 
 filter.addEventListener("click", e => {
   check = !check;
   displayAdvancedFilter();
-  goButton.style.display = styles[check ? 0 : 1]; //make the go button disappear when advanced filter shows up
+  goButton.style.display = styles[check ? 0 : 1];
 });
 
 function displayAdvancedFilter() {

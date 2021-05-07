@@ -1,7 +1,6 @@
 var db = require("../config/database");
 const pdfReader = require("../controllers/helpers/pdf_handler");
 const debugPrinter = require("../controllers/helpers/debug/debug_printer");
-const User = require("./Users");
 
 const Engine = {};
 
@@ -20,10 +19,8 @@ Engine.getPosts = async limit => {
   try {
     let baseSQL = "SELECT * FROM website.users WHERE usertype=0 ORDER BY created DESC LIMIT ?;";
     let [r, fields] = await db.query(baseSQL, [limit]);
-    console.log("r: ");
-    console.log(r);
     return r;
-  } catch (err) {
+  }catch (err) {
     res.send(err);
   }
 };
@@ -31,18 +28,17 @@ Engine.getPosts = async limit => {
 // fetch all 
 Engine.getAllPosts = async _ => {
   debugPrinter.printFunction("Engine.getPosts");
+  //let baseSQL = "SELECT * FROM website.users ORDER BY created DESC;";
   let baseSQL = "SELECT * FROM website.users WHERE usertype=0 ORDER BY created DESC";
   let [r, fields] = await db.query(baseSQL);
   return r;
 };
-
 Engine.getPostsApiEndpoint = async (limit, filter, order = "DESC") => {
   //filter = created, reviews
-  //Display descending: "DESC"
-  debugPrinter.printFunction("Engine.getPostsApiEndpoint");
+  //ASC - DESC
+  debugPrinter.printFunction("Engine.getPosts");
   debugPrinter.printDebug([limit, filter, order]);
-  // let baseSQL = "SELECT u.username,u.name,  p.id, p.title, p.description, p.resumePath, p.created FROM users u JOIN posts p ON u.id=fk_userid ORDER BY ? ? LIMIT ?";
-  let baseSQL = "SELECT u.username, u.name, p.id, p.major, p.description, p.resumePath, p.created FROM users u JOIN posts p ON u.id=fk_userid ORDER BY ? ? LIMIT ?";
+  let baseSQL = "SELECT u.username,u.name,  p.id, p.title, p.description, p.resumePath, p.created FROM users u JOIN posts p ON u.id=fk_userid ORDER BY ? ? LIMIT ?";
   let [r, fields] = await db.query(baseSQL, [filter, order, limit]);
   return r;
 };
@@ -50,25 +46,38 @@ Engine.getPostsApiEndpoint = async (limit, filter, order = "DESC") => {
 Engine.search = async search => {
   debugPrinter.printFunction("Engine.search");
   try {
+    // let baseSQL =
+    //   "SELECT u.id,u.name,u.profilepic, u.title,u.created, u.username, concat_ws(' ', u.name, u.username, u.title) AS haystack FROM users u HAVING haystack like ?;";
     let baseSQL =
-    "SELECT u.id,u.name,u.profilepic, u.major,u.created, u.username, concat_ws(' ', u.name, u.username, u.major) AS haystack FROM users u WHERE u.usertype=0 HAVING haystack like ?;";
+    "SELECT u.id,u.name,u.profilepic, u.title,u.created, u.username, concat_ws(' ', u.name, u.username, u.title) AS haystack FROM users u WHERE u.usertype=0 HAVING haystack like ?;";
     let sqlready = "%" + search + "%";
     let [r, fields] = await db.execute(baseSQL, [sqlready]);
-    console.log("r-------");
-    console.log(r);
     return r && r.length ? r : await Engine.getPosts(10);
   } catch (err) {
     return false;
   }
 };
 
+// Engine.search = async search => {
+//   debugPrinter.printFunction("Engine.search");
+//   try {
+//     let baseSQL =
+//       "SELECT p.id, p.title, p.description, p.created,u.profilepic, u.username, u.name, concat_ws(' ', p.title,u.name, p.description, p.tags) AS haystack FROM users u JOIN posts p ON u.id=fk_userid HAVING haystack like ?;";
+//     let sqlready = "%" + search + "%";
+//     let [r, fields] = await db.execute(baseSQL, [sqlready]);
+//     return r && r.length ? r : await Engine.getPosts(10);
+//   } catch (err) {
+//     return false;
+//   }
+// };
+
 // get a single review
 Engine.getPost = async id => {
   debugPrinter.printFunction("Engine.getPost");
   try {
-    var baseSQL = "SELECT id, username, name, email, created, title, bio, profilepic, gender, ethnicity, major, resume FROM users WHERE id=?;";
+    var baseSQL =
+      "SELECT p.id as postid, p.role, u.id,u.email, u.profilepic,u.name, u.username, p.title, p.description, p.resumePath, p.created FROM users u JOIN posts p ON u.id=fk_userid WHERE p.id=?;";
     let [r, fields] = await db.query(baseSQL, [id]);
-    console.log(r)
     return r;
   } catch (err) {
     debugPrinter.printWarning(`Post id: ${id} does not exist in the DB`);
@@ -108,13 +117,14 @@ Engine.setPost = async (title, description, file, fk_userid) => {
   }
 };
 
-// Update profile photo
 Engine.updatePFP = async (file, fk_userid) => {
-  debugPrinter.printFunction("Engine.updatePFP");
+  debugPrinter.printFunction("Engine.setPost");
   try {
     console.log(fk_userid);
-    let path = "/assets/photos/" + file.filename;
+    let path = "/assets/" + file.filename;
+    // let tags = await pdfReader("./public" + path);
     debugPrinter.printDebug(fk_userid);
+    // let path = "/assets/" + req.file.filename;
     var baseSQL = "UPDATE `website`.`users` SET `profilepic` = ? WHERE `id` = ?;";
     let [r, fields] = await db.query(baseSQL, [path, fk_userid]);
     debugPrinter.printDebug("Response", r);
@@ -139,20 +149,6 @@ Engine.updateRES = async (file, fk_userid) => {
     return r;
   } catch (err) {
     console.log("Couldnt update resume, boo.");
-    return null;
-  }
-};
-
-Engine.getRES = async(userid) => {
-  debugPrinter.printFunction("Engine.getRES");
-  console.log(userid);
-  try {
-    var baseSQL = "SELECT resume, name FROM users WHERE id=?";
-    let [r, fields] = await db.query(baseSQL, [userid]);
-    console.log(r[0]);
-    return [r[0].resume, r[0].name];
-  } catch (err) {
-    console.log("Error, userid does not exist in db.");
     return null;
   }
 };
@@ -186,7 +182,7 @@ Engine.advancedSearch = async advancedSearch => {
     let baseSQL = "SELECT u.id,u.title, u.ethnicity, u.major, u.profilepic, u.username, u.name FROM users u " + base;
     console.log(baseSQL);
     let [r, fields] = await db.execute(baseSQL);
-    return r && r.length ? r : await Engine.getAllPosts();
+    return r && r.length ? r : await Engine.getallPosts();
   } catch (err) {
     return false;
   }
@@ -206,44 +202,30 @@ const filterHelper = (option, filter_name, count, base) => {
   return [tempcount, tempbase];
 };
 
-// Grabs all filtered results 
-Engine.filterSearch = async (filteredSearchArray, lastLogin) => {
+Engine.filterSearch = async filteredSearchArray => {
   if (!filteredSearchArray) return;
-  debugPrinter.printFunction("Engine.filterSearch");
+  debugPrinter.printFunction("Engine.advancedSearch");
   let options = ["ethnicity", "gender", "major"];
   let base = "",
     count = 0;
-  let base2 = " ORDER BY u.created DESC;";
-
-  console.log("Engine.filterSearch");
-  console.log(lastLogin); //output one day ahead
-  let baseSQL2 = "SELECT * from users WHERE `usertype`=0 AND UNIX_TIMESTAMP(`created`) < UNIX_TIMESTAMP(?);";
-  let [r2, fields2] = await db.execute(baseSQL2, [lastLogin]); // this gives us a whole list of all students who are new since last login
-  if(r2 && r2.length) {
-    console.log("outputting r2: ");
-    for(i = 0; i < r2.length; i++){
-      console.log(r2[i].username + "\t" + r2[i].created);
-    }
-  } else { console.log("r2 is empty."); }
 
   debugPrinter.printSuccess(filteredSearchArray[0].ethnicity);
   [count, base] = filterHelper(filteredSearchArray[0].ethnicity, options[0], count, base);
   [count, base] = filterHelper(filteredSearchArray[0].gender, options[1], count, base);
   [count, base] = filterHelper(filteredSearchArray[0].major, options[2], count, base);
+  base += ";";
   //filter: [eth:[] major:[] gender: []]
 
   debugPrinter.printFunction("BASE: ");
   debugPrinter.printFunction(base);
   try {
-    //let baseSQL = "SELECT u.id,u.title, u.ethnicity, u.major, u.profilepic, u.username, u.name FROM users u " + base;
-    let baseSQL = "SELECT u.id,u.title, u.ethnicity, u.major, u.profilepic, u.username, u.name FROM users u " + base + base2;
+    let baseSQL = "SELECT u.id,u.title, u.ethnicity, u.major, u.profilepic, u.username, u.name FROM users u " + base;
     console.log(baseSQL);
-    let [r, fields] = await db.execute(baseSQL); // this gives us a list of all relevant search items
-    return r && r.length ? r : await Engine.getAllPosts();
+    let [r, fields] = await db.execute(baseSQL);
+    return r && r.length ? r : await Engine.getallPosts();
   } catch (err) {
     return false;
   }
 };
-
 
 module.exports = Engine;
