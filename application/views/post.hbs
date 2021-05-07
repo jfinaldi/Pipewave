@@ -1,4 +1,4 @@
-{{> nav}}
+    {{> nav}}
 {{!-- 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> --}}
 {{!-- <link rel="stylesheet" type="text/css" href="/css/nav.css" />
@@ -9,23 +9,21 @@
 
 <div class="post_container">
     <div class="left">
-        <a class="post_title" href="/post/{{data.postid}}"> {{data.name}}</a>
-        <a class="left_a" id="user" href="/user/{{data.username}}">{{data.username}}</a>
+        <p class="post_title"> {{data.username}}</p>
         <br>
-        <a class="left_a top_left_a">Job Title: {{data.title}} </a>
-        <a class="left_a">Company: {{data.company}} </a>
+        <p class="left_a" id="user">Name: {{data.name}}</p>
+        <p class="left_a">Major: {{data.major}} </p>
+        <p class="left_a">Email: {{data.email}} </p>
 
-        <a class="left_a bottom_left_a">Date Posted: {{data.created}}</a>
+        {{!-- <p class="left_a bottom_left_a">Date Posted: {{data.created}}</a> --}}
         <br>
         <br>
         {{!-- <a class="left_a">Description: {{data.description}}</a> --}}
         <div class="description">
-            <p> Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto
-                obcaecati enim dicta
-                praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
+            <p> {{data.bio}}</p>
             {{!-- <a id="readmore" href="#">seomthing about rating here</a> --}}
             <div class="rating" id="ratingstars">
-                <p class="avg" id="avg">{{comment.avg}}</p>
+                <p class="avg" id="avg">{{data.comment}}</p>
 
                 <a id="star5" href="#5" title="Give 5 stars">★</a>
                 <a id="star4" href="#4" title="Give 4 stars">★</a>
@@ -39,36 +37,25 @@
     </div>
 
 
-    <div class="resume_container">
-        {{!-- <embed id="obj" src="{{data.resumePath}}"> --}}
-        <object id="obj" data="{{data.resumePath}}">object can't be rendered</object>
-    </div> 
+    {{!-- <div class="resume_container">
+        <object id="obj" data="{{data.resume}}">object can't be rendered</object>
+    </div>  --}}
 </div>
 <div class="comments">
-
     <div class="left_title">
         <a class="post_title">Reviews</a>
-        <div class="right_post"><button id="post_review">Post A Review</button></div>
+        {{!-- If user is a student post button will not be available --}}
+        {{#if usertype}}
+            <div class="right_post"><button id="post_review">Post A Review</button></div>
+        {{/if}}
     </div>
     <br>
+
     {{!-- comments section partial --}}
-    <div class="comment_container">
-        <a class="note_title">Dr.Erlich Bachman</a>
-        <a class="review_user_title">Professor of Computer Science, SFSU</a>
-        <br>
-
-        <a class="review_content">Very good student, recommend. Writes good code and knows how to spell, next.
-            bla
-            bla bla bla bla bla bla bla bla, words idk what to say</a>
-
-        {{!-- <div class="moreinfo">
-            <a href="/post/{{this.id}}">
-                <button>More info</button>
-            </a>
-        </div> --}}
-    </div>
+    
     {{>comments}}
 
+    {{#if usertype}}
     <div id="leave_a_review">
         <form action="/comment" method="post" enctype="application/x-www-form-urlencoded">
             <textarea type="text" name="comment" id="review_textarea" cols="30" rows="10">
@@ -76,13 +63,6 @@
             <div class="review_button_container">
                 <button>Submit Review</button>
             </div>
-            {{!-- <div class="formrating" id="ratingstars">
-                <input id="formstar5" type="radio" name="review" href="#5" title="Give 5 stars">★</input>
-                <input id="formstar4" type="radio" name="review" href="#4" title="Give 4 stars">★</input>
-                <input id="formstar3" type="radio" name="review" href="#3" title="Give 3 stars">★</input>
-                <input id="formstar2" type="radio" name="review" href="#2" title="Give 2 stars">★</input>
-                <input id="formstar1" type="radio" name="review" href="#1" title="Give 1 star">★</input>
-            </div> --}}
             <div class="formrating">
                 <p class="avg" id="formavg">N/A</p>
                 <input type="radio" name="rating" value="5" /><label for="star5" id="formstar5" title="Rocks!">5
@@ -96,10 +76,9 @@
                 <input type="radio" id="formstar1" name="rating" value="1" /><label for="star1" title="Sucks big time">1
                     star</label>
             </div>
-
         </form>
     </div>
-
+    {{/if}}
 </div>
 <br>
 <br>

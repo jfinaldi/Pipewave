@@ -8,6 +8,8 @@ router.get("/", (req, res) => {
   debugPrinter.printRouter("/about");
   res.render("about/about", {
     unique: "About",
+    hasNewAlerts: req.session.hasAlerts,
+    usertype: req.session.usertype,
   });
 });
 //

@@ -321,4 +321,26 @@ input {
   text-align: left;
 }
 
+.my_alerts {
+  font-family: "Open Sans", sans-serif;
+  background: rgb(235, 235, 235);
+  margin: auto;
+  width: 300px;
+  padding-bottom: 10px;
+}
+
+.alert_items {
+  font-family: default;
+  /* border-left: solid black;
+  border-right: solid black;
+  border-top: solid black; */
+  background: white;
+  margin: auto;
+  width: 50%;
+}
+
+li {
+  /* border-bottom: solid black; */
+}
+
 

@@ -4,13 +4,15 @@
         <a href="/user/logout">
             <button type="submit" id="logout_button" class="right">Logout</button>
         </a>
-        {{#if hasNewAlerts}}
-        <a href="/alerts" class="right">Alerts
-            <div class="right" id="nav_dot"></div>
-        </a>
-        {{else}}
-            <a href="/alerts" class="right">Alerts</a>
-        {{/if}}
+        {{#equal user.usertype 2}}
+            {{#if hasNewAlerts}}
+            <a href="/alerts" class="right">Alerts
+                <div class="right" id="nav_dot"></div>
+            </a>
+            {{else}}
+                <a href="/alerts" class="right">Alerts</a>
+            {{/if}}
+        {{/equal}}
         <a href="/user/{{username}}" class="right">{{username}}</a>
     {{else}}
         <a href="/register" class="right">Register</a>
@@ -18,4 +20,6 @@
     {{/if}}
     <a href="/about" class="right">About </a>
     <a href="/" class="right">Home</a>
+    <a href="/" class="right" style="color: red; padding-right: 50px;">
+        ***SFSU Software Engineering Project CSC 648-848, Spring 2021. For Demonstration Only***</a>
 </div>

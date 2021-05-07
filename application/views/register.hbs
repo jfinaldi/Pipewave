@@ -55,7 +55,7 @@
                         <option value="NPO">Non-Profit Organization (NPO)</option>
                         <option value="Recruiter">Recruiter</option>
                     </select>
-                    <div id="formElements">
+                    <div id="formElements" class="formElements">
                         <br><label for="Username" class="inputtags">Username</label>
                         <input placeholder=" Enter Username" pattern="[A-Za-z0-9]+" type=text id="username"
                             name="username" required />
@@ -64,9 +64,42 @@
 
                         <br><label for="email" class="inputtags">E-mail</label>
                         <input placeholder=" Enter Email" type="email" id="email"
-                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" name="email" required />
-                        <br><label id="occupationLabel" for="occupation" class="inputtags">Occupation</label>
-                        <input placeholder=" Occupation" id="occupation" minlength="8" name="title" required></input>
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" name="email" required />  
+                        <div id="Student" class="inputtags">
+                            <label id="majorLabel" for="major" class="inputtags">Major</label>
+                        </div>
+                        <div id="Student2">
+                            <select name="major" id="majorSelector" name="role">
+                                <option name="" value="">--Select--</option>
+                                <option name="Computer Science" value="Computer Science">Computer Science</option>
+                                <option name="Engineering" value="Engineering">Engineering</option>
+                                <option name="Mathematics" value="Mathematics">Mathematics</option>
+                                <option name="Communications" value="Communications">Communications</option>
+                                <option name="Business" value="Business">Business</option>
+                            </select>
+                        </div>
+                        
+                        <div id="Professor" class="inputtags">
+                            <label id="departmentLabel" for="department" class="inputtags">Department</label>
+                        </div>
+                        <div id="Professor2">
+                            <select name="department" id="departmentSelector" name="role">
+                                <option name="" value="">--Select--</option>
+                                <option name="Computer Science" value="Computer Science">Computer Science</option>
+                                <option name="Engineering" value="Engineering">Engineering</option>
+                                <option name="Mathematics" value="Mathematics">Mathematics</option>
+                                <option name="Communications" value="Communications">Communications</option>
+                                <option name="Business" value="Business">Business</option>
+                            </select>
+                        </div>
+
+                        <div id="Recruiter" class="inputtags">
+                            <label id="companyLabel" for="company" class="inputtags">Company</label>
+                        </div>
+                        <div id="Recruiter2">
+                            <input placeholder="New Company" id="company" name="company"></input><br>
+                        </div>
+
                         <br><label for="password" class="inputtags">Password</label>
                         <input placeholder=" Enter Password" type=password id="password" minlength="8" name="password"
                             required></input>
@@ -76,14 +109,14 @@
                         <br>
                         <br>
                         <input type="checkbox" id="age" value="age" required name="agecheckbox" /><a class="text">Over
-                            13
+                            16
                             years of age</a><br>
                         <br>
                         <div>
-                            <input type="checkbox" id="TOS" value="tos" required /><a name="toscheckbox"
-                                class="text">Accept
-                            </a><a href="#" id="tostext"> Terms and Conditions</a><br>
-                        </div> <br>
+                            <input type="checkbox" id="TOS" value="tos" required />
+                            <a name="toscheckbox" class="text">Accept</a>
+                            <a href="#" id="tostext"> Terms and Conditions</a><br>
+                        </div>
                         <input type="submit" class="submit" value="Submit">
                     </div>
                 </form>

@@ -7,21 +7,6 @@
 
             <a class="username">{{user.name}}</a>
 
-            {{!-- Change Photo --}}
-            <div>Upload Photo</div>
-            <form action="/user/edit_profile_picture" method="post" enctype="multipart/form-data">
-                <input type="file" name="photo" />
-                <button type="submit">Save</button>
-            </form><br>
-
-            {{!-- Change Resume --}}
-            <div>Upload Resume</div>
-            <form action="/user/edit_resume" method="post" enctype="multipart/form-data">
-                <input type="file" name="resume" />
-                <button type="submit">Save</button>
-            </form>
-
-            {{!-- <form action="/user/updateSettings" id="form" method="POST" enctype="application/x-www-form-urlencoded"> --}}
             <form action="/user/updateSettings" id="form" method="post" enctype="application/x-www-form-urlencoded">
                 <div id= "formElements">
                     <h3>User Info</h3>
@@ -39,28 +24,56 @@
                     <input placeholder=" Enter Email" type="email" id="email"
                             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" name="email" /><br>
                     
-                    {{#equal usertype.usertype 0}}
+                    {{#equal usertype 0}}
                         {{!-- Change Ethnicity --}}
                         <label id="ethnicityLabel" for="ethnicity" class="inputtags">Ethnicity</label>
-                        <input placeholder="Ethnicity" id="ethnicity" name="ethnicity"></input><br>
+                        <select name="ethnicity" id="formSelector" name="role">
+                            <option value="">--Select--</option>
+                            <option name="ethnicity" value="african american">African-American</option>
+                            <option name="ethnicity" value="hispanic">Hispanic</option>
+                            <option name="ethnicity" value="asian">Asian</option>
+                            <option name="ethnicity" value="latin">Latin</option>
+                            <option name="ethnicity" value="pacific islander">Pacific Islander</option>
+                            <option name="ethnicity" value="indigeneous">Indigenous</option>
+                            <option name="ethnicity" value="white">White</option>
+                            <option name="ethnicity" value="other">Other</option>
+                        </select>
 
                         {{!-- Change Gender --}}
                         <label id="genderLabel" for="gender" class="inputtags">Gender</label>
-                        <input placeholder="Gender" id="gender" name="gender"></input><br>
+                        <select name="gender" id="formSelector" name="role">
+                            <option value="">--Select--</option>
+                            <option name="male" value="male">Male</option>
+                            <option name="female" value="female">Female</option>
+                            <option name="nonbinary" value="nonbinary">Non-binary</option>
+                        </select>
 
                         {{!-- Change Major --}}
                         <label id="majorLabel" for="major" class="inputtags">Major</label>
-                        <input placeholder="New Major" id="major" name="major"></input><br>
+                        <select name="major" id="formSelector" name="role">
+                            <option name="" value="">--Select--</option>
+                            <option name="Computer Science" value="Computer Science">Computer Science</option>
+                            <option name="Engineering" value="Engineering">Engineering</option>
+                            <option name="Mathematics" value="Mathematics">Mathematics</option>
+                            <option name="Communications" value="Communications">Communications</option>
+                            <option name="Business" value="Business">Business</option>
+                        </select>
                     {{/equal}}
 
-                    {{#equal usertype.usertype 1}}
+                    {{#equal usertype 1}}
                         {{!-- Change Department --}}
                         <label id="departmentLabel" for="department" class="inputtags">Department</label>
-                        <input placeholder="New Department" id="department" name="department"></input><br>
-                        <br>
+                        <select name="department" id="formSelector" name="role">
+                            <option name="" value="">--Select--</option>
+                            <option name="Computer Science" value="Computer Science">Computer Science</option>
+                            <option name="Engineering" value="Engineering">Engineering</option>
+                            <option name="Mathematics" value="Mathematics">Mathematics</option>
+                            <option name="Communications" value="Communications">Communications</option>
+                            <option name="Business" value="Business">Business</option>
+                        </select>
                     {{/equal}}
 
-                    {{#equal usertype.usertype 2}}
+                    {{#equal usertype 2}}
                         {{!-- Change Company  --}}
                         <label id="companyLabel" for="company" class="inputtags">Company</label>
                         <input placeholder="New Company" id="company" name="company"></input><br>
