@@ -4,6 +4,7 @@ const { successPrint, errorPrint } = require("../helpers/printers");
 const User = require("../../models/Users");
 const Engine = require("../../models/Engine");
 var mytools = require("../helpers/mytools");
+var mytools = require("../helpers/mytools");
 const multer = require("multer");
 const crypto = require("crypto");
 
@@ -32,19 +33,13 @@ router.post("/login", async (req, res, next) => {
     // Authenticate user
     let [auth, userid, usertype, lastlogin] = await User.authenticate(username, password);
     if (auth) {
-      console.log("authorized login!");
       // Assign stuff to user once logged in
       res.locals.logged = true;
       req.session.hasNewAlerts = false;
       req.session.username = await username;
       req.session.userid = await userid;
       req.session.usertype = await usertype; // Kevin added
-      //req.session.lastLogin = lastlogin;
-      req.session.lastLogin = await User.getLastLogin(req.session.username);
 
-      console.log("Last login:");
-      console.log(lastlogin);
-    
       // If this user is an industry account
       // create a hasAlerts variable in session and
       // set it to true if last login < created of some alert
@@ -52,15 +47,21 @@ router.post("/login", async (req, res, next) => {
       if(req.session.usertype === 2) {
         console.log("usertype is industry. Checking for new alerts now...");
         let lastLogin = await lastlogin;
-        let newAlerts = await User.hasNewAlerts(lastLogin);
+        console.log("userid: " + userid);
+        let newAlerts = await User.hasNewAlerts(lastLogin, userid);
         if(newAlerts == true) {
           req.session.hasNewAlerts = true;
           console.log("We have new alerts! yay");
         } else {
           console.log("We have no new alerts boo")
-          //req.session.hasNewAlerts = false;
+          req.session.hasNewAlerts = false;
         }
+        console.log(req.session.hasNewAlerts);
       }
+      // } else {
+      //   console.log("We have no new alerts");
+      //   req.session.noNewAlerts = true;
+      // }
 
       // update the last login to now
       await User.updateLastLogin(username);
@@ -84,31 +85,15 @@ router.post("/register", async (req, res, next) => {
   }
   // If not logged in
   else {
-    let { username, name, email, password, major, company, department, usertype } = req.body,
+    let { username, name, email, password, title, usertype } = req.body,
       active = 0;
     let schooltypes = ["Student", "Professor"];
     let orgtypes = ["ERG", "NPO", "Recruiter"];
-    var title = "";
-    if (usertype == schooltypes[0]) {
-      usertype = 0;
-      title = major;
-    }
-    if (usertype == schooltypes[1]) {
-      usertype = 1;
-      title = department;
-    }
-    if (orgtypes.includes(usertype)) {
-      usertype = 2;
-      title = company;
-    }
+    if (usertype == schooltypes[0]) usertype = 0;
+    if (usertype == schooltypes[1]) usertype = 1;
+    if (orgtypes.includes(usertype)) usertype = 2;
 
-    console.log(req.body);
-    console.log("req.body.title: " + req.body.title);
-    console.log(major);
-    console.log(company);
-    console.log(department);
-    console.log(title);
-
+    console.log(usertype);
     // Communicate with the Users model to create the user
     let response = await User.create(username, name, password, active, usertype, email, title);
     // debugPrinter.printDebug(`User${response ? "" : " not"} created`);
@@ -167,13 +152,12 @@ router.get("/logout", async (req, res) => {
   }
 });
 
-// Storage for all file uploads
 const multerStorage = multer.diskStorage({
   // Add an new key called destination
   destination: (req, file, cb) => {
     // Image upload location
 
-    let pathImageFileUploadLocation = "public/assets/resumes";
+    let pathImageFileUploadLocation = "public/assets";
 
     cb(null, pathImageFileUploadLocation);
   },
@@ -191,34 +175,8 @@ const multerStorage = multer.diskStorage({
   },
 });
 
-// Storage for Profile Photos
-// Doesn't Work Yet, Same functionality as original storage different path
-const multerPhotoStorage = multer.diskStorage({
-  // Add an new key called destination
-  destination: (req, file, cb) => {
-    // Image upload location
-    let pathImageFileUploadLocation = "public/assets/photos";
+const uploader = multer({ storage: multerStorage });
 
-    cb(null, pathImageFileUploadLocation);
-  },
-
-  // Add a new key called filename
-  filename: (req, file, cb) => {
-    // Get file ext
-    debugPrinter.printDebug(`file: ${file}`);
-
-    let fileExt = file.mimetype.split("/")[1];
-
-    // Generate file name
-    let randomName = crypto.randomBytes(22).toString("hex");
-    cb(null, `${randomName}.${fileExt}`);
-  },
-});
-
-let uploader = multer({ storage: multerStorage });
-let photoUploader = multer({ storage: multerPhotoStorage});
-
-// Upload for the test upload page
 router.post("/upload", uploader.single("photofile"), async (req, res, next) => {
   debugPrinter.printRouter("Post: /upload");
   debugPrinter.printDebug(`PATH: ${req.file.path}`);
@@ -238,17 +196,16 @@ router.post("/upload", uploader.single("photofile"), async (req, res, next) => {
   }
 });
 
-router.post("/edit_profile_picture", photoUploader.single("photo"), async (req, res) => {
+router.post("/edit_profile_picture", uploader.single("photo"), async (req, res) => {
   if (!req.session.username) {
     res.redirect("/");
   } else {
     debugPrinter.printRouter(req.file);
 
     await Engine.updatePFP(req.file, req.session.userid);
-    res.redirect("/user/" + req.session.username);
+    res.redirect("/");
   }
 });
-
 // Post changeUsername
 router.post("/changeUsername", async (req, res) => {
   debugPrinter.printRouter("Post: /changeUsername");
@@ -294,7 +251,6 @@ router.post("/changePassword", async (req, res) => {
     status = "Password Updated";
     res.render("user", {
       unique: "user",
-      title: "PipeWave",
       search: true,
       user: { username: req.session.username, status: status },
     });
@@ -302,7 +258,6 @@ router.post("/changePassword", async (req, res) => {
     status = "Server Error, please try again later";
     res.render("user", {
       unique: "user",
-      title: "PipeWave",
       search: true,
       user: { username: req.session.username, status: status },
     });
@@ -327,23 +282,14 @@ router.post("/changeEmail", async (req, res) => {
 // Page user
 router.get("/:user", async (req, res) => {
   debugPrinter.printRouter(`Get: /users/${req.params.user}`);
-  let r = await Engine.getUserPosts(req.params.user);
+  let r = await mytools.resFormatDateCreated(await Engine.getUserPosts(req.params.user));
   debugPrinter.printRouter(r);
   successPrint(r[0]);
   res.render("user", {
-    data: await mytools.resFormatDateCreated(await User.getInfo(req.params.user))[0],
-    user: { 
-      userid: req.session.userid,
-      username: req.session.username,
-      usertype: req.session.usertype
-    },
+    user: await mytools.resFormatDateCreated(await User.getInfo(req.params.user))[0],
     post: r,
-    title: "" + (req.params.user) + "'s Profile",
-    hasNewAlerts: req.session.hasNewAlerts,
     unique: "User",
-    render_js_files: ["profile"],
   });
-  console.log(req.session);
 });
 
 // get settings page
@@ -355,11 +301,9 @@ router.get("/:user/settings", async (req, res) => {
   } else {
     res.render("settings", {
       unique: "Settings", //css link
-      title: "Update Settings",
       search: true,
-      hasNewAlerts: req.session.hasNewAlerts,
       user: { username: req.session.username },
-      usertype: req.session.usertype,
+      usertype: { usertype : req.session.usertype},
       render_js_files: ["settings"],
     });
   }
@@ -379,22 +323,19 @@ router.post("/setAlert", async (req, res) => {
 });
 
 // get post aka Reviews page
-// router.get("/:user/post", async (req, res) => {
-//   debugPrinter.printRouter("Get: /:post");
-//   let resp = await mytools.resFormatDateCreated(await Engine.getUserPosts(req.session.username));
-//   debugPrinter.printRouter(resp[0]);
-//   console.log(resp[0])
-//   res.render("post", {
-//     data: await resp[0],
-//     unique: "Post",
-//     search: true,
-//     comment: await Review.getReviews(req.params.id),
-//     hasNewAlerts: req.session.hasAlerts,
-//     usertype: req.session.usertype,
-//     user: { username: req.session.username },
-//     render_js_files: ["comment"],
-//   });
-// });
+router.get("/:user/post", async (req, res) => {
+  debugPrinter.printRouter("Get: /:post");
+  let resp = await mytools.resFormatDateCreated(await Engine.getUserPosts(req.session.username));
+  debugPrinter.printRouter(resp[0]);
+  res.render("post", {
+    data: await resp[0],
+    unique: "Post",
+    search: true,
+    user: { username: req.session.username },
+    render_css_files: ["Post"],
+    render_js_files: ["comment"],
+  });
+});
 
 // post update settings
 router.post("/updateSettings", async (req, res) => {
@@ -425,16 +366,15 @@ router.post("/updateSettings", async (req, res) => {
       status = `Name Changed to ${req.body.name}`;
     }
 
-    // change user email
-    if(req.body.email != '') {
-      let status;
-      let response = await User.changeEmail(req.body.email, req.session.userid);
-      console.log("updated");
-      console.log(response);
-      status = `Email Changed to ${req.body.email}`;
-    }
-
-    if(req.session.usertype == 0) {
+    if(req.session.usertype == 0){
+      // change user email
+      if(req.body.email != '') {
+        let status;
+        let response = await User.changeEmail(req.body.email, req.session.userid);
+        console.log("updated");
+        console.log(response);
+        status = `Email Changed to ${req.body.email}`;
+      }
 
       // change ethnicity
       if(req.body.ethnicity != '') {
@@ -512,30 +452,13 @@ router.post("/edit_resume", uploader.single("resume"), async (req, res) => {
 
     try {
       let [r, fields] = await Engine.updateRES(req.file, req.session.userid);
-      res.redirect("/resume/" + req.session.userid);
+      res.redirect("/user/" + user + "/settings");
     } catch (err) {
       console.log("Error: could not update resume");
-      console.log(err);
-      res.redirect("/resume/" + req.session.userid);
+      res.redirect("/user/" + user + "/settings");
     }
 
   }
-});
-
-// post update bio
-router.post("/savebio", async(req, res) => {
-  debugPrinter.printRouter("Post: /user/savebio");
-
-  try {
-    var result = await User.changeBio(req.body.bio, req.session.userid);
-    if (result) console.log("this shit worked");
-    else console.log("error bio not updated");
-    res.redirect("/user/" + req.session.username);
-  } catch (err) {
-    console.log(err);
-    res.redirect("/user/:user");
-  }
-
 });
 
 module.exports = router;

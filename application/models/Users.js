@@ -27,27 +27,14 @@ User.usernameExists = async user => {
 
 User.create = async (username, name, password, active, usertype, email, title) => {
   debugPrinter.printFunction("User.create");
-  let baseSQL = "";
+
   password = await bcrypt.hash(password, 15);
   if (!((await User.emailExists(email)) || (await User.usernameExists(username)))) {
-    switch(usertype){
-      case 0:
-        baseSQL = "INSERT INTO users (`username`,`name`, `email`, `active`,`usertype`, `password`, `created`, `major`) VALUES (?,?,?,?,?,?, now(), ?);";
-        break;
-      case 1:
-        baseSQL = "INSERT INTO users (`username`,`name`, `email`, `active`,`usertype`, `password`, `created`, `department`) VALUES (?,?,?,?,?,?, now(), ?);";
-        break;
-      case 2:
-        baseSQL = "INSERT INTO users (`username`,`name`, `email`, `active`,`usertype`, `password`, `created`, `company`) VALUES (?,?,?,?,?,?, now(), ?);";
-        break;
-      default:
-        console.log("Usertype not listed");
-    }
+    let baseSQL = "INSERT INTO users (`username`,`name`, `email`, `active`,`usertype`, `password`, `created`, `title`) VALUES (?,?,?,?,?,?, now(), ?);";
     let a = await db.execute(baseSQL, [username, name, email, active, usertype, password, title]);
     return a;
   }
 };
-
 User.createWithGoogleID = async (username, name, password, active, usertype, email, googleid) => {
   debugPrinter.printFunction("User.createWithGoogleID");
 
@@ -144,22 +131,6 @@ User.getLastLogin = async (username) => {
   }
 }
 
-// returns a list of any new unseen alerts 
-// meaning new profiles relevant to their alert that they have not seen yet
-User.hasNewAlerts = async (lastLogin) => {
-  let baseSQL = "SELECT * from users WHERE `usertype`=0 AND UNIX_TIMESTAMP(`created`) > UNIX_TIMESTAMP(?);";
-  let [r, fields] = await db.execute(baseSQL, [lastLogin]);
-
-  if (r && r.length) {
-    console.log("New alert");
-    return true;
-  }
-  else {
-    console.log("No new alert");
-    return false;
-  }
-};
-
 User.checkPassword = async (username, new_password) => {
   debugPrinter.printFunction("User.checkPassword");
 
@@ -204,18 +175,6 @@ User.changeEmail = async (new_email, userid) => {
     return r;
   } else return null;
 };
-
-User.changeBio = async (new_bio, userid) => {
-  debugPrinter.printFunction("User.changeBio");
-
-  // verify user input by taking out ``
-
-  // update the database
-  let baseSQL = "UPDATE `users` SET `bio` = ? WHERE `id` = ?;";
-  let [r, fields] = await db.execute(baseSQL, [new_bio, userid]);
-
-  return r;
-}
 
 // Change Username
 User.changeUsername = async (new_username, userid) => {
@@ -292,7 +251,7 @@ User.changeDepartment = async (new_department, userid) => {
 User.getInfo = async username => {
   debugPrinter.printFunction("User.getInfo");
 
-  var baseSQL = "SELECT id, username, name, email, usertype, created, title, bio, profilepic, gender, ethnicity, major, company, department, resume FROM users WHERE username=?;";
+  var baseSQL = "SELECT bio, id, profilepic, name, email, usertype, title, created, username FROM users WHERE username=?;";
   let [r, fields] = await db.query(baseSQL, [username]);
   return r;
 };
@@ -305,16 +264,19 @@ const handler = async value => {
   }
 };
 
-// Get all the relevant alerts for an account
 User.getAlerts = async user_id => {
   debugPrinter.printFunction("User.getAlerts");
+  console.log("user_id: " + user_id);
 
-  var baseSQL = "SELECT ethnicity, major, gender FROM alerts WHERE fk_userid=?;";
-  let [r, fields] = await db.query(baseSQL, [user_id]);
+  var baseSQL = "SELECT `ethnicity`, `major`, `gender` FROM `alerts` WHERE `fk_userid`=?;";
+  let [r, fields] = await db.execute(baseSQL, [user_id]);
   if (r && r.length) {
+    console.log("We have a result from alerts query in User.getAlerts");
     r[0].ethnicity = await handler(r[0].ethnicity);
     r[0].major = await handler(r[0].major);
     r[0].gender = await handler(r[0].gender);
+    console.log("r: ");
+    console.log(r);
     return r;
   }
   return false;
@@ -329,10 +291,105 @@ const alertsetter = async option => {
   if (option == NULL || option == undefined) return NULL;
 };
 
+// returns a list of any new unseen alerts 
+// meaning new profiles relevant to their alert that they have not seen yet
+User.hasNewAlerts = async (lastLogin, userid) => {
+  console.log("Inside hasNewAlerts");
+  let baseSQL = "SELECT * from users WHERE `usertype`=0 AND UNIX_TIMESTAMP(`created`) > UNIX_TIMESTAMP(?);";
+  let [r, fields] = await db.execute(baseSQL, [lastLogin]);
+
+  if (r && r.length) {
+    console.log("New alert possibly");
+    //do second query to find out if new profile matches demographics in alert
+    let[r2, fields2] = await User.getAlerts(userid);
+    console.log("r2: ");
+    console.log(r2);
+
+    //console.log("Fields2.length: ");
+    //console.log(fields2.length);
+
+    // if we have any alert parameters set up
+    if(r2) {
+      console.log("User has an alert set up..");
+      console.log("r2: ");
+      console.log(r2);
+
+      //cycle through all of our new accounts 
+      for(i = 0; i < r.length; i++) {
+        console.log("r[i]: ");
+        console.log(r[i]);
+        //Only have genders to match
+        if((r2.ethnicity == null) && (r2.major == null) && (r2.gender[0] != null)) {
+          console.log("Only have gender to match");
+          console.log(r2.gender[0]);
+          if(r2.gender[0] === r[i].gender) return true;
+        }
+
+        //Only have major to match
+        if((r2.ethnicity == null) && (r2.major[0] != null) && (r2.gender == null)) {
+          console.log("Only have major to match");
+          console.log(r2.major);
+          if(r2.major[0] === r[i].major) return true;
+        }
+
+        //gender and major to match
+        if((r2.ethnicity == null) && (r2.major[0] != null) && (r2.gender[0] != null)) {
+          console.log("Have gender and major to match");
+          console.log(r2.gender[0]);
+          console.log(r2.major[0]);
+          if((r2.gender[0] === r[i].gender) && (r2.major[0] === r[i].major)) return true;
+        }
+
+        //Only have ethnicity to match
+        if((r2.ethnicity[0] != null) && (r2.major == null) && (r2.gender == null)) {
+          console.log("Only have ethnicity to match");
+          console.log(r2.ethnicity[0]);
+          if(r2.ethnicity[0] === r[i].ethnicity) return true;
+        }
+
+        //ethnicity and gender to match
+        if((r2.ethnicity[0] != null) && (r2.major == null) && (r2.gender[0] != null)) {
+          console.log("Have ethnicity and gender to match");
+          console.log(r2.gender[0]);
+          console.log(r2.ethnicity[0]);
+          if((r2.ethnicity[0] === r[i].ethnicity) && (r2.gender[0] === r[i].gender)) return true;
+        }
+      
+        //ethnicity and major to match
+        if((r2.ethnicity[0] != null) && (r2.major[0] != null) && (r2.gender == null)) {
+          console.log("Have ethnicity and major to match");
+          console.log(r2.ethnicity[0]);
+          console.log(r2.major[0]);
+          if((r2.ethnicity[0] === r[i].ethnicity) && (r2.major[0] === r[i].major)) return true;
+        }
+      
+        //all three to match
+        if((r2.ethnicity[0] != null) && (r2.major[0] != null) && (r2.gender[0] != null)) {
+          console.log("Have all three to match");
+          console.log(r2.ethnicity[0]);
+          console.log(r2.gender[0]);
+          console.log(r2.major[0]);
+          if((r2.ethnicity[0] === r[i].ethnicity) && (r2.major[0] === r[i].major) &&
+              (r2.gender[0] === r[i].gender)) return true;
+        }
+      }
+      console.log("For-loop yields no matches");
+      return false; // for-loop yielded nothing
+
+    } else {
+      console.log("user has no alerts set up");
+      return false; // user has no alerts set up
+    }
+  }
+  else {
+    console.log("No new alert");
+    return false; // no new accounts to try to match
+  }
+};
+
 User.setAlert = async (object, userid) => {
   if (await User.hasAlerts(userid)) basesql = "UPDATE `website`.`alerts` SET `ethnicity` = ?, `major` = ?, `gender` = ? WHERE `fk_userid` = ?;";
   else basesql = "INSERT INTO `website`.`alerts` SET `ethnicity` = ?, `major` = ?, `gender` = ?, `fk_userid` = ?;";
   db.query(basesql, [object.ethnicity, object.major, object.gender, userid]);
 };
-
 module.exports = User;
